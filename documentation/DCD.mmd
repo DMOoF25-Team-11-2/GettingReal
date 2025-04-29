@@ -1,112 +1,77 @@
-﻿classDiagram
+﻿---
+config:
+  theme: dark
+  look: classic
+  layout: dagre
+title: DCD
+---
+classDiagram
+direction TB
+    class Activity {
+	    +UID UID
+	    +string Name
+    }
 
-class Activity {
-    +UID
-    +Name
-    +ExpectedTime
-}
+    class Workshop {
+        +UID UID
+	    +string Name
+        +bool isWorkShop
+	    +datetime ExpectedTime
+    }
 
-class Workshop {
-    +Name
-    +ExpectedTime
-}
+    class Box {
+	    +UID UID
+	    +string Name
+    }
+    class Material {
+	    +UID UID
+	    +string Name
+	    +string Discription
+	    +string Number
+    }
+    class MaterialRepository {
+        DoNameExist(string)::bool
+    }
+    class BoxRepository {
+        DoNameExist(string)::bool
+    }
+    class WorkshopRepository {
+        DoNameExist(string)::bool
+    }
+    class ActivityRepository {
+        DoNameExist(string)::bool
+    }
+    class IUidGenerateAble {
+	    +GenerateUid() :string
+	    -ValidateUidIsUniq() :bool
+    }
+    class UidGenerate {
+	    +GenerateUid() :string
+	    -ValidateUidIsUniq() :bool
+    }
+    class Repository~T~ {
+	    +-List~T~ Items
+	    +Add(T) :void
+	    +Update(T) :void
+	    +Remove(T) :void
+	    +GetByName(string) :T
+	    +GetByUid(string) :T
+    }
 
-class Box {
-    +UID
-    +Name
-}
+	<<interface>> IUidGenerateAble
+    <<abstract>> UidGenerate
+	<<template>> Repository
 
-class Material {
-    +UID
-    +Name
-    +Discription
-    +Number
-}
-
-
-class MaterialType {
-    +Name
-    +ValidateName():void
-}
-
-class MaterialTypeRepository {
-    -List<MaterialType> MaterialTypes
-    Add(MaterialType):void
-    Remove(MaterialType):void
-    GetByName(string):MaterialType
-    GetByUid(string):MaterialType
-    ValidateNameDoNotExist(string):bool
-}
-
-
-class MaterialRepository {
-    -List<Material> Materials
-    +Add(Material):void
-    +Remove(Material):void
-    +GetByName(string):Material
-    +GetByUid(string):Material
-    +Get():List<Material>
-}
-
-class BoxRepository {
-    -List<Box> Boxes
-    +Add(Box):void
-    +Remove(Box):void
-    +GetByName(string):Box
-    +GetByUid(string):Box
-    +Get():List<Box>
-}
-
-class WorkshopRepository {
-    -List<Workshop> Workshops
-    +Add(Workshop):void
-    +Remove(Workshop):void
-    +GetByName(string):Workshop
-    +GetByUid(string):Workshop
-    +Get():List<Workshop>
-}
-
-
-class ActivityRepository {
-    -List<Activity> Activities
-    +Add(Activity):void
-    +Remove(Activity):void
-    +GetByName(string):Activity
-    +GetByUid(string):Activity
-    +Get():List<Activity>
-}
-
-class IUidGenerateAble {
-    <<interface>>
-    +GenerateUid():string
-    -ValidateUidIsUniq():bool
-}
-
-class UidGenerate {
-    +GenerateUid():string
-    -ValidateUidIsUniq():bool
-}
-
-class Repository {
-    <<abstract>>
-    +-List<object> Items
-    +Add():void
-    +Remove():void
-    +GetByName(string):object
-    +GetByUid(string):object
-    +Get():List<object>
-}
-
-MaterialType "1..*" --* "1" MaterialTypeRepository
-MaterialTypeRepository <|-- Repository : "is"
-Material "1" --* "0..*" MaterialRepository : "have"
-MaterialRepository <|-- Repository : "is"
-Box "0..*" --*  "1" BoxRepository : "have"
-BoxRepository <|-- Repository : "is"
-Workshop "1..*" --* "1" WorkshopRepository : "have"
-WorkshopRepository <|-- Repository : "is"
-ActivityRepository <|-- Repository : "is"
-Repository --|> IUidGenerateAble : "is"
-Activity --* ActivityRepository : "have"
-
-IUidGenerateAble --|> UidGenerate : "is"
+    Material "1" --* "0..*" MaterialRepository : "have"
+    MaterialRepository ..|> Repository : "implement"
+    Box "0..*" -- "0..*" Material : "have"
+    Box "0..*" --* "1" BoxRepository : "have"
+    BoxRepository ..|> Repository : "implement"
+    Workshop "1" -- "0..*" WorkshopRepository : "have"
+    WorkshopRepository ..|> Repository : "implement"
+    Activity -- Workshop
+    ActivityRepository ..|> Repository : "implement"
+    Workshop -- Box : "have"
+    Activity --* ActivityRepository : "have"
+    Repository --|> UidGenerate : "is"
+    UidGenerate --|> IUidGenerateAble : "is"
