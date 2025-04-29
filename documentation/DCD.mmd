@@ -1,0 +1,32 @@
+classDiagram
+
+class MaterialeTyper {
+    +Navn
+}
+
+class Materiale {
+    +ID
+    +Navn
+    +Beskrivelse
+    +Antal
+}
+
+class Kasse {
+    +ID
+    +Navn
+}
+
+class Workshop {
+    +Navn
+    +ForventetTid
+}
+
+class Aktivetet {
+    +ID
+    +ForventetTid
+}
+
+Aktivetet "1..*" -- "0..*" Workshop : "er en"
+Aktivetet "1..*" -- "1..*" Kasse : "er en"
+MaterialeTyper "0..*" -- "0..*" Materiale : "er en"
+Materiale "1..*" -- "1..*" Kasse : "indeholder"
