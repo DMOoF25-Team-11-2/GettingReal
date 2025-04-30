@@ -15,7 +15,6 @@ direction TB
     class Workshop {
         +UID UID
 	    +string Name
-        +bool isWorkShop
 	    +datetime ExpectedTime
     }
 
@@ -30,16 +29,16 @@ direction TB
 	    +string Number
     }
     class MaterialRepository {
-        DoNameExist(string)::bool
+        +DoNameExist(string)::bool
     }
     class BoxRepository {
-        DoNameExist(string)::bool
+        +DoNameExist(string)::bool
     }
     class WorkshopRepository {
-        DoNameExist(string)::bool
+        +DoNameExist(string)::bool
     }
     class ActivityRepository {
-        DoNameExist(string)::bool
+        +DoNameExist(string)::bool
     }
     class IUidGenerateAble {
 	    +GenerateUid() :string
