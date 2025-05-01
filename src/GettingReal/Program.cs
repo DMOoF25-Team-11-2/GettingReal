@@ -1,4 +1,4 @@
-﻿namespace GettingReal
+﻿namespace GettingReal2
 {
     internal class Program
     {
