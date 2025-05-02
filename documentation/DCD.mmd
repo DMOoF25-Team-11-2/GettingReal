@@ -19,7 +19,7 @@ direction TB
     class Material {
 	    +UID UID
 	    +string Name
-	    +string Discription
+	    +string Description
 	    +string Number
     }
     class Box {
@@ -88,6 +88,6 @@ direction TB
 
     Repository ..|> UidGenerate : "implement"
     Repository ..|> IOXmlAble : "implement"
-    UidGenerate ..|> IUidGenerateAble : "impelment"
+    UidGenerate ..|> IUidGenerateAble : "implement"
 
     IOXmlAble .. FileDataHandler : "use"
