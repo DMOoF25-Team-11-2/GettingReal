@@ -1,0 +1,93 @@
+﻿---
+config:
+  theme: dark
+  look: classic
+  layout: dagre
+title: DCD
+---
+classDiagram
+direction TB
+    class Workshop {
+        +UID UID
+	    +string Name
+    }
+    class Activity {
+	    +UID UID
+	    +string Name
+	    +datetime ExpectedTime
+    }
+    class Material {
+	    +UID UID
+	    +string Name
+	    +string Discription
+	    +string Number
+    }
+    class Box {
+	    +int ID
+	    +string Name
+    }
+    class MaterialRepository {
+        +DoNameExist(string)::bool
+    }
+    class BoxRepository {
+        +DoNameExist(string)::bool
+    }
+    class WorkshopRepository {
+        +DoNameExist(string)::bool
+    }
+    class ActivityRepository {
+        +DoNameExist(string)::bool
+    }
+    class IUidGenerateAble {
+	    +GenerateUid() :string
+	    -ValidateUidIsUniq() :bool
+    }
+    class UidGenerate {
+	    +GenerateUid() :string
+	    -ValidateUidIsUniq() :bool
+    }
+    class Repository~T~ {
+	    +-List~T~ Items
+	    +Add(T) :void
+	    +Update(T) :void
+	    +Remove(T) :void
+	    +GetByName(string) :T
+	    +GetByUid(string) :T
+    }
+
+    class IOXmlAble {
+        +ToXml(string) :void
+        +FromXml(string) :void
+    }
+
+    class FileDataHandler {
+        +Save(string) :void
+        +Load(string) :void
+        +New(string) :void
+    }
+
+	<<interface>> IUidGenerateAble
+    <<interface>> IOXmlAble
+    <<abstract>> UidGenerate
+	<<template>> Repository
+
+    Box "0..*" -- "0..1" BoxRepository : "have"
+    BoxRepository ..|> Repository : "implement"
+
+    Material "0..*" -- "0..1" Box : "have"
+    Material "1..*" --* "1" MaterialRepository : "have"
+    MaterialRepository ..|> Repository : "implement"
+    
+    Activity "0..*" -- "0..1" Material : "have"
+    Activity "1..*" --* "1" ActivityRepository : "have"
+    ActivityRepository ..|>  Repository : "implement"
+
+    Workshop "0..*" --* "0..*" Activity : "have"
+    Workshop "1..*" -- "1" WorkshopRepository : "have"
+    WorkshopRepository ..|> Repository : "implement"
+
+    Repository ..|> UidGenerate : "implement"
+    Repository ..|> IOXmlAble : "implement"
+    UidGenerate ..|> IUidGenerateAble : "impelment"
+
+    IOXmlAble .. FileDataHandler : "use"
