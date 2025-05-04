@@ -15,7 +15,7 @@ public class Activity : ISaveable<Activity>
 
     public string ToString()
     {
-        return $"{UID},{Name},{ExpectedTime}}";
+        return $"{UID},{Name},{ExpectedTime}";
     }
 }
 
