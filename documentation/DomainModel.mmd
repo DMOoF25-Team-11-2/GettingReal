@@ -1,0 +1,34 @@
+﻿---
+config:
+  theme: dark
+  look: classic
+  layout: dagre
+title: Domain Model
+---
+classDiagram
+direction LR
+
+class Kasse {
+    ID
+    Beskrivelse
+}
+
+class Materiale {
+    ID
+    Navn
+    Antal
+    Beskrivelse
+}
+
+class Aktivitet {
+    Navn
+    Forventet tid
+}
+
+class Workshop {
+    Navn
+}
+
+Kasse "0..1" -- "0..*" Materiale
+Materiale "0..*" -- "0..*" Aktivitet
+Aktivitet "0..*" -- "0..*" Workshop
