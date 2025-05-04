@@ -2,12 +2,16 @@
 config:
   theme: dark
   look: classic
+  layout: dagre
 title: SD-UC6
+description: |
 ---
 sequenceDiagram
-    Frederik->>+system: 
-    system-->>Frederik: 
-    Frederik->>system: 
-    system-->>Frederik: 
-    Frederik->>system: 
-    system-->>-Frederik: 
+    participant User as Actor
+    participant System
+    User->>+System: 
+    System-->>User: 
+    User->>System: 
+    System-->>User: 
+    User->>System: 
+    System-->>-User: 
