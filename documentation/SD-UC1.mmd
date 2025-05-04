@@ -1,0 +1,21 @@
+﻿---
+config:
+  theme: dark
+  look: classic
+  layout: dagre
+title: SD-UC1
+description: |
+  Sekvensdiagram for UC1 - Opret kasse
+  Brugeren vælger "Opret kasse" fra kasse-menuen og indtaster kassenummer pg evt beskrivelse af kassen.
+  Systemet returnerer til kasse-menuen.
+  Kassen oprettes i systemet.
+---
+sequenceDiagram
+    participant User as Actor
+    participant System
+    User->>+System: Vælger Kasser
+    System-->>User: Kasse-menu
+    User->>System: Vælger "Opret kasse"
+    System-->>User: Prompter "Kasse beskrivelse"
+    User->>System: Indtaster kassebeskrivelse
+    System-->>-User: Returner til kasse-menu

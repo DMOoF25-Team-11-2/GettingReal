@@ -1,0 +1,20 @@
+﻿---
+config:
+  theme: dark
+  look: classic
+  layout: dagre
+title: SD-UC6
+description: |
+    Brugeren oprette en aktivitet med et navn. 
+    Aktiviteten gemmes i systemet.
+
+---
+sequenceDiagram
+    participant User as Actor
+    participant System
+    User->>+System: Vælger Aktiviteter
+    System-->>User: Aktiviter-menu
+    User->>System: Vælger "Opret aktivitet"
+    System-->>User: Prompter "aktivitet navn"
+    User->>System: Indtaster navn
+    System-->>-User: Returner til Aktiviteter-menu
