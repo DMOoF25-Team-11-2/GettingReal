@@ -8,16 +8,16 @@ title: DCD
 classDiagram
 direction TB
     class Workshop {
-        +UID UID
+        +Guid GUID
 	    +string Name
     }
     class Activity {
-	    +UID UID
+        +Guid GUID
 	    +string Name
 	    +datetime ExpectedTime
     }
     class Material {
-	    +UID UID
+        +Guid GUID
 	    +string Name
 	    +string Description
 	    +string Number
@@ -52,7 +52,7 @@ direction TB
 	    +Update(T) :void
 	    +Remove(T) :void
 	    +GetByName(string) :T
-	    +GetByUid(string) :T
+	    +GetByGuid(string) :T
     }
 
     class IOXmlAble {
