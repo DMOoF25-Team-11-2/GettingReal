@@ -9,6 +9,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		documentation\DomainModel.mmd = documentation\DomainModel.mmd
 		README.md = README.md
 		documentation\SD-UC1.mmd = documentation\SD-UC1.mmd
+		documentation\SD-UC10.mmd = documentation\SD-UC10.mmd
+		documentation\SD-UC11.mmd = documentation\SD-UC11.mmd
+		documentation\SD-UC12.mmd = documentation\SD-UC12.mmd
+		documentation\SD-UC13.mmd = documentation\SD-UC13.mmd
+		documentation\SD-UC2.mmd = documentation\SD-UC2.mmd
+		documentation\SD-UC3.mmd = documentation\SD-UC3.mmd
+		documentation\SD-UC4.mmd = documentation\SD-UC4.mmd
+		documentation\SD-UC5.mmd = documentation\SD-UC5.mmd
+		documentation\SD-UC6.mmd = documentation\SD-UC6.mmd
+		documentation\SD-UC7.mmd = documentation\SD-UC7.mmd
+		documentation\SD-UC8.mmd = documentation\SD-UC8.mmd
+		documentation\SD-UC9.mmd = documentation\SD-UC9.mmd
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GettingReal", "GettingReal\GettingReal.csproj", "{AD9269A3-2F27-41A8-B6C5-306D92AD201C}"
