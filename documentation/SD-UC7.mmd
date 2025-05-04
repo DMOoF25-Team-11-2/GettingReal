@@ -5,13 +5,19 @@ config:
   layout: dagre
 title: SD-UC7
 description: |
+    Brugeren tilknytte et materialer til en given aktivitet.
+    Tilknytningen gemmes i systemet. 
 ---
 sequenceDiagram
     participant User as Actor
     participant System
-    User->>+System: 
-    System-->>User: 
-    User->>System: 
-    System-->>User: 
-    User->>System: 
-    System-->>-User: 
+    User->>+System: Vælger Aktiviteter menu
+    System-->>User: Aktivitetsmenu
+    User->>System: Vælg "rediger aktivitet"
+    System-->>User: Aktivitetsmenu
+    User->>System: Vælg aktivitet
+    System-->>User: Rediger aktivitetsmenu
+    User->>System: Vælg "Tilknyt aktivitet til materiale"
+    System-->>User: Returner matriale-liste
+    User->>System: Vælg matriale
+    System-->>-User: Returner til aktivitet-menu
