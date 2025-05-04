@@ -34,17 +34,15 @@ namespace GettingReal.Model
             throw new NotImplementedException();
         }
 
-        public void Remove(int id)
+        public void Remove(Activity item)
         {
-            db.DeleteLine();
-            throw new NotImplementedException();
+            db.DeleteLine(item.UID);
         }
 
         public void Update(Activity item)
         {
-            db.DeleteLine();
+            db.DeleteLine(item.UID);
             db.AppendLine(item.ToString());
-            throw new NotImplementedException();
         }
     }
 }

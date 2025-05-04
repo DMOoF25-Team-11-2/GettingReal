@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Shapes;
 
 namespace GettingReal.Model;
 
@@ -22,22 +23,36 @@ internal class FileDataHandler
     // burde virke
     public void AppendLine(string input)
     {
-        using (StreamWriter sw = new StreamWriter(FilePath))
+        using (StreamWriter sw = new StreamWriter(FilePath, true))
         {
             sw.WriteLine(input);
         }
     }
 
-    public string ReadLine(int id)
+    public void WriteFile()
     {
-        // logik til at læse en linje fra fil
+        var lines;
+        // write list to file
+        using (StreamWriter sw = new StreamWriter(FilePath, false))
+        {
+            // write list to file
+            foreach (var line in lines)
+            {
+                sw.WriteLine(line);
+            }
+        }
+    }
+
+
+    public string ReadLine<T>(T item) where T : ISaveable<T>, new()
+    {
+        List<T> list = ReadAllLines<T>();
         // find line
-        // returner
         return "";
     }
 
     // burde virke
-    public IEnumerable<T> ReadAllLines<T>(ISaveable<T> type) where T : ISaveable<T>, new()
+    public List<T> ReadAllLines<T>() where T : ISaveable<T>, new()
     {
         List<T> result = new List<T>();
         using (StreamReader sr = new StreamReader(FilePath))
@@ -47,18 +62,20 @@ internal class FileDataHandler
             {
                 if (!string.IsNullOrEmpty(line))
                 {
-                    result.Add(new T().FromString(line));
+                    T instance = new T();
+                    result.Add(instance.FromString(line));
                 }
             }
-
         }     
-        return new List<T>();
+        return result;
     }
 
-    public void DeleteLine(string id)
+    // Burde virke
+    public void DeleteLine<T>(T item) where T : ISaveable<T>, new()
     {
-        //logik til at fjerne en linje fra en fil
-        // find line
-        // fjern line
+        List<T> list = ReadAllLines<T>();
+        list.RemoveAll(line => line.Equals(item));
+        WriteFile();
     }
+
 }
