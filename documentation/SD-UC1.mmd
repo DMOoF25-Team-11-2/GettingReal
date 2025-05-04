@@ -1,0 +1,14 @@
+﻿---
+config:
+  theme: dark
+  look: classic
+  layout: dagre
+title: SD-UC1
+---
+sequenceDiagram
+    Brugeren->>+system: Vælger Kasser
+    system-->>Brugeren: Kasse-menu
+    Brugeren->>system: Vælger "Opret kasse"
+    system-->>Brugeren: Prompter "Kasse beskrivelse"
+    Brugeren->>system: Indtaster kassebeskrivelse
+    system-->>-Brugeren: Returner til kasse-menu
