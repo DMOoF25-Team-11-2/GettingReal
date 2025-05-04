@@ -1,0 +1,13 @@
+﻿---
+config:
+  theme: dark
+  look: classic
+title: SD-UC1
+---
+sequenceDiagram
+    Frederik->>+system: Vælger Kasser
+    system-->>Frederik: Kasse-menu
+    Frederik->>system: Vælger "Opret kasse"
+    system-->>Frederik: Prompter "Kasse beskrivelse"
+    Frederik->>system: Indtaster kassebeskrivelse
+    system-->>-Frederik: Returner til kasse-menu
