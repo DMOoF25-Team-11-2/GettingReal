@@ -5,13 +5,19 @@ config:
   layout: dagre
 title: SD-UC3
 description: |
+    Brugeren placere et materiale i en given kasse.
+    Lokationen gemmes i systemet.
 ---
 sequenceDiagram
     participant User as Actor
     participant System
-    User->>+System: 
-    System-->>User: 
-    User->>System: 
-    System-->>User: 
-    User->>System: 
-    System-->>-User: 
+    User->>+System: Vælger matrialer
+    System-->>User: materiale-menu
+    User->>System: Vælger "rediger materiale"
+    System-->>User: materiale-liste -menu
+    User->>System: Vælg materiale
+    System-->>User: Rediger materialemenu
+    User->>System: Vælg "placer matriale i kasse"
+    System-->>User: Returner kasse liste
+    User->>System: Vælg kasse
+    System-->>-User: Returner til matriale-liste-menu
