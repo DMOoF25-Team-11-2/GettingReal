@@ -1,6 +1,6 @@
 namespace GettingReal.Model;
 
-public class Workshop
+public class Workshop : ISaveable<Workshop>
 {
     public string UID { get; set; } 
     public string Name { get; set; } 
@@ -12,5 +12,15 @@ public class Workshop
     public Workshop()
     {
         Activities = new List<Activity>(); //Initialiserer tom liste
+    }
+
+    public Workshop FromString(string input)
+    {
+        throw new NotImplementedException();
+    }
+
+    public string ToString()
+    {
+        return $"{UID},{Name}";
     }
 }
