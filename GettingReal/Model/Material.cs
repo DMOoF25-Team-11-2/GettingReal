@@ -2,7 +2,7 @@
 
 public class Material
 {
-    public Guid GUID { get; private set; }
+    public Guid GUID { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
     public int Amount { get; set; }
@@ -11,5 +11,8 @@ public class Material
     public Material()
     {
         GUID = Guid.NewGuid();
+        Name = string.Empty;
+        Description = string.Empty;
+        Amount = 0;
     }
 }
