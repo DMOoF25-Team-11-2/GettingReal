@@ -14,17 +14,18 @@ direction TB
     class Activity {
         +Guid GUID
 	    +string Name
-	    +datetime ExpectedTime
+	    +TimeSpand ExpectedTime
     }
     class Material {
         +Guid GUID
 	    +string Name
 	    +string Description
-	    +string Number
+	    +int Amount
     }
     class Box {
-	    +int ID
-	    +string Name
+	    +Guid GUID
+        +string Name
+	    +string Description
     }
     class MaterialRepository {
         +DoNameExist(string)::bool
@@ -42,17 +43,14 @@ direction TB
 	    +GenerateUid() :string
 	    -ValidateUidIsUniq() :bool
     }
-    class UidGenerate {
-	    +GenerateUid() :string
-	    -ValidateUidIsUniq() :bool
-    }
     class Repository~T~ {
 	    +-List~T~ Items
 	    +Add(T) :void
-	    +Update(T) :void
-	    +Remove(T) :void
+        +GetAll() :List<T>
 	    +GetByName(string) :T
 	    +GetByGuid(string) :T
+	    +Update(T) :void
+	    +Remove(T) :void
     }
 
     class IOXmlAble {
@@ -68,26 +66,23 @@ direction TB
 
 	<<interface>> IUidGenerateAble
     <<interface>> IOXmlAble
-    <<abstract>> UidGenerate
-	<<template>> Repository
+	<<Abstract>> Repository
 
-    Box "0..*" -- "0..1" BoxRepository : "have"
+    Box "0..*" --* "1" BoxRepository : "have"
     BoxRepository ..|> Repository : "implement"
 
     Material "0..*" -- "0..1" Box : "have"
-    Material "1..*" --* "1" MaterialRepository : "have"
+    Material "0..*" --* "1" MaterialRepository : "have"
     MaterialRepository ..|> Repository : "implement"
     
     Activity "0..*" -- "0..1" Material : "have"
-    Activity "1..*" --* "1" ActivityRepository : "have"
+    Activity "0..*" --* "1" ActivityRepository : "have"
     ActivityRepository ..|>  Repository : "implement"
 
     Workshop "0..*" --* "0..*" Activity : "have"
-    Workshop "1..*" -- "1" WorkshopRepository : "have"
+    Workshop "0..*" --* "1" WorkshopRepository : "have"
     WorkshopRepository ..|> Repository : "implement"
 
-    Repository ..|> UidGenerate : "implement"
     Repository ..|> IOXmlAble : "implement"
-    UidGenerate ..|> IUidGenerateAble : "implement"
 
     IOXmlAble .. FileDataHandler : "use"

@@ -1,22 +1,25 @@
-namespace GettingReal.Model;
+﻿namespace GettingReal.Model;
 
-public class Activity : ISaveable<Activity>
+public class Activity
 {
-    public string UID { get; set; } 
+    public Guid GUID { get; private set; }
     public string Name { get; set; }
-    public DateTime ExpectedTime { get; set; } //Forventet Tidspunkt For Aktivitet
+    public DateTime ExpectedTime { get; set; }
+    public ICollection<Material>? Material { get; set; }
 
-    public Material? Material { get; set; } //Det materiale, der bruges (kan være null)
-
-    public Activity FromString(string input)
+    public Activity()
     {
-        throw new NotImplementedException();
+        GUID = Guid.NewGuid();
+        Name = string.Empty;
+        ExpectedTime = DateTime.Now;
+        Material = new List<Material>();
     }
 
-    public string ToString()
+    public Activity(string name, DateTime expectedTime)
     {
-        return $"{UID},{Name},{ExpectedTime}";
+        GUID = Guid.NewGuid();
+        Name = name;
+        ExpectedTime = expectedTime;
+        Material = new List<Material>();
     }
 }
-
-//Ingen Metoder Endnu!

@@ -1,38 +1,74 @@
-namespace GettingReal.Model;
+﻿namespace GettingReal.Model;
+using System.Xml.Serialization;
 
-public class Box : ISaveable<Box>
+/// <summary>
+/// Represents a box that can contain materials.
+/// </summary>
+public class Box
 {
-    public int ID { get; set; } 
-    public string Name { get; set; } // Navn på kassen f.eks. "Kasse 3"
 
-    public List<Material> Materials { get; set; } // Materialer i kassen
+    public Guid GUID { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
 
-    //Tom Metode Ind Til Videre!
-    public Box()
+    /// <summary>
+    /// List of materials contained in the box.
+    /// </summary>
+    /// <remarks>
+    /// This property is used to store the materials that are contained in the box.
+    /// </remarks>
+    [XmlIgnore]
+    public List<Material> Materials { get; set; }
+
+    /// <summary>
+    /// List of GUIDs representing the materials in the box.
+    /// </summary>
+    /// <remarks>
+    /// This property is used for XML serialization and deserialization.
+    /// It converts the list of Material objects to a list of GUIDs.
+    /// </remarks>
+    [XmlArrayItem("MaterialGUID")]
+    public List<Guid> MaterialGUIDs
     {
-        Materials = new List<Material>(); //Initialiserer tom liste
+        get => Materials?.Select(m => m.GUID).ToList() ?? new List<Guid>();
+        set
+        {
+            if (Materials == null)
+                Materials = new List<Material>();
+            Materials.Clear();
+            if (value != null)
+            {
+                foreach (var guid in value)
+                {
+                    Materials.Add(new Material { GUID = guid });
+                }
+            }
+        }
     }
 
-    public string ToString()
+    /// <summary>
+    /// Default constructor for XML serialization.
+    /// </summary>
+    /// <remarks>
+    /// Needs to be public to satisfy the XML serialization requirements.
+    /// </remarks>
+    public Box() : this(string.Empty, string.Empty)
     {
-        return $"{ID},{Name}";
+        GUID = Guid.NewGuid();
     }
 
-    public Box FromString(string line)
+    /// <summary>
+    /// Constructor to create a Box with a name and description.
+    /// </summary>
+    /// <param name="name">The name of the box.</param>
+    /// <param name="description">The description of the box.</param>
+    /// <remarks>
+    /// This constructor is used to create a new Box instance with a specified name and description.
+    /// </remarks>
+    public Box(string name = "", string description = "") : base()
     {
-        //string[] parts = line.Split(';');
-        //if (parts.Length < 2)
-        //    throw new ArgumentException("Invalid line format");
-        //Box box = new Box
-        //{
-        //    ID = int.Parse(parts[0]),
-        //    Name = parts[1]
-        //};
-        //// Hvis der er flere dele, kan vi tilføje dem til Materials
-        //for (int i = 2; i < parts.Length; i++)
-        //{
-        //    box.Materials.Add(new Material { UID = parts[i] });
-        //}
-        return new Box();
+        GUID = Guid.NewGuid();
+        Name = name;
+        Description = description;
     }
 }

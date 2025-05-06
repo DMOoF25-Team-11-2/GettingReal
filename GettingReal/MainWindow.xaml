@@ -5,8 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GettingReal"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="1080" Width="1920">
     <StackPanel>
-        
+        <Menu Name="MainMenu" FontSize="16" FontFamily="Arial">
+            <MenuItem Header="Fil">
+                <MenuItem Header="Afslut" Icon="" Click="Exit_Click">
+                    <MenuItem.ToolTip>
+                        <ToolTip Content="Luk dette program" />
+                    </MenuItem.ToolTip>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Vis">
+                <MenuItem x:Name="MenuShowBox" Header="Kasse" Click="Show_Box_Click">
+                    <MenuItem.ToolTip>
+                        <ToolTip Content="Vis kasser" />
+                    </MenuItem.ToolTip>
+                </MenuItem>
+                <MenuItem x:Name="MenuShowMaterial" Header="Materiale" Click="Show_Material_Click">
+                    <MenuItem.ToolTip>
+                        <ToolTip Content="Vis materialer" />
+                    </MenuItem.ToolTip>
+                </MenuItem>
+                <MenuItem x:Name="ShowActivity" Header="Aktivitet" Click="Show_Activity_Click">
+                    <MenuItem.ToolTip>
+                        <ToolTip Content="Vis aktiviteter" />
+                    </MenuItem.ToolTip> 
+                </MenuItem>
+                <MenuItem x:Name="ShowWhorkshop" Header="Workshop" Click="Show_Workshop_Click"/>
+            </MenuItem>
+        </Menu>
+        <StackPanel Orientation="Horizontal">
+            <Frame Name="MainFrame" NavigationUIVisibility="Hidden" Margin="10"/>
+        </StackPanel>
     </StackPanel>
 </Window>

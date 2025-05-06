@@ -1,26 +1,31 @@
-namespace GettingReal.Model;
+﻿namespace GettingReal.Model;
 
-public class Workshop : ISaveable<Workshop>
+/// <summary>
+/// Represents a workshop that contains a list of activities.
+/// </summary>
+public class Workshop
 {
-    public string UID { get; set; } 
-    public string Name { get; set; } 
+    /// <summary>
+    /// Gets the unique identifier for the workshop.
+    /// </summary>
+    public Guid GUID { get; private set; }
 
-    //Tom Metode Ind Til Videre!
-    public List<Activity> Activities { get; set; } //Aktiviteter i workshoppen
+    /// <summary>
+    /// Gets or sets the name of the workshop.
+    /// </summary>
+    public string Name { get; set; }
 
-    //Tom Metode Ind Til Videre!
+    /// <summary>
+    /// Gets or sets the list of activities associated with the workshop.
+    /// </summary>
+    public List<Activity> Activities { get; set; }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Workshop"/> class.
+    /// </summary>
     public Workshop()
     {
-        Activities = new List<Activity>(); //Initialiserer tom liste
-    }
-
-    public Workshop FromString(string input)
-    {
-        throw new NotImplementedException();
-    }
-
-    public string ToString()
-    {
-        return $"{UID},{Name}";
+        Activities = [];
+        Name = "";
     }
 }
