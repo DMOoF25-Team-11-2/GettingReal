@@ -24,6 +24,7 @@ public abstract class RepositoryBase<T> where T : new()
         {
             _filePath = Path.Combine(RealPath, $"{typeof(T).Name}_repository.xml");
         }
+
         // Check if the file exists, and if not, create it
         if (!File.Exists(_filePath))
         {
@@ -32,9 +33,11 @@ public abstract class RepositoryBase<T> where T : new()
                 // File created
             }
         }
+
         // Load the repository from an XML file
         // Fixing the CS0308 error by removing the incorrect type argument
         Items = XmlFileHandler.LoadFromFile(_filePath);
+
         // Check if the loaded items are null, and if so, initialize an empty list
         if (Items == null)
         {
@@ -50,11 +53,14 @@ public abstract class RepositoryBase<T> where T : new()
     {
         // Generate a new GUID for the item
         Guid guid = Guid.NewGuid();
+
         // Check if the GUID already exists in the list
         while (Items.Any(x => (Guid)typeof(T).GetProperty("GUID")!.GetValue(x)! == guid))
             guid = Guid.NewGuid();
+        
         // Set the GUID property of the item
         typeof(T).GetProperty("GUID")!.SetValue(item, guid);
+        
         // Add the item to the list
         Items.Add(item);
         XmlFileHandler.SaveToFile(Items, _filePath);
@@ -88,17 +94,13 @@ public abstract class RepositoryBase<T> where T : new()
     /// </summary>
     /// <param name="guid">The guid of the item to get.</param>
     /// <returns>The item with the specified guid, or null if not found.</returns>
-    public T? GetByGuid(Guid guid)
-    {
-        return Items.FirstOrDefault(x => (Guid)typeof(T).GetProperty("GUID")!.GetValue(x)! == guid);
-    }
 
     /// <summary>
     /// Gets an item from the repository by its name.
     /// </summary>
     /// <param name="name">The name of the item to get.</param>
     /// <returns>The item with the specified name, or null if not found.</returns>
-    public T? GetByName(string name)
+    public T? Get(string name)
     {
         return Items.FirstOrDefault(x => (string)typeof(T).GetProperty("Name")!.GetValue(x)! == name);
     }

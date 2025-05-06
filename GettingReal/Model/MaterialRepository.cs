@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GettingReal.Model
+namespace GettingReal.Model;
+
+public class MaterialRepository : RepositoryBase<Material>
 {
-    public class MaterialRepository : RepositoryBase<Material>
+    public MaterialRepository() : base()
     {
+        // Additional initialization for MaterialRepository, if needed
     }
 }

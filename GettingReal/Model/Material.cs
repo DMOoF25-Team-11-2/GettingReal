@@ -15,4 +15,12 @@ public class Material
         Description = string.Empty;
         Amount = 0;
     }
+
+    public Material(string name, string description, int amount)
+    {
+        GUID = Guid.NewGuid();
+        this.Name = name;
+        this.Description = description;
+        this.Amount = amount;
+    }
 }

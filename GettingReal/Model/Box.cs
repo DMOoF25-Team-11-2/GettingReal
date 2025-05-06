@@ -6,17 +6,9 @@ using System.Xml.Serialization;
 /// </summary>
 public class Box
 {
-    /// <summary>
-    /// Unique identifier for the box.
-    /// </summary>
+
     public Guid GUID { get; set; }
-    /// <summary>
-    /// Name of the box.
-    /// </summary>
     public string Name { get; set; }
-    /// <summary>
-    /// Description of the box.
-    /// </summary>
     public string Description { get; set; }
 
     /// <summary>
