@@ -1,23 +1,15 @@
-namespace GettingReal.Model;
+﻿namespace GettingReal.Model;
 
-public class Material : ISaveable<Material>
+public class Material
 {
-    public string UID { get; set; } 
-    public string Name { get; set; } 
+    public Guid GUID { get; private set; }
+    public string Name { get; set; }
     public string Description { get; set; }
-    public string Number { get; set; } //Varenummer eller intern kode
+    public int Amount { get; set; }
 
-    public Box? Box { get; set; } //Den kasse, materialet ligger i (kan være null)
-
-    public Material FromString(string input)
+    // Add a public parameterless constructor to satisfy the constraint in RepositoryBase<T>
+    public Material()
     {
-        throw new NotImplementedException();
-    }
-
-    public string ToString()
-    {
-        return $"{UID},{Name},{Description},{Number}";
+        GUID = Guid.NewGuid();
     }
 }
-
-//Ingen Metoder Endnu!

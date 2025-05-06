@@ -1,16 +1,7 @@
-﻿using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace GettingReal;
-
+using GettingReal.View;
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
@@ -20,4 +11,34 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
     }
+
+    #region Menu bar
+    // File Menu
+    private void Exit_Click(object sender, RoutedEventArgs e)
+    {
+        Application.Current.Shutdown();
+    }
+
+    // Vis Menu
+    private void Show_Box_Click(object sender, RoutedEventArgs e)
+    {
+        MainFrame.Navigate(new BoxView());
+    }
+
+    private void Show_Material_Click(object sender, RoutedEventArgs e)
+    {
+        MessageBox.Show("Viser Materiale");
+    }
+
+    private void Show_Activity_Click(object sender, RoutedEventArgs e)
+    {
+        MessageBox.Show("Viser Aktivitet");
+    }
+
+    private void Show_Workshop_Click(object sender, RoutedEventArgs e)
+    {
+        MessageBox.Show("Viser Workshop");
+    }
+
+    #endregion
 }

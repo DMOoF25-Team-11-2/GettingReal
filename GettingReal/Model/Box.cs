@@ -1,38 +1,23 @@
-namespace GettingReal.Model;
+﻿namespace GettingReal.Model;
 
-public class Box : ISaveable<Box>
+public class Box
 {
-    public int ID { get; set; } 
-    public string Name { get; set; } // Navn på kassen f.eks. "Kasse 3"
+    public Guid GUID { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
+    private List<Material> Materials { get; set; }
 
-    public List<Material> Materials { get; set; } // Materialer i kassen
-
-    //Tom Metode Ind Til Videre!
     public Box()
     {
-        Materials = new List<Material>(); //Initialiserer tom liste
+        GUID = Guid.NewGuid();
+        Materials = new List<Material>(); // Initialize Materials collection
     }
 
-    public string ToString()
+    // Adding a public parameterless constructor to fix CS0310
+    public Box(string name = "", string description = "")
     {
-        return $"{ID},{Name}";
-    }
-
-    public Box FromString(string line)
-    {
-        //string[] parts = line.Split(';');
-        //if (parts.Length < 2)
-        //    throw new ArgumentException("Invalid line format");
-        //Box box = new Box
-        //{
-        //    ID = int.Parse(parts[0]),
-        //    Name = parts[1]
-        //};
-        //// Hvis der er flere dele, kan vi tilføje dem til Materials
-        //for (int i = 2; i < parts.Length; i++)
-        //{
-        //    box.Materials.Add(new Material { UID = parts[i] });
-        //}
-        return new Box();
+        Materials = new List<Material>(); // Initialize Materials collection
+        Name = name;
+        Description = description;
     }
 }
