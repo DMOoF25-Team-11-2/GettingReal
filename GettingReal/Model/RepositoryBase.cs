@@ -22,7 +22,11 @@ public abstract class RepositoryBase<T> where T : new()
         var RealPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
         if (RealPath != null)
         {
+#if DEBUG
+            _filePath = Path.Combine(RealPath, $"{typeof(T).Name}_repository_test.xml");
+#else
             _filePath = Path.Combine(RealPath, $"{typeof(T).Name}_repository.xml");
+#endif
         }
 
         // Check if the file exists, and if not, create it
@@ -57,10 +61,10 @@ public abstract class RepositoryBase<T> where T : new()
         // Check if the GUID already exists in the list
         while (Items.Any(x => (Guid)typeof(T).GetProperty("GUID")!.GetValue(x)! == guid))
             guid = Guid.NewGuid();
-        
+
         // Set the GUID property of the item
         typeof(T).GetProperty("GUID")!.SetValue(item, guid);
-        
+
         // Add the item to the list
         Items.Add(item);
         XmlFileHandler.SaveToFile(Items, _filePath);
