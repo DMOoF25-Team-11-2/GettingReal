@@ -27,17 +27,17 @@ public partial class MainWindow : Window
 
     private void Show_Material_Click(object sender, RoutedEventArgs e)
     {
-        MessageBox.Show("Viser Materiale");
+        MainFrame.Navigate(new MaterialView());
     }
 
     private void Show_Activity_Click(object sender, RoutedEventArgs e)
     {
-        MessageBox.Show("Viser Aktivitet");
+        MainFrame.Navigate(new ActivityView());
     }
 
     private void Show_Workshop_Click(object sender, RoutedEventArgs e)
     {
-        MessageBox.Show("Viser Workshop");
+        MainFrame.Navigate(new WorkshopView());
     }
 
     #endregion
