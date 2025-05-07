@@ -11,7 +11,7 @@ namespace GettingReal.Handler
         /// <typeparam name="T">The type of the repository data.</typeparam>
         /// <param name="data">The data to save.</param>
         /// <param name="filePath">The file path to save the XML file.</param>
-        public void SaveToFile(IEnumerable<T> data, string filePath)
+        public void Save(IEnumerable<T> data, string filePath)
         {
             try
             {
@@ -33,7 +33,7 @@ namespace GettingReal.Handler
         /// <typeparam name="T">The type of the repository data.</typeparam>
         /// <param name="filePath">The file path to load the XML file from.</param>
         /// <returns>The deserialized data.</returns>
-        public List<T> LoadFromFile(string filePath)
+        public List<T> Load(string filePath)
         {
             try
             {
