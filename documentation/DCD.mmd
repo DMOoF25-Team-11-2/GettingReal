@@ -7,82 +7,77 @@ title: DCD
 ---
 classDiagram
 direction TB
-    class Workshop {
-        +Guid GUID
-	    +string Name
-    }
-    class Activity {
-        +Guid GUID
-	    +string Name
-	    +TimeSpand ExpectedTime
-    }
-    class Material {
-        +Guid GUID
-	    +string Name
-	    +string Description
-	    +int Amount
-    }
-    class Box {
-	    +Guid GUID
-        +string Name
-	    +string Description
-    }
-    class MaterialRepository {
-        +DoNameExist(string)::bool
-    }
-    class BoxRepository {
-        +DoNameExist(string)::bool
-    }
-    class WorkshopRepository {
-        +DoNameExist(string)::bool
-    }
-    class ActivityRepository {
-        +DoNameExist(string)::bool
-    }
-    class IUidGenerateAble {
-	    +GenerateUid() :string
-	    -ValidateUidIsUniq() :bool
-    }
-    class Repository~T~ {
-	    +-List~T~ Items
-	    +Add(T) :void
-        +GetAll() :List<T>
-	    +GetByName(string) :T
-	    +GetByGuid(string) :T
-	    +Update(T) :void
-	    +Remove(T) :void
-    }
+	namespace GettingReal.Model {
+        class Workshop {
+	        +Guid GUID
+	        +string Name
+        }
+        class Activity {
+	        +Guid GUID
+	        +string Name
+	        +TimeSpand ExpectedTime
+        }
+        class Material {
+	        +Guid GUID
+	        +string Name
+	        +string Description
+	        +int Amount
+        }
+        class Box {
+	        +Guid GUID
+	        +string Name
+	        +string Description
+        }
+        class BoxRepository {
+	        +DoNameExist(string) ::bool
+        }
+        class MaterialRepository {
+	        +DoNameExist(string) ::bool
+        }
+        class ActivityRepository {
+	        +DoNameExist(string) ::bool
+        }
+        class WorkshopRepository {
+	        +DoNameExist(string) ::bool
+        }
+        class Repository~T~ {
+	        +-List~T~ Items
+	        +Add(T) :void
+	        +GetAll() :List
+	        +Get(string) :T
+	        +Get(Guid) :T
+	        +Update(T) :void
+	        +Remove(T) :void
+	        -DoNameExist(string) :bool
+        }
+        class IUidGenerateAble {
+	        +GenerateUid() :string
+	        -DoGuidExist() :bool
+        }
+	}
+	namespace GettingReal.Handler {
+        class XmlFileHandler {
+	        +Save(IEnumerable~T~, string) :void
+	        +Load(string) :void
+        }
+	}
 
-    class IOXmlAble {
-        +ToXml(string) :void
-        +FromXml(string) :void
-    }
-
-    class FileDataHandler {
-        +Save(string) :void
-        +Load(string) :void
-        +New(string) :void
-    }
-
-	<<interface>> IUidGenerateAble
-    <<interface>> IOXmlAble
 	<<Abstract>> Repository
+	<<interface>> IUidGenerateAble
 
     Box "0..*" --* "1" BoxRepository : "have"
     BoxRepository ..|> Repository : "implement"
-
     Material "0..*" -- "0..1" Box : "have"
     Material "0..*" --* "1" MaterialRepository : "have"
     MaterialRepository ..|> Repository : "implement"
-    
     Activity "0..*" -- "0..1" Material : "have"
     Activity "0..*" --* "1" ActivityRepository : "have"
-    ActivityRepository ..|>  Repository : "implement"
-
+    ActivityRepository ..|> Repository : "implement"
     Workshop "0..*" --* "0..*" Activity : "have"
     Workshop "0..*" --* "1" WorkshopRepository : "have"
     WorkshopRepository ..|> Repository : "implement"
-
-    Repository ..|> IOXmlAble : "implement"
-
-    IOXmlAble .. FileDataHandler : "use"
+    Repository ..|> IUidGenerateAble : "implement"
+    BoxRepository ..|> XmlFileHandler : "use"
+    MaterialRepository ..|> XmlFileHandler : "use"
+    ActivityRepository ..|> XmlFileHandler : "use"
+    WorkshopRepository ..|> XmlFileHandler : "use"
