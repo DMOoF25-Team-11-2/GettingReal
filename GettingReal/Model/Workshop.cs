@@ -8,7 +8,7 @@ public class Workshop
     /// <summary>
     /// Gets the unique identifier for the workshop.
     /// </summary>
-    public Guid GUID { get; private set; }
+    public Guid GUID { get; set; }
 
     /// <summary>
     /// Gets or sets the name of the workshop.
