@@ -7,7 +7,7 @@ using GettingReal.Model;
 class BoxViewModel : ViewModelBase
 {
     private readonly BoxRepository _boxRepository;
-    public ObservableCollection<Box> Boxes { get; set; } = new ObservableCollection<Box>();
+    public ObservableCollection<Box>? Boxes { get; set; } = new ObservableCollection<Box>();
     private Box? _selectedBox;
     public Box? SelectedBox
     {
@@ -18,8 +18,8 @@ class BoxViewModel : ViewModelBase
             {
                 OnPropertyChanged(nameof(SelectedBox));
                 RemoveBoxCommand.RaiseCanExecuteChanged();
-                UpdateButtonVisibility(); // Update visibility when selection changes
-                UpdateFormValue(); // Update form values when selection changes
+                UpdateButtonVisibility();
+                UpdateFormValue();
             }
         }
     }
@@ -75,7 +75,6 @@ class BoxViewModel : ViewModelBase
     public RelayCommand RemoveBoxCommand { get; private set; }
 
     public RelayCommand SaveBoxCommand { get; private set; }
-
     public BoxViewModel()
     {
         _boxRepository = new BoxRepository();
@@ -145,14 +144,12 @@ class BoxViewModel : ViewModelBase
         SelectedBox!.Name = NewBoxName;
         SelectedBox.Description = NewBoxDescription;
         _boxRepository.Update(SelectedBox);
-        // Notify the UI about the change
-        //OnPropertyChanged(nameof(Boxes)); // Mot working
-        // Trigger the reload logic
-        //Application.Current.Dispatcher.Invoke(() =>
-        //{
-        //    var navigationService = System.Windows.Navigation.NavigationService.GetNavigationService(Application.Current.MainWindow);
-        //    navigationService?.Refresh();
-        //});
+        //workaround to refresh listview with new data
+        var temp = Boxes;
+        Boxes = null;
+        OnPropertyChanged(nameof(Boxes));
+        Boxes = temp;
+        OnPropertyChanged(nameof(Boxes));
     }
 
     private bool CanSaveBox()
