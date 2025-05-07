@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfBox xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Box>
+    <GUID>99863610-6516-4428-a66c-31781fde13c0</GUID>
+    <Name>1</Name>
+    <Description>3D print</Description>
+    <MaterialGUIDs />
+  </Box>
+  <Box>
+    <GUID>49dff5a3-2f7b-4dc4-a6cf-4dba335bccd3</GUID>
+    <Name>2</Name>
+    <Description>2d print</Description>
+    <MaterialGUIDs />
+  </Box>
+  <Box>
+    <GUID>2ab61ad5-8da9-45a6-8ade-41e4cedc5e03</GUID>
+    <Name>3</Name>
+    <Description>2D til 3D print</Description>
+    <MaterialGUIDs />
+  </Box>
+</ArrayOfBox>
