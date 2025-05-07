@@ -3,17 +3,18 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:viewmodel="clr-namespace:GettingReal.ViewModel"
+      d:DataContext="{d:DesignInstance Type=viewmodel:BoxViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="BoxView">
     <StackPanel Orientation="Vertical" Margin="10">
-
         <StackPanel Orientation="Horizontal" Margin="10">
             <!-- Left Side: ListView for Boxes -->
             <StackPanel Orientation="Vertical" Width="300" Margin="0,0,10,0" Background="LightBlue">
-                <TextBlock Text="Box List" FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
+                <TextBlock Text="Kasseliste" FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
                 <ListView x:Name="ListBox" ItemsSource="{Binding Boxes}" 
-                          SelectedItem="{Binding SelectedBox}" 
+                          SelectedItem="{Binding SelectedBox}"
                           Margin="0,0,0,10"
                           >
                     <ListView.ItemContainerStyle>
@@ -35,8 +36,8 @@
             </StackPanel>
 
             <!-- Right Side: Form for Add/Edit -->
-            <StackPanel Orientation="Vertical" Width="300" Background="AntiqueWhite">
-                <TextBlock Text="Manage Box" FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
+            <StackPanel Orientation="Vertical" Width="300" Background="LightBlue">
+                <TextBlock Text="Kasse" FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
 
                 <TextBlock Text="Name:" Margin="0,0,0,5"/>
                 <TextBox Text="{Binding NewBoxName, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"/>
@@ -48,7 +49,7 @@
 
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                     <Button Content="Tilføj" Command="{Binding AddBoxCommand}" Visibility="{Binding AddButtonVisibility}" Width="75" Margin="0,0,10,0"/>
-                    <Button Content="Opdataer" Command="{Binding SaveBoxCommand}" Visibility="{Binding SaveButtonVisibility}" Width="75" Margin="0,0,10,0"/>
+                    <Button Content="Opdater" Command="{Binding SaveBoxCommand}" Visibility="{Binding SaveButtonVisibility}" Width="75" Margin="0,0,10,0"/>
                     <Button Content="Fjern" Command="{Binding RemoveBoxCommand}"  Visibility="{Binding RemoveButtonVisability}" Width="75"/>
                 </StackPanel>
             </StackPanel>
@@ -57,22 +58,8 @@
         <!-- Materials Section -->
         <StackPanel Orientation="Horizontal">
             <StackPanel Orientation="Vertical">
-                <TextBlock Text="Materials in Box" FontSize="20" FontWeight="Bold" Margin="10,10,0,10"/>
+                <TextBlock Text="Materiale i kassen" FontSize="20" FontWeight="Bold" Margin="10,10,0,10"/>
                 <ListView ItemsSource="{Binding MaterialsInBox}" Margin="10,0,0,10">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="150"/>
-                            <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="200"/>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-                <Button Content="Tilføj materiale til kassen" Margin="10,0,10,0"/>
-
-            </StackPanel>
-
-            <StackPanel Orientation="Vertical">
-                <TextBlock Text="Material Repository" FontSize="20" FontWeight="Bold" Margin="10,10,0,10"/>
-                <ListView ItemsSource="{Binding MaterialRepository}" Margin="10,0,0,10">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="150"/>
@@ -82,9 +69,19 @@
                 </ListView>
                 <Button Content="Fjern materiale fra kassen" Margin="10,0,10,0"/>
             </StackPanel>
-            
+
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Materialeliste" FontSize="20" FontWeight="Bold" Margin="10,10,0,10"/>
+                <ListView ItemsSource="{Binding MaterialRepository}" Margin="10,0,0,10">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="150"/>
+                            <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="200"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Button Content="Tilføj materiale til kassen" Margin="10,0,10,0"/>
+            </StackPanel>
         </StackPanel>
     </StackPanel>
-
-
 </Page>

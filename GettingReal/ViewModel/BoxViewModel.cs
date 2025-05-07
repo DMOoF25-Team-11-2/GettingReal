@@ -19,6 +19,7 @@ class BoxViewModel : ViewModelBase
                 OnPropertyChanged(nameof(SelectedBox));
                 RemoveBoxCommand.RaiseCanExecuteChanged();
                 UpdateButtonVisibility(); // Update visibility when selection changes
+                UpdateFormValue(); // Update form values when selection changes
             }
         }
     }
@@ -73,6 +74,8 @@ class BoxViewModel : ViewModelBase
     public RelayCommand AddBoxCommand { get; private set; }
     public RelayCommand RemoveBoxCommand { get; private set; }
 
+    public RelayCommand SaveBoxCommand { get; private set; }
+
     public BoxViewModel()
     {
         _boxRepository = new BoxRepository();
@@ -81,6 +84,7 @@ class BoxViewModel : ViewModelBase
         _newBoxDescription = string.Empty;
         AddBoxCommand = new RelayCommand(AddBox, CanAddBox);
         RemoveBoxCommand = new RelayCommand(RemoveBox, CanRemoveBox);
+        SaveBoxCommand = new RelayCommand(SaveBox, CanSaveBox);
     }
 
     private void AddBox()
@@ -117,7 +121,7 @@ class BoxViewModel : ViewModelBase
             return false;
         }
         // Check if the box name and description are not empty and if the selected box is not already in the list
-        return !(string.IsNullOrWhiteSpace(NewBoxName) && !string.IsNullOrWhiteSpace(NewBoxDescription));
+        return IsNotFormFieldNullOrSpace();
     }
 
     private void RemoveBox()
@@ -135,6 +139,32 @@ class BoxViewModel : ViewModelBase
         return SelectedBox != null;
     }
 
+    private void SaveBox()
+    {
+        //MessageBox.Show("Test", "Test", MessageBoxButton.OK);
+        SelectedBox!.Name = NewBoxName;
+        SelectedBox.Description = NewBoxDescription;
+        _boxRepository.Update(SelectedBox);
+        // Notify the UI about the change
+        //OnPropertyChanged(nameof(Boxes)); // Mot working
+        // Trigger the reload logic
+        //Application.Current.Dispatcher.Invoke(() =>
+        //{
+        //    var navigationService = System.Windows.Navigation.NavigationService.GetNavigationService(Application.Current.MainWindow);
+        //    navigationService?.Refresh();
+        //});
+    }
+
+    private bool CanSaveBox()
+    {
+        return IsNotFormFieldNullOrSpace();
+    }
+
+    private bool IsNotFormFieldNullOrSpace()
+    {
+        return !(string.IsNullOrWhiteSpace(NewBoxName) && !string.IsNullOrWhiteSpace(NewBoxDescription));
+    }
+
     private void UpdateButtonVisibility()
     {
         if (SelectedBox != null && SelectedBox.GUID != Guid.Empty)
@@ -146,6 +176,19 @@ class BoxViewModel : ViewModelBase
         {
             AddButtonVisibility = Visibility.Visible; // Show the button
             SaveButtonVisibility = Visibility.Collapsed; // Hide the button
+        }
+    }
+    private void UpdateFormValue()
+    {
+        if (SelectedBox != null)
+        {
+            NewBoxName = SelectedBox.Name;
+            NewBoxDescription = SelectedBox.Description;
+        }
+        else
+        {
+            NewBoxName = string.Empty;
+            NewBoxDescription = string.Empty;
         }
     }
 }
