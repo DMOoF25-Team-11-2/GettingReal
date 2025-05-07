@@ -1,7 +1,6 @@
 ﻿namespace GettingReal.Model;
 
 using System.IO;
-using System.Windows;
 using GettingReal.Handler;
 /// <summary>
 /// Base class for repositories.
@@ -40,7 +39,7 @@ public abstract class RepositoryBase<T> where T : new()
 
         // Load the repository from an XML file
         // Fixing the CS0308 error by removing the incorrect type argument
-        Items = XmlFileHandler.LoadFromFile(_filePath);
+        Items = XmlFileHandler.Load(_filePath);
 
         // Check if the loaded items are null, and if so, initialize an empty list
         if (Items == null)
@@ -67,7 +66,16 @@ public abstract class RepositoryBase<T> where T : new()
 
         // Add the item to the list
         Items.Add(item);
-        XmlFileHandler.SaveToFile(Items, _filePath);
+        XmlFileHandler.Save(Items, _filePath);
+    }
+
+    /// <summary>
+    /// Gets all items from the repository.
+    /// </summary>
+    /// <returns>A list of all items in the repository.</returns>
+    public List<T> GetAll()
+    {
+        return Items;
     }
 
     /// <summary>
@@ -83,21 +91,6 @@ public abstract class RepositoryBase<T> where T : new()
         }
         throw new InvalidOperationException("Type T does not contain a property named 'GUID'.");
     }
-
-    /// <summary>
-    /// Gets all items from the repository.
-    /// </summary>
-    /// <returns>A list of all items in the repository.</returns>
-    public List<T> GetAll()
-    {
-        return Items;
-    }
-
-    /// <summary>
-    /// Gets an item from the repository by its guid.
-    /// </summary>
-    /// <param name="guid">The guid of the item to get.</param>
-    /// <returns>The item with the specified guid, or null if not found.</returns>
 
     /// <summary>
     /// Gets an item from the repository by its name.
@@ -121,7 +114,7 @@ public abstract class RepositoryBase<T> where T : new()
             Items.RemoveAt(index);
             Items.Insert(index, item);
         }
-        XmlFileHandler.SaveToFile(Items, _filePath);
+        XmlFileHandler.Save(Items, _filePath);
     }
 
     /// <summary>
@@ -131,7 +124,14 @@ public abstract class RepositoryBase<T> where T : new()
     public void Remove(T item)
     {
         Items.Remove(item);
-        XmlFileHandler.SaveToFile(Items, _filePath);
+        XmlFileHandler.Save(Items, _filePath);
+    }
+
+    public void Remove(Guid guid)
+    {
+        var item = Get(guid);
+        if (item != null)
+            Remove(item);
     }
 
     /// <summary>
@@ -140,17 +140,6 @@ public abstract class RepositoryBase<T> where T : new()
     public void Clear()
     {
         Items.Clear();
-    }
-
-    public void Dispose()
-    {
-        // Save the repository to an XML file
-        XmlFileHandler.SaveToFile(Items, _filePath);
-
-        // Perform cleanup logic
-        MessageBox.Show("Base destructor logic executed.", "Cleanup");
-
-        // Optionally clear items or perform other cleanup
-        Clear();
+        XmlFileHandler.Save(Items, _filePath);
     }
 }
