@@ -1,6 +1,7 @@
 ﻿using System.Windows.Controls;
 
 namespace GettingReal.View;
+
 using GettingReal.ViewModel;
 /// <summary>
 /// Interaction logic for BoxView.xaml

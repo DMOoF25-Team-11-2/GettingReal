@@ -1,21 +1,15 @@
 ﻿using System.Collections.ObjectModel;
 namespace GettingReal.ViewModel;
+
+using System.Windows;
 using GettingReal.Model;
 
 class BoxViewModel : ViewModelBase
 {
     private readonly BoxRepository _boxRepository;
-
     public ObservableCollection<Box> Boxes { get; set; } = new ObservableCollection<Box>();
-
-    public BoxViewModel()
-    {
-        _boxRepository = new BoxRepository();
-        Boxes = new ObservableCollection<Box>(_boxRepository.GetAll());
-    }
-
-    private Box _selectedBox;
-    public Box SelectedBox
+    private Box? _selectedBox;
+    public Box? SelectedBox
     {
         get => _selectedBox;
         set
@@ -24,6 +18,7 @@ class BoxViewModel : ViewModelBase
             {
                 OnPropertyChanged(nameof(SelectedBox));
                 RemoveBoxCommand.RaiseCanExecuteChanged();
+                UpdateButtonVisibility(); // Update visibility when selection changes
             }
         }
     }
@@ -54,46 +49,83 @@ class BoxViewModel : ViewModelBase
         }
     }
 
-    private RelayCommand _addBoxCommand;
-    public RelayCommand AddBoxCommand
+    private Visibility _addButtonVisibility = Visibility.Visible;
+    public Visibility AddButtonVisibility
     {
-        get
-        {
-            return _addBoxCommand ??= new RelayCommand(AddBox, CanAddBox);
-        }
+        get => _addButtonVisibility;
+        set => SetProperty(ref _addButtonVisibility, value);
+    }
+
+    private Visibility _removeButtonVisibility = Visibility.Visible;
+    public Visibility RemoveButtonVisibility
+    {
+        get => _removeButtonVisibility;
+        set => SetProperty(ref _removeButtonVisibility, value);
+    }
+
+    private Visibility _saveButtonVisibility = Visibility.Collapsed;
+    public Visibility SaveButtonVisibility
+    {
+        get => _saveButtonVisibility;
+        set => SetProperty(ref _saveButtonVisibility, value);
+    }
+
+    public RelayCommand AddBoxCommand { get; private set; }
+    public RelayCommand RemoveBoxCommand { get; private set; }
+
+    public BoxViewModel()
+    {
+        _boxRepository = new BoxRepository();
+        Boxes = new ObservableCollection<Box>(_boxRepository.GetAll());
+        _newBoxName = string.Empty;
+        _newBoxDescription = string.Empty;
+        AddBoxCommand = new RelayCommand(AddBox, CanAddBox);
+        RemoveBoxCommand = new RelayCommand(RemoveBox, CanRemoveBox);
     }
 
     private void AddBox()
     {
-        var newBox = new Box(NewBoxName, NewBoxDescription);
-        Boxes.Add(newBox);
-        _boxRepository.Add(newBox);
-        NewBoxName = string.Empty;
-        NewBoxDescription = string.Empty;
+        if (SelectedBox != null && string.IsNullOrEmpty(SelectedBox.Name) && string.IsNullOrEmpty(SelectedBox.Description))
+        {
+            // Replace the placeholder with a new item
+            SelectedBox.Name = NewBoxName;
+            SelectedBox.Description = NewBoxDescription;
+
+            // Add a new placeholder item
+            Boxes.Add(new Box { Name = string.Empty, Description = string.Empty });
+
+            // Clear the input fields
+            NewBoxName = string.Empty;
+            NewBoxDescription = string.Empty;
+        }
+        else
+        {
+            var newBox = new Box(NewBoxName, NewBoxDescription);
+            Boxes.Add(newBox);
+            _boxRepository.Add(newBox);
+            NewBoxName = string.Empty;
+            NewBoxDescription = string.Empty;
+        }
+
         AddBoxCommand.RaiseCanExecuteChanged();
     }
 
     private bool CanAddBox()
     {
-        return !string.IsNullOrWhiteSpace(NewBoxName) && !string.IsNullOrWhiteSpace(NewBoxDescription);
-    }
-
-    private RelayCommand _removeBoxCommand;
-    public RelayCommand RemoveBoxCommand
-    {
-        get
+        if (SelectedBox != null && SelectedBox.GUID != Guid.Empty)
         {
-            return _removeBoxCommand ??= new RelayCommand(RemoveBox, CanRemoveBox);
+            return false;
         }
+        // Check if the box name and description are not empty and if the selected box is not already in the list
+        return !(string.IsNullOrWhiteSpace(NewBoxName) && !string.IsNullOrWhiteSpace(NewBoxDescription));
     }
 
     private void RemoveBox()
     {
         if (SelectedBox != null)
         {
+            _boxRepository.Remove(SelectedBox.GUID);
             Boxes.Remove(SelectedBox);
-            _boxRepository.Remove(SelectedBox);
-            SelectedBox = null;
             RemoveBoxCommand.RaiseCanExecuteChanged();
         }
     }
@@ -101,5 +133,19 @@ class BoxViewModel : ViewModelBase
     private bool CanRemoveBox()
     {
         return SelectedBox != null;
+    }
+
+    private void UpdateButtonVisibility()
+    {
+        if (SelectedBox != null && SelectedBox.GUID != Guid.Empty)
+        {
+            AddButtonVisibility = Visibility.Collapsed; // Hide the button
+            SaveButtonVisibility = Visibility.Visible; // Show the button
+        }
+        else
+        {
+            AddButtonVisibility = Visibility.Visible; // Show the button
+            SaveButtonVisibility = Visibility.Collapsed; // Hide the button
+        }
     }
 }

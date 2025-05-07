@@ -1,4 +1,5 @@
 ﻿namespace GettingReal.Model;
+
 using System.Xml.Serialization;
 
 /// <summary>
@@ -52,9 +53,11 @@ public class Box
     /// <remarks>
     /// Needs to be public to satisfy the XML serialization requirements.
     /// </remarks>
-    public Box() : this(string.Empty, string.Empty)
+    public Box()
     {
-        GUID = Guid.NewGuid();
+        GUID = Guid.Empty;
+        Name = string.Empty;
+        Description = string.Empty;
     }
 
     /// <summary>

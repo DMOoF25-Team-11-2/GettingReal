@@ -3,27 +3,36 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:GettingReal.View"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="BoxView">
     <StackPanel Orientation="Vertical" Margin="10">
 
         <StackPanel Orientation="Horizontal" Margin="10">
-        <!-- Left Side: ListView for Boxes -->
-                <StackPanel Orientation="Vertical" Width="300" Margin="0,0,10,0" Background="LightBlue">
-                    <TextBlock Text="Box List" FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
-                    <ListView ItemsSource="{Binding Boxes}" 
+            <!-- Left Side: ListView for Boxes -->
+            <StackPanel Orientation="Vertical" Width="300" Margin="0,0,10,0" Background="LightBlue">
+                <TextBlock Text="Box List" FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
+                <ListView x:Name="ListBox" ItemsSource="{Binding Boxes}" 
                           SelectedItem="{Binding SelectedBox}" 
-                          Margin="0,0,0,10">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="150"/>
-                                <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="150"/>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                </StackPanel>
+                          Margin="0,0,0,10"
+                          >
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Name}" Value="">
+                                    <Setter Property="Foreground" Value="Gray"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="150"/>
+                            <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="150"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
 
             <!-- Right Side: Form for Add/Edit -->
             <StackPanel Orientation="Vertical" Width="300" Background="AntiqueWhite">
@@ -31,41 +40,50 @@
 
                 <TextBlock Text="Name:" Margin="0,0,0,5"/>
                 <TextBox Text="{Binding NewBoxName, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"/>
+                <!--<TextBox Text="{Binding SelectedBox.Name, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10" IsEnabled="{Binding SelectedBox}"/>-->
 
                 <TextBlock Text="Description:" Margin="0,0,0,5"/>
                 <TextBox Text="{Binding NewBoxDescription, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"/>
+                <!--<TextBox Text="{Binding SelectedBox.Description, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10" IsEnabled="{Binding SelectedBox}"/>-->
 
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                    <Button Content="Add" Command="{Binding AddBoxCommand}" Width="75" Margin="0,0,10,0"/>
-                    <Button Content="Remove" Command="{Binding RemoveBoxCommand}" Width="75"/>
+                    <Button Content="Tilføj" Command="{Binding AddBoxCommand}" Visibility="{Binding AddButtonVisibility}" Width="75" Margin="0,0,10,0"/>
+                    <Button Content="Opdataer" Command="{Binding SaveBoxCommand}" Visibility="{Binding SaveButtonVisibility}" Width="75" Margin="0,0,10,0"/>
+                    <Button Content="Fjern" Command="{Binding RemoveBoxCommand}"  Visibility="{Binding RemoveButtonVisability}" Width="75"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>
 
-
         <!-- Materials Section -->
-        <!--<StackPanel Orientation="Vertical" Width="400" Margin="10,0,0,0">
-            <TextBlock Text="Materials in Box" FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
-            <ListView ItemsSource="{Binding MaterialsInBox}" Margin="0,0,0,10">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="150"/>
-                        <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="200"/>
-                    </GridView>
-                </ListView.View>
-            </ListView>
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Materials in Box" FontSize="20" FontWeight="Bold" Margin="10,10,0,10"/>
+                <ListView ItemsSource="{Binding MaterialsInBox}" Margin="10,0,0,10">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="150"/>
+                            <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="200"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Button Content="Tilføj materiale til kassen" Margin="10,0,10,0"/>
 
-            <TextBlock Text="Material Repository" FontSize="20" FontWeight="Bold" Margin="0,10,0,10"/>
-            <ListView ItemsSource="{Binding MaterialRepository}" Margin="0,0,0,10">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="150"/>
-                        <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="200"/>
-                    </GridView>
-                </ListView.View>
-            </ListView>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Material Repository" FontSize="20" FontWeight="Bold" Margin="10,10,0,10"/>
+                <ListView ItemsSource="{Binding MaterialRepository}" Margin="10,0,0,10">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="150"/>
+                            <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="200"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Button Content="Fjern materiale fra kassen" Margin="10,0,10,0"/>
+            </StackPanel>
+            
         </StackPanel>
-        -->
     </StackPanel>
 
 
