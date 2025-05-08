@@ -5,7 +5,10 @@ public class Material
     public Guid GUID { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
-    public int Amount { get; set; }
+    [Obsolete("Use Quantity instead", true)]
+    public int Amount { get => Quantity; set { Quantity = value; } }
+
+    public int Quantity { get; set; }
 
     // Add a public parameterless constructor to satisfy the constraint in RepositoryBase<T>
     public Material()
@@ -13,14 +16,14 @@ public class Material
         GUID = Guid.NewGuid();
         Name = string.Empty;
         Description = string.Empty;
-        Amount = 0;
+        Quantity = 0;
     }
 
-    public Material(string name, string description, int amount)
+    public Material(string name, string description, int quantity)
     {
         GUID = Guid.NewGuid();
         this.Name = name;
         this.Description = description;
-        this.Amount = amount;
+        this.Quantity = quantity;
     }
 }

@@ -18,7 +18,7 @@ class BoxViewModel : ViewModelBase
             {
                 OnPropertyChanged(nameof(SelectedBox));
                 RemoveBoxCommand.RaiseCanExecuteChanged();
-                UpdateButtonVisibility();
+                SetButtonVisibility();
                 UpdateFormValue();
             }
         }
@@ -64,11 +64,11 @@ class BoxViewModel : ViewModelBase
         set => SetProperty(ref _removeButtonVisibility, value);
     }
 
-    private Visibility _saveButtonVisibility = Visibility.Collapsed;
-    public Visibility SaveButtonVisibility
+    private Visibility _updateButtonVisibility = Visibility.Collapsed;
+    public Visibility UpdateButtonVisibility
     {
-        get => _saveButtonVisibility;
-        set => SetProperty(ref _saveButtonVisibility, value);
+        get => _updateButtonVisibility;
+        set => SetProperty(ref _updateButtonVisibility, value);
     }
 
     public RelayCommand AddBoxCommand { get; private set; }
@@ -88,39 +88,18 @@ class BoxViewModel : ViewModelBase
 
     private void AddBox()
     {
-        if (SelectedBox != null && string.IsNullOrEmpty(SelectedBox.Name) && string.IsNullOrEmpty(SelectedBox.Description))
-        {
-            // Replace the placeholder with a new item
-            SelectedBox.Name = NewBoxName;
-            SelectedBox.Description = NewBoxDescription;
-
-            // Add a new placeholder item
-            Boxes.Add(new Box { Name = string.Empty, Description = string.Empty });
-
-            // Clear the input fields
-            NewBoxName = string.Empty;
-            NewBoxDescription = string.Empty;
-        }
-        else
-        {
-            var newBox = new Box(NewBoxName, NewBoxDescription);
-            Boxes.Add(newBox);
-            _boxRepository.Add(newBox);
-            NewBoxName = string.Empty;
-            NewBoxDescription = string.Empty;
-        }
-
+        Box newBox = new(NewBoxName, NewBoxDescription);
+        Boxes?.Add(newBox);
+        _boxRepository.Add(newBox);
+        ClearForm();
         AddBoxCommand.RaiseCanExecuteChanged();
     }
 
     private bool CanAddBox()
     {
         if (SelectedBox != null && SelectedBox.GUID != Guid.Empty)
-        {
             return false;
-        }
-        // Check if the box name and description are not empty and if the selected box is not already in the list
-        return IsNotFormFieldNullOrSpace();
+        return IsFormValid();
     }
 
     private void RemoveBox()
@@ -128,7 +107,7 @@ class BoxViewModel : ViewModelBase
         if (SelectedBox != null)
         {
             _boxRepository.Remove(SelectedBox.GUID);
-            Boxes.Remove(SelectedBox);
+            Boxes?.Remove(SelectedBox);
             RemoveBoxCommand.RaiseCanExecuteChanged();
         }
     }
@@ -154,25 +133,25 @@ class BoxViewModel : ViewModelBase
 
     private bool CanSaveBox()
     {
-        return IsNotFormFieldNullOrSpace();
+        return IsFormValid();
     }
 
-    private bool IsNotFormFieldNullOrSpace()
+    private bool IsFormValid()
     {
         return !(string.IsNullOrWhiteSpace(NewBoxName) && !string.IsNullOrWhiteSpace(NewBoxDescription));
     }
 
-    private void UpdateButtonVisibility()
+    private void SetButtonVisibility()
     {
         if (SelectedBox != null && SelectedBox.GUID != Guid.Empty)
         {
             AddButtonVisibility = Visibility.Collapsed; // Hide the button
-            SaveButtonVisibility = Visibility.Visible; // Show the button
+            UpdateButtonVisibility = Visibility.Visible; // Show the button
         }
         else
         {
             AddButtonVisibility = Visibility.Visible; // Show the button
-            SaveButtonVisibility = Visibility.Collapsed; // Hide the button
+            UpdateButtonVisibility = Visibility.Collapsed; // Hide the button
         }
     }
     private void UpdateFormValue()
@@ -184,8 +163,13 @@ class BoxViewModel : ViewModelBase
         }
         else
         {
-            NewBoxName = string.Empty;
-            NewBoxDescription = string.Empty;
+            ClearForm();
         }
+    }
+
+    private void ClearForm()
+    {
+        NewBoxName = string.Empty;
+        NewBoxDescription = string.Empty;
     }
 }
