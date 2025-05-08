@@ -1,5 +1,4 @@
 ﻿namespace GettingReal.Model;
-
 using System.Xml.Serialization;
 
 /// <summary>

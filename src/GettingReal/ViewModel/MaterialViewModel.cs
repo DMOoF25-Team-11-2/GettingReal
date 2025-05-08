@@ -31,7 +31,7 @@ class MaterialViewModel : ViewModelBase
         {
             if (SetProperty(ref _newMaterialName, value))
             {
-                SaveMaterialCommand.RaiseCanExecuteChanged();
+                UpdateMaterialCommand.RaiseCanExecuteChanged();
                 AddMaterialCommand.RaiseCanExecuteChanged();
             }
         }
@@ -45,7 +45,7 @@ class MaterialViewModel : ViewModelBase
         {
             if (SetProperty(ref _newMaterialDescription, value))
             {
-                SaveMaterialCommand.RaiseCanExecuteChanged();
+                UpdateMaterialCommand.RaiseCanExecuteChanged();
                 AddMaterialCommand.RaiseCanExecuteChanged();
             }
         }
@@ -59,7 +59,7 @@ class MaterialViewModel : ViewModelBase
         {
             if (SetProperty(ref _newMaterialQuantity, value))
             {
-                SaveMaterialCommand.RaiseCanExecuteChanged();
+                UpdateMaterialCommand.RaiseCanExecuteChanged();
                 AddMaterialCommand.RaiseCanExecuteChanged();
             }
         }
@@ -89,7 +89,7 @@ class MaterialViewModel : ViewModelBase
     public RelayCommand AddMaterialCommand { get; private set; }
     public RelayCommand RemoveMaterialCommand { get; private set; }
 
-    public RelayCommand SaveMaterialCommand { get; private set; }
+    public RelayCommand UpdateMaterialCommand { get; private set; }
     public MaterialViewModel()
     {
         _materialRepository = new MaterialRepository();
@@ -98,7 +98,7 @@ class MaterialViewModel : ViewModelBase
         _newMaterialDescription = string.Empty;
         AddMaterialCommand = new RelayCommand(AddMaterial, CanAddMaterial);
         RemoveMaterialCommand = new RelayCommand(RemoveMaterial, CanRemoveMaterial);
-        SaveMaterialCommand = new RelayCommand(SaveMaterial, CanSaveMaterial);
+        UpdateMaterialCommand = new RelayCommand(SaveMaterial, CanSaveMaterial);
         SetButtonVisibility();
     }
 
