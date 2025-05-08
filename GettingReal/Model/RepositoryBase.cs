@@ -21,6 +21,7 @@ public abstract class RepositoryBase<T> where T : new()
         var RealPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
         if (RealPath != null)
         {
+            RealPath = Path.Join(RealPath, "Data");
 #if DEBUG
             _filePath = Path.Combine(RealPath, $"{typeof(T).Name}_repository_test.xml");
 #else
