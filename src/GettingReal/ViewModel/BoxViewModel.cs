@@ -77,13 +77,14 @@ class BoxViewModel : ViewModelBase
     public RelayCommand SaveBoxCommand { get; private set; }
     public BoxViewModel()
     {
-        _boxRepository = new BoxRepository();
-        Boxes = new ObservableCollection<Box>(_boxRepository.GetAll());
         _newBoxName = string.Empty;
         _newBoxDescription = string.Empty;
+        _boxRepository = new BoxRepository();
+        Boxes = new ObservableCollection<Box>(_boxRepository.GetAll());
         AddBoxCommand = new RelayCommand(AddBox, CanAddBox);
         RemoveBoxCommand = new RelayCommand(RemoveBox, CanRemoveBox);
         SaveBoxCommand = new RelayCommand(SaveBox, CanSaveBox);
+        SetButtonVisibility();
     }
 
     private void AddBox()
@@ -138,21 +139,27 @@ class BoxViewModel : ViewModelBase
 
     private bool IsFormValid()
     {
-        return !(string.IsNullOrWhiteSpace(NewBoxName) && !string.IsNullOrWhiteSpace(NewBoxDescription));
+        return (!string.IsNullOrWhiteSpace(NewBoxName));
     }
 
     private void SetButtonVisibility()
     {
-        if (SelectedBox != null && SelectedBox.GUID != Guid.Empty)
-        {
-            AddButtonVisibility = Visibility.Collapsed; // Hide the button
-            UpdateButtonVisibility = Visibility.Visible; // Show the button
-        }
-        else
-        {
-            AddButtonVisibility = Visibility.Visible; // Show the button
-            UpdateButtonVisibility = Visibility.Collapsed; // Hide the button
-        }
+        //if (SelectedBox != null && SelectedBox.GUID != Guid.Empty)
+        //{
+        //    AddButtonVisibility = Visibility.Collapsed; // Hide the button
+        //    UpdateButtonVisibility = Visibility.Visible; // Show the button
+        //    RemoveButtonVisibility = Visibility.Visible; // Show the button
+        //}
+        //else
+        //{
+        //    AddButtonVisibility = Visibility.Visible; // Show the button
+        //    UpdateButtonVisibility = Visibility.Collapsed; // Hide the button
+        //    RemoveButtonVisibility = Visibility.Collapsed; // Hide the button
+        //}
+        AddButtonVisibility = (SelectedBox != null && SelectedBox.GUID != Guid.Empty) ? Visibility.Collapsed : Visibility.Visible;
+        UpdateButtonVisibility = (SelectedBox != null && SelectedBox.GUID != Guid.Empty) ? Visibility.Visible : Visibility.Collapsed;
+        RemoveButtonVisibility = (SelectedBox != null && SelectedBox.GUID != Guid.Empty) ? Visibility.Visible : Visibility.Collapsed;
+
     }
     private void UpdateFormValue()
     {

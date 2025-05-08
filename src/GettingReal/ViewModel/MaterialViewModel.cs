@@ -1,6 +1,5 @@
-﻿using System.Collections.ObjectModel;
-namespace GettingReal.ViewModel;
-
+﻿namespace GettingReal.ViewModel;
+using System.Collections.ObjectModel;
 using System.Windows;
 using GettingReal.Model;
 
@@ -63,14 +62,14 @@ class MaterialViewModel : ViewModelBase
         }
     }
 
-    private Visibility _addButtonVisibility = Visibility.Visible;
+    private Visibility _addButtonVisibility = Visibility.Collapsed;
     public Visibility AddButtonVisibility
     {
         get => _addButtonVisibility;
         set => SetProperty(ref _addButtonVisibility, value);
     }
 
-    private Visibility _removeButtonVisibility = Visibility.Visible;
+    private Visibility _removeButtonVisibility = Visibility.Collapsed;
     public Visibility RemoveButtonVisibility
     {
         get => _removeButtonVisibility;
@@ -94,9 +93,10 @@ class MaterialViewModel : ViewModelBase
         Materials = new ObservableCollection<Material>(_materialRepository.GetAll());
         _newMaterialName = string.Empty;
         _newMaterialDescription = string.Empty;
-        AddMaterialCommand = new RelayCommand(AddMaterial, CanMaterialBox);
+        AddMaterialCommand = new RelayCommand(AddMaterial, CanAddMaterial);
         RemoveMaterialCommand = new RelayCommand(RemoveMaterial, CanRemoveMaterial);
         SaveMaterialCommand = new RelayCommand(SaveMaterial, CanSaveMaterial);
+        SetButtonVisibility();
     }
 
     private void AddMaterial()
@@ -108,7 +108,7 @@ class MaterialViewModel : ViewModelBase
         AddMaterialCommand.RaiseCanExecuteChanged();
     }
 
-    private bool CanMaterialBox()
+    private bool CanAddMaterial()
     {
         if (SelectedMaterial != null && SelectedMaterial.GUID != Guid.Empty)
             return false;
@@ -151,21 +151,14 @@ class MaterialViewModel : ViewModelBase
 
     private bool IsFormValid()
     {
-        return !(string.IsNullOrWhiteSpace(NewMaterialName) && !string.IsNullOrWhiteSpace(NewMaterialDescription));
+        return (!string.IsNullOrWhiteSpace(NewMaterialName) && !(NewMaterialQuantity < 0));
     }
 
     private void SetButtonVisibility()
     {
-        if (SelectedMaterial != null && SelectedMaterial.GUID != Guid.Empty)
-        {
-            AddButtonVisibility = Visibility.Collapsed; // Hide the button
-            UpdateButtonVisibility = Visibility.Visible; // Show the button
-        }
-        else
-        {
-            AddButtonVisibility = Visibility.Visible; // Show the button
-            UpdateButtonVisibility = Visibility.Collapsed; // Hide the button
-        }
+        AddButtonVisibility = (SelectedMaterial != null && SelectedMaterial.GUID != Guid.Empty) ? Visibility.Collapsed : Visibility.Visible;
+        UpdateButtonVisibility = (SelectedMaterial != null && SelectedMaterial.GUID != Guid.Empty) ? Visibility.Visible : Visibility.Collapsed;
+        RemoveButtonVisibility = (SelectedMaterial != null && SelectedMaterial.GUID != Guid.Empty) ? Visibility.Visible : Visibility.Collapsed;
     }
     private void UpdateFormValue()
     {
