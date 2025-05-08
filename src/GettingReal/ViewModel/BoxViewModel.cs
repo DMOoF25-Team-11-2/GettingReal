@@ -138,7 +138,7 @@ class BoxViewModel : ViewModelBase
 
     private bool IsFormValid()
     {
-        return !(string.IsNullOrWhiteSpace(NewBoxName) && !string.IsNullOrWhiteSpace(NewBoxDescription));
+        return (!string.IsNullOrWhiteSpace(NewBoxName));
     }
 
     private void SetButtonVisibility()
@@ -147,11 +147,13 @@ class BoxViewModel : ViewModelBase
         {
             AddButtonVisibility = Visibility.Collapsed; // Hide the button
             UpdateButtonVisibility = Visibility.Visible; // Show the button
+            RemoveButtonVisibility = Visibility.Visible; // Show the button
         }
         else
         {
             AddButtonVisibility = Visibility.Visible; // Show the button
             UpdateButtonVisibility = Visibility.Collapsed; // Hide the button
+            RemoveButtonVisibility = Visibility.Collapsed; // Hide the button
         }
     }
     private void UpdateFormValue()

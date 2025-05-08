@@ -27,21 +27,18 @@
 
             <!-- Right Side: Form for Add/Edit -->
             <StackPanel Orientation="Vertical" Width="300" Background="LightBlue">
-                <TextBlock Text="Kasse" FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
+                <TextBlock Text="Kasse" FontSize="20" FontWeight="Bold" Margin="10"/>
 
-                <TextBlock Text="Navn:" Margin="0,0,0,5"/>
+                <TextBlock Text="Navn:" Margin="10,0,0,5"/>
                 <TextBox Text="{Binding NewBoxName, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"/>
-                <!--<TextBox Text="{Binding SelectedBox.Name, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10" IsEnabled="{Binding SelectedBox}"/>-->
 
-                <TextBlock Text="Beskrivelse:" Margin="0,0,0,5"/>
+                <TextBlock Text="Beskrivelse:" Margin="10,0,0,5"/>
                 <TextBox Text="{Binding NewBoxDescription, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"/>
-                <!--<TextBox Text="{Binding SelectedBox.Description, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10" IsEnabled="{Binding SelectedBox}"/>-->
 
-                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                    <Button Content="Tilføj" Command="{Binding AddBoxCommand}" Visibility="{Binding AddButtonVisibility}" Width="75" Margin="0,0,10,0"/>
-                    <Button Content="Opdater" Command="{Binding SaveBoxCommand}" Visibility="{Binding SaveButtonVisibility}" Width="75" Margin="0,0,10,0"/>
-                    <Button Content="Fjern" Command="{Binding RemoveBoxCommand}" Visibility="{Binding RemoveButtonVisability}" Width="75"/>
-                    
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <Button Content="Tilføj" Command="{Binding AddBoxCommand}" Visibility="{Binding AddButtonVisibility, Mode=TwoWay}" Width="75" Margin="0,0,10,0"/>
+                    <Button Content="Opdater" Command="{Binding SaveBoxCommand}" Visibility="{Binding SaveButtonVisibility, Mode=TwoWay}" Width="75" Margin="0,0,10,0"/>
+                    <Button Content="Fjern" Command="{Binding RemoveBoxCommand}" Visibility="{Binding RemoveButtonVisability, Mode=TwoWay}" Width="75"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>
