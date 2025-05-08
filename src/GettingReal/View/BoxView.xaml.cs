@@ -1,8 +1,7 @@
 ﻿using System.Windows.Controls;
+using GettingReal.ViewModel;
 
 namespace GettingReal.View;
-
-using GettingReal.ViewModel;
 /// <summary>
 /// Interaction logic for BoxView.xaml
 /// </summary>
@@ -13,6 +12,7 @@ public partial class BoxView : Page
         InitializeComponent();
         DataContext = new BoxViewModel();
     }
+
     private void ListBoxes_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
     {
         if (e.Key == System.Windows.Input.Key.Escape)
