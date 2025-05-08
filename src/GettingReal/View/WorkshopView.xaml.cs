@@ -1,9 +1,7 @@
 ﻿using System.Windows.Controls;
-
-namespace GettingReal.View;
-
 using GettingReal.ViewModel;
 
+namespace GettingReal.View;
 /// <summary>
 /// Interaction logic for WorkshopView.xaml
 /// </summary>

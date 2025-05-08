@@ -156,18 +156,9 @@ class MaterialViewModel : ViewModelBase
 
     private void SetButtonVisibility()
     {
-        if (SelectedMaterial != null && SelectedMaterial.GUID != Guid.Empty)
-        {
-            AddButtonVisibility = Visibility.Collapsed; // Hide the button
-            UpdateButtonVisibility = Visibility.Visible; // Show the button
-            RemoveButtonVisibility = Visibility.Visible; // Show the button
-        }
-        else
-        {
-            AddButtonVisibility = Visibility.Visible; // Show the button
-            UpdateButtonVisibility = Visibility.Collapsed; // Hide the button
-            RemoveButtonVisibility = Visibility.Collapsed; // Hide the button
-        }
+        AddButtonVisibility = (SelectedMaterial != null && SelectedMaterial.GUID != Guid.Empty) ? Visibility.Collapsed : Visibility.Visible;
+        UpdateButtonVisibility = (SelectedMaterial != null && SelectedMaterial.GUID != Guid.Empty) ? Visibility.Visible : Visibility.Collapsed;
+        RemoveButtonVisibility = (SelectedMaterial != null && SelectedMaterial.GUID != Guid.Empty) ? Visibility.Visible : Visibility.Collapsed;
     }
     private void UpdateFormValue()
     {

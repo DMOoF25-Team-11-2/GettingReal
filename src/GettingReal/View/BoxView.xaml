@@ -3,7 +3,8 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:viewmodel="clr-namespace:GettingReal.ViewModel"
+      xmlns:viewmodel="clr-namespace:GettingReal.ViewModel" 
+      d:DataContext="{d:DesignInstance Type=viewmodel:BoxViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="BoxView">
@@ -36,9 +37,9 @@
                 <TextBox Text="{Binding NewBoxDescription, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"/>
 
                 <StackPanel Orientation="Horizontal" Margin="10">
-                    <Button Content="Tilføj" Command="{Binding AddBoxCommand}" Visibility="{Binding AddButtonVisibility, Mode=TwoWay}" Width="75" Margin="0,0,10,0"/>
-                    <Button Content="Opdater" Command="{Binding SaveBoxCommand}" Visibility="{Binding SaveButtonVisibility, Mode=TwoWay}" Width="75" Margin="0,0,10,0"/>
-                    <Button Content="Fjern" Command="{Binding RemoveBoxCommand}" Visibility="{Binding RemoveButtonVisability, Mode=TwoWay}" Width="75"/>
+                    <Button Content="Tilføj" Command="{Binding AddBoxCommand}" Visibility="{Binding AddButtonVisibility}" Width="75" Margin="0,0,10,0"/>
+                    <Button Content="Opdater" Command="{Binding SaveBoxCommand}" Visibility="{Binding UpdateButtonVisibility}" Width="75" Margin="0,0,10,0"/>
+                    <Button Content="Fjern" Command="{Binding RemoveBoxCommand}" Visibility="{Binding RemoveButtonVisibility}" Width="75"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>
