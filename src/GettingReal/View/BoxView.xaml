@@ -12,7 +12,7 @@
         <StackPanel Orientation="Horizontal" Margin="10">
             <!-- Left Side: ListView for Boxes -->
             <StackPanel Orientation="Vertical" Width="300" Margin="0,0,10,0" Background="LightBlue">
-                <TextBlock Text="Kasseliste" FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
+                <TextBlock Text="Kasseliste" FontSize="20" FontWeight="Bold" Margin="10"/>
                 <ListView x:Name="ListBoxes" ItemsSource="{Binding Boxes}" 
                           SelectedItem="{Binding SelectedBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                           Margin="0,0,0,10"
@@ -31,15 +31,15 @@
                 <TextBlock Text="Kasse" FontSize="20" FontWeight="Bold" Margin="10"/>
 
                 <TextBlock Text="Navn:" Margin="10,0,0,5"/>
-                <TextBox Text="{Binding NewBoxName, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"/>
+                <TextBox Text="{Binding NewBoxName, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
 
                 <TextBlock Text="Beskrivelse:" Margin="10,0,0,5"/>
-                <TextBox Text="{Binding NewBoxDescription, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"/>
+                <TextBox Text="{Binding NewBoxDescription, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
 
                 <StackPanel Orientation="Horizontal" Margin="10">
-                    <Button Content="Tilføj" Command="{Binding AddBoxCommand}" Visibility="{Binding AddButtonVisibility}" Width="75" Margin="0,0,10,0"/>
-                    <Button Content="Opdater" Command="{Binding SaveBoxCommand}" Visibility="{Binding UpdateButtonVisibility}" Width="75" Margin="0,0,10,0"/>
-                    <Button Content="Fjern" Command="{Binding RemoveBoxCommand}" Visibility="{Binding RemoveButtonVisibility}" Width="75"/>
+                    <Button Content="Tilføj" Command="{Binding AddBoxCommand}" Visibility="{Binding AddButtonVisibility}" Width="75" Margin="10"/>
+                    <Button Content="Opdater" Command="{Binding UpdateBoxCommand}" Visibility="{Binding UpdateButtonVisibility}" Width="75" Margin="10"/>
+                    <Button Content="Fjern" Command="{Binding RemoveBoxCommand}" Visibility="{Binding RemoveButtonVisibility}" Width="75" Margin="10"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

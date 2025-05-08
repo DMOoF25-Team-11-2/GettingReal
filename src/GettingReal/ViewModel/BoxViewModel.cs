@@ -31,6 +31,7 @@ class BoxViewModel : ViewModelBase
         {
             if (SetProperty(ref _newBoxName, value))
             {
+                UpdateBoxCommand.RaiseCanExecuteChanged();
                 AddBoxCommand.RaiseCanExecuteChanged();
             }
         }
@@ -44,7 +45,7 @@ class BoxViewModel : ViewModelBase
         {
             if (SetProperty(ref _newBoxDescription, value))
             {
-                AddBoxCommand.RaiseCanExecuteChanged();
+                UpdateBoxCommand.RaiseCanExecuteChanged();
             }
         }
     }
@@ -73,7 +74,7 @@ class BoxViewModel : ViewModelBase
     public RelayCommand AddBoxCommand { get; private set; }
     public RelayCommand RemoveBoxCommand { get; private set; }
 
-    public RelayCommand SaveBoxCommand { get; private set; }
+    public RelayCommand UpdateBoxCommand { get; private set; }
     public BoxViewModel()
     {
         _newBoxName = string.Empty;
@@ -82,7 +83,7 @@ class BoxViewModel : ViewModelBase
         Boxes = new ObservableCollection<Box>(_boxRepository.GetAll());
         AddBoxCommand = new RelayCommand(AddBox, CanAddBox);
         RemoveBoxCommand = new RelayCommand(RemoveBox, CanRemoveBox);
-        SaveBoxCommand = new RelayCommand(SaveBox, CanSaveBox);
+        UpdateBoxCommand = new RelayCommand(SaveBox, CanSaveBox);
         SetButtonVisibility();
     }
 

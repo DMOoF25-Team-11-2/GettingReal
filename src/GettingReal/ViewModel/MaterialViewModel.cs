@@ -154,7 +154,12 @@ class MaterialViewModel : ViewModelBase
 
     private bool IsFormValid()
     {
-        return (!string.IsNullOrWhiteSpace(NewMaterialName) && !(NewMaterialQuantity < 0));
+        if (NewMaterialQuantity < 0)
+            return false;
+        if (string.IsNullOrWhiteSpace(NewMaterialName))
+            return false;
+        return true;
+
     }
 
     private void SetButtonVisibility()
