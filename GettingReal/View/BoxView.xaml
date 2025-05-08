@@ -16,19 +16,10 @@
                           SelectedItem="{Binding SelectedBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                           Margin="0,0,0,10"
                           PreviewKeyDown="ListBoxes_PreviewKeyDown">
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Name}" Value="">
-                                    <Setter Property="Foreground" Value="Gray"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ListView.ItemContainerStyle>
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
-                            <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
+                            <GridViewColumn Header="Navn" DisplayMemberBinding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
+                            <GridViewColumn Header="Beskrivelse" DisplayMemberBinding="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -38,11 +29,11 @@
             <StackPanel Orientation="Vertical" Width="300" Background="LightBlue">
                 <TextBlock Text="Kasse" FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
 
-                <TextBlock Text="Name:" Margin="0,0,0,5"/>
+                <TextBlock Text="Navn:" Margin="0,0,0,5"/>
                 <TextBox Text="{Binding NewBoxName, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"/>
                 <!--<TextBox Text="{Binding SelectedBox.Name, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10" IsEnabled="{Binding SelectedBox}"/>-->
 
-                <TextBlock Text="Description:" Margin="0,0,0,5"/>
+                <TextBlock Text="Beskrivelse:" Margin="0,0,0,5"/>
                 <TextBox Text="{Binding NewBoxDescription, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"/>
                 <!--<TextBox Text="{Binding SelectedBox.Description, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10" IsEnabled="{Binding SelectedBox}"/>-->
 
@@ -62,8 +53,8 @@
                 <ListView ItemsSource="{Binding MaterialsInBox}" Margin="10,0,0,10">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="150"/>
-                            <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="200"/>
+                            <GridViewColumn Header="Navn" DisplayMemberBinding="{Binding Name}" Width="150"/>
+                            <GridViewColumn Header="Beskrivelse" DisplayMemberBinding="{Binding Description}" Width="200"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -75,8 +66,8 @@
                 <ListView ItemsSource="{Binding MaterialRepository}" Margin="10,0,0,10">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="150"/>
-                            <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="200"/>
+                            <GridViewColumn Header="Navn" DisplayMemberBinding="{Binding Name}" Width="150"/>
+                            <GridViewColumn Header="Beskrivelse" DisplayMemberBinding="{Binding Description}" Width="200"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
