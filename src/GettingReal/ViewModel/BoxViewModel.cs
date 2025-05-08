@@ -1,6 +1,5 @@
-﻿using System.Collections.ObjectModel;
-namespace GettingReal.ViewModel;
-
+﻿namespace GettingReal.ViewModel;
+using System.Collections.ObjectModel;
 using System.Windows;
 using GettingReal.Model;
 

@@ -9,7 +9,7 @@ using GettingReal.Handler;
 public abstract class RepositoryBase<T> where T : new()
 {
     private readonly XmlFileHandler<T> XmlFileHandler = new XmlFileHandler<T>();
-    private string _filePath;
+    private readonly string _filePath;
     /// <summary>
     /// List of items in the repository.
     /// </summary>
@@ -32,7 +32,7 @@ public abstract class RepositoryBase<T> where T : new()
         // Check if the file exists, and if not, create it
         if (!File.Exists(_filePath))
         {
-            using (var fs = File.Create(_filePath))
+            using (var fs = File.Create(_filePath!))
             {
                 // File created
             }
@@ -40,7 +40,7 @@ public abstract class RepositoryBase<T> where T : new()
 
         // Load the repository from an XML file
         // Fixing the CS0308 error by removing the incorrect type argument
-        Items = XmlFileHandler.Load(_filePath);
+        Items = XmlFileHandler.Load(_filePath!);
 
         // Check if the loaded items are null, and if so, initialize an empty list
         if (Items == null)

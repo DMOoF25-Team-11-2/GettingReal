@@ -3,18 +3,44 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:GettingReal.View"
+      xmlns:viewmodel="clr-namespace:GettingReal.ViewModel" 
+      d:DataContext="{d:DesignInstance Type=viewmodel:WorkshopViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="WorkshopView">
-
     <StackPanel Orientation="Vertical" Margin="10">
         <StackPanel Orientation="Horizontal" Margin="10">
-            <StackPanel Orientation="Vertical" Width="300" Margin="10" Background="LightBlue">
-                <TextBlock Text="Workshop liste" FontSize="20" FontWeight="Bold" Margin="10"/>
+            <!-- Left Side: ListView for Workshop -->
+            <StackPanel Orientation="Vertical" Width="300" Margin="0,0,10,0" Background="LightBlue">
+                <TextBlock Text="Workshopliste" FontSize="20" FontWeight="Bold" Margin="10"/>
+                <ListView x:Name="ListViewWorkshops" ItemsSource="{Binding Workshops}" 
+                          SelectedItem="{Binding SelectedWorkshop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          Margin="0,0,0,10"
+                          PreviewKeyDown="ListViewWorkshops_PreviewKeyDown">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Navn" DisplayMemberBinding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
+                            <GridViewColumn Header="Beskrivelse" DisplayMemberBinding="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </StackPanel>
-            <StackPanel Orientation="Vertical" Width="300" Margin="10" Background="LightBlue">
-                <TextBlock Text="Workshop" FontSize="20" FontWeight="Bold" Margin="10"/>
+
+            <!-- Right Side: Form for Add/Edit -->
+            <StackPanel Orientation="Vertical" Width="300" Background="LightBlue">
+                <TextBlock Text="Workshope" FontSize="20" FontWeight="Bold" Margin="10"/>
+
+                <TextBlock Text="Navn:" Margin="10,0,0,5"/>
+                <TextBox Text="{Binding NewWorkshopName, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
+
+                <TextBlock Text="Beskrivelse:" Margin="10,0,0,5"/>
+                <TextBox Text="{Binding NewWorkshopDescription, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
+
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Tilføj" Command="{Binding AddWorkshopCommand}" Visibility="{Binding AddButtonVisibility}" Width="75" Margin="10"/>
+                    <Button Content="Opdater" Command="{Binding UpdateMaterialCommand}" Visibility="{Binding UpdateButtonVisibility}" Width="75" Margin="10"/>
+                    <Button Content="Fjern" Command="{Binding RemoveWorkshopCommand}" Visibility="{Binding RemoveButtonVisibility}" Width="75" Margin="10"/>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
     </StackPanel>
