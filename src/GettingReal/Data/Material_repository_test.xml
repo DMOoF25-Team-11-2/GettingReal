@@ -2,7 +2,7 @@
 <ArrayOfMaterial xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Material>
     <GUID>560f0c8b-6b7f-4e35-bddf-f586830ec302</GUID>
-    <Name> Bong monster </Name>
+    <Name>Bong monster </Name>
     <Description>! sæt af 4 forskellige Bong Monster</Description>
     <Quantity>1</Quantity>
   </Material>
@@ -50,7 +50,7 @@
   </Material>
   <Material>
     <GUID>db471faa-9735-46b4-a1a6-6f2516a6385d</GUID>
-    <Name> måne robot</Name>
+    <Name>måne robot</Name>
     <Description />
     <Quantity>1</Quantity>
   </Material>
@@ -62,7 +62,7 @@
   </Material>
   <Material>
     <GUID>3dda4bf6-0a23-418a-a723-5f9cefc5b9da</GUID>
-    <Name> hårholder Perle </Name>
+    <Name>hårholder Perle </Name>
     <Description />
     <Quantity>1</Quantity>
   </Material>
@@ -74,7 +74,7 @@
   </Material>
   <Material>
     <GUID>32849f98-7f62-4f9a-993f-cef0f209cefd</GUID>
-    <Name> tynd 3d print </Name>
+    <Name>tynd 3d print </Name>
     <Description>12 forskellige  dele</Description>
     <Quantity>1</Quantity>
   </Material>

@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfBox xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Box>
-    <GUID>d09a2b3b-2e1e-428e-b4ca-49da89237daa</GUID>
-    <Name>2D til 3D</Name>
-    <Description />
-    <MaterialGUIDs />
-  </Box>
-  <Box>
-    <GUID>092166ad-f676-4666-9960-4276ae123360</GUID>
-    <Name>3D</Name>
-    <Description />
-    <MaterialGUIDs />
-  </Box>
+    <Box>
+        <GUID>d09a2b3b-2e1e-428e-b4ca-49da89237daa</GUID>
+        <Name>1</Name>
+        <Description>2D til 3D</Description>
+        <MaterialGUIDs />
+    </Box>
+    <Box>
+        <GUID>092166ad-f676-4666-9960-4276ae123360</GUID>
+        <Name>1</Name>
+        <Description>3D</Description>
+        <MaterialGUIDs />
+    </Box>
 </ArrayOfBox>
