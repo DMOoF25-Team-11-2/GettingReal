@@ -47,7 +47,7 @@ public class Workshop
     [XmlIgnore]
     public List<Material> Materials { get; set; }
 
-    [XmlArrayItem("ActivityGUID")]
+    [XmlArrayItem("MaterialGUID")]
     public List<Guid> MaterialGUIDs
     {
         get => Materials?.Select(m => m.GUID).ToList() ?? new List<Guid>();

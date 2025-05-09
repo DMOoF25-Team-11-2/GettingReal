@@ -1,6 +1,5 @@
-﻿using System.Collections.ObjectModel;
-namespace GettingReal.ViewModel;
-
+﻿namespace GettingReal.ViewModel;
+using System.Collections.ObjectModel;
 using System.Windows;
 using GettingReal.Model;
 
@@ -32,43 +31,59 @@ class ActivityViewModel : ViewModelBase
         {
             if (SetProperty(ref _newActivityName, value))
             {
+                UpdateActivityCommand.RaiseCanExecuteChanged();
                 AddActivityCommand.RaiseCanExecuteChanged();
             }
         }
     }
 
     private TimeSpan _newActivityExpectedTime;
-    public TimeSpan NewActivityDescription
+    public TimeSpan NewActivityExpectedTime
     {
         get => _newActivityExpectedTime;
         set
         {
             if (SetProperty(ref _newActivityExpectedTime, value))
             {
+                UpdateActivityCommand.RaiseCanExecuteChanged();
                 AddActivityCommand.RaiseCanExecuteChanged();
             }
         }
     }
 
-    private Visibility _addButtonVisibility = Visibility.Visible;
+    private string _newActivityDescription;
+    public string NewActivityDescription
+    {
+        get => _newActivityDescription;
+        set
+        {
+            if (SetProperty(ref _newActivityDescription, value))
+            {
+                UpdateActivityCommand.RaiseCanExecuteChanged();
+                AddActivityCommand.RaiseCanExecuteChanged();
+            }
+        }
+    }
+
+    private Visibility _addButtonVisibility = Visibility.Collapsed;
     public Visibility AddButtonVisibility
     {
         get => _addButtonVisibility;
         set => SetProperty(ref _addButtonVisibility, value);
     }
 
-    private Visibility _removeButtonVisibility = Visibility.Visible;
+    private Visibility _removeButtonVisibility = Visibility.Collapsed;
     public Visibility RemoveButtonVisibility
     {
         get => _removeButtonVisibility;
         set => SetProperty(ref _removeButtonVisibility, value);
     }
 
-    private Visibility _saveButtonVisibility = Visibility.Collapsed;
-    public Visibility SaveButtonVisibility
+    private Visibility _updateButtonVisibility = Visibility.Collapsed;
+    public Visibility UpdateButtonVisibility
     {
-        get => _saveButtonVisibility;
-        set => SetProperty(ref _saveButtonVisibility, value);
+        get => _updateButtonVisibility;
+        set => SetProperty(ref _updateButtonVisibility, value);
     }
 
     public RelayCommand AddActivityCommand { get; private set; }
@@ -80,22 +95,18 @@ class ActivityViewModel : ViewModelBase
         _activityRepository = new ActivityRepository();
         Activities = new ObservableCollection<Activity>(_activityRepository.GetAll());
         _newActivityName = string.Empty;
-        _newActivityExpectedTime = TimeSpan.Zero;
+        _newActivityDescription = string.Empty;
         AddActivityCommand = new RelayCommand(AddActivity, CanAddActivity);
         RemoveActivityCommand = new RelayCommand(RemoveActivity, CanRemoveActivity);
-        UpdateActivityCommand = new RelayCommand(UpdateActivity, CanUpdateActivity);
+        UpdateActivityCommand = new RelayCommand(SaveActivity, CanSaveActivity);
+        SetButtonVisibility();
     }
 
     private void AddActivity()
     {
-        if (SelectedActivity != null)
-            throw new InvalidOperationException("Cannot add a new activity while one is selected.");
-        if (string.IsNullOrEmpty(NewActivityName))
-            throw new InvalidOperationException("Cannot add a new activity with an empty name.");
-
-        Activity newActivity = new Activity(NewActivityName, NewActivityDescription);
-        Activities?.Add(newActivity);
+        Activity newActivity = new(NewActivityName, NewActivityExpectedTime, NewActivityDescription);
         _activityRepository.Add(newActivity);
+        Activities?.Add(newActivity);
         ClearForm();
         AddActivityCommand.RaiseCanExecuteChanged();
     }
@@ -103,10 +114,7 @@ class ActivityViewModel : ViewModelBase
     private bool CanAddActivity()
     {
         if (SelectedActivity != null && SelectedActivity.GUID != Guid.Empty)
-        {
             return false;
-        }
-        // Check if the activity name and description are not empty and if the selected activity is not already in the list
         return IsFormValid();
     }
 
@@ -115,25 +123,21 @@ class ActivityViewModel : ViewModelBase
         if (SelectedActivity != null)
         {
             _activityRepository.Remove(SelectedActivity.GUID);
-            Activities.Remove(SelectedActivity);
-            ClearForm();
+            Activities?.Remove(SelectedActivity);
             RemoveActivityCommand.RaiseCanExecuteChanged();
         }
     }
 
     private bool CanRemoveActivity()
     {
-        return SelectedActivity != null && SelectedActivity.GUID != Guid.Empty;
+        return SelectedActivity != null;
     }
 
-    private void UpdateActivity()
+    private void SaveActivity()
     {
-        if (SelectedActivity == null)
-            throw new InvalidOperationException("Der er ikke valgt nogen aktiviteter i listen!");
-        if (string.IsNullOrEmpty(NewActivityName))
-            throw new InvalidOperationException("Aktivitetsnavn må ikke være tomt!");
+        //MessageBox.Show("Test", "Test", MessageBoxButton.OK);
         SelectedActivity!.Name = NewActivityName;
-        SelectedActivity.ExpectedTime = NewActivityDescription;
+        SelectedActivity.Description = NewActivityDescription;
         _activityRepository.Update(SelectedActivity);
         //workaround to refresh listview with new data
         var temp = Activities;
@@ -141,48 +145,43 @@ class ActivityViewModel : ViewModelBase
         OnPropertyChanged(nameof(Activities));
         Activities = temp;
         OnPropertyChanged(nameof(Activities));
-        //UpdateActivityCommand.RaiseCanExecuteChanged();
-
     }
 
-    private bool CanUpdateActivity()
+    private bool CanSaveActivity()
     {
         return IsFormValid();
     }
 
     private bool IsFormValid()
     {
-        return (!string.IsNullOrWhiteSpace(NewActivityName));
+        if (string.IsNullOrWhiteSpace(NewActivityName))
+            return false;
+        return true;
+
     }
 
     private void SetButtonVisibility()
     {
-        if (SelectedActivity != null && SelectedActivity.GUID != Guid.Empty)
-        {
-            AddButtonVisibility = Visibility.Collapsed; // Hide the button
-            SaveButtonVisibility = Visibility.Visible; // Show the button
-        }
-        else
-        {
-            AddButtonVisibility = Visibility.Visible; // Show the button
-            SaveButtonVisibility = Visibility.Collapsed; // Hide the button
-        }
+        AddButtonVisibility = (SelectedActivity != null && SelectedActivity.GUID != Guid.Empty) ? Visibility.Collapsed : Visibility.Visible;
+        UpdateButtonVisibility = (SelectedActivity != null && SelectedActivity.GUID != Guid.Empty) ? Visibility.Visible : Visibility.Collapsed;
+        RemoveButtonVisibility = (SelectedActivity != null && SelectedActivity.GUID != Guid.Empty) ? Visibility.Visible : Visibility.Collapsed;
     }
     private void UpdateFormValue()
     {
         if (SelectedActivity != null)
         {
             NewActivityName = SelectedActivity.Name;
-            NewActivityDescription = SelectedActivity.ExpectedTime;
+            NewActivityDescription = SelectedActivity.Description;
         }
         else
         {
             ClearForm();
         }
     }
+
     private void ClearForm()
     {
         NewActivityName = string.Empty;
-        NewActivityDescription = TimeSpan.Zero;
+        NewActivityDescription = string.Empty;
     }
 }
