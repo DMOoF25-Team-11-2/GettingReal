@@ -1,6 +1,4 @@
 ﻿namespace GettingReal.Model;
-using System.Xml.Serialization;
-
 /// <summary>
 /// Represents a box that can contain materials.
 /// </summary>
@@ -27,42 +25,20 @@ public class Box
     /// <remarks>
     /// This property is used to store the materials that are contained in the box.
     /// </remarks>
-    [XmlIgnore]
     public List<Material> Materials { get; set; }
-
-    /// <summary>
-    /// List of GUIDs representing the materials in the box.
-    /// </summary>
-    /// <remarks>
-    /// This property is used for XML serialization and deserialization.
-    /// It converts the list of Material objects to a list of GUIDs.
-    /// </remarks>
-    [XmlArrayItem("MaterialGUID")]
-    public List<Guid> MaterialGUIDs
-    {
-        get => Materials?.Select(m => m.GUID).ToList() ?? new List<Guid>();
-        set
-        {
-            Materials ??= [];
-            Materials.Clear();
-            if (value != null)
-                foreach (var guid in value)
-                    Materials.Add(new Material { GUID = guid });
-        }
-    }
-
     /// <summary>
     /// Default constructor for XML serialization.
     /// </summary>
     /// <remarks>
     /// Needs to be public to satisfy the XML serialization requirements.
     /// </remarks>
-    public Box()
+    public Box() : this("", "")
     {
         GUID = Guid.Empty;
-        Name = string.Empty;
-        Description = string.Empty;
-        Materials = [];
+        //Name = string.Empty;
+        //Description = string.Empty;
+        //Materials = [];
+        //MaterialGUIDs = [];
     }
 
     /// <summary>
