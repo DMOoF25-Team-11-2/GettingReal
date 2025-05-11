@@ -9,13 +9,13 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="BoxView">
     <StackPanel Orientation="Vertical" Margin="10">
-        <StackPanel Orientation="Horizontal" Margin="10">
+        <StackPanel Orientation="Horizontal">
             <!-- Left Side: ListView for Boxes -->
-            <StackPanel Orientation="Vertical" Width="300" Margin="0,0,10,0" Background="LightBlue">
+            <StackPanel Orientation="Vertical" Background="LightBlue" Margin="10" Height="300" Width="450">
                 <TextBlock Text="Kasseliste" FontSize="20" FontWeight="Bold" Margin="10"/>
-                <ListView x:Name="ListBoxes" ItemsSource="{Binding Boxes}" 
+                <ListView x:Name="ListBoxes" ItemsSource="{Binding Boxes}" ScrollViewer.CanContentScroll="True" 
                           SelectedItem="{Binding SelectedBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                          Margin="0,0,0,10"
+                          MaxHeight="200" Margin="10"
                           PreviewKeyDown="ListBoxes_PreviewKeyDown">
                     <ListView.View>
                         <GridView>
@@ -27,13 +27,13 @@
             </StackPanel>
 
             <!-- Right Side: Form for Add/Edit -->
-            <StackPanel Orientation="Vertical" Width="300" Background="LightBlue">
+            <StackPanel Orientation="Vertical" Background="LightBlue" Margin="10" Height="300" Width="450">
                 <TextBlock Text="Kasse" FontSize="20" FontWeight="Bold" Margin="10"/>
 
-                <TextBlock Text="Navn:" Margin="10,0,0,5"/>
+                <TextBlock Text="Navn:" Margin="10"/>
                 <TextBox Text="{Binding NewBoxName, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
 
-                <TextBlock Text="Beskrivelse:" Margin="10,0,0,5"/>
+                <TextBlock Text="Beskrivelse:" Margin="10"/>
                 <TextBox Text="{Binding NewBoxDescription, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
 
                 <StackPanel Orientation="Horizontal" Margin="10">
@@ -46,22 +46,28 @@
 
         <!-- Materials Section -->
         <StackPanel Orientation="Horizontal">
-            <StackPanel Orientation="Vertical">
-                <TextBlock Text="Materiale i kassen" FontSize="20" FontWeight="Bold" Margin="10,10,0,10"/>
-                <ListView ItemsSource="{Binding MaterialsInBox}" Margin="10,0,0,10">
+            <StackPanel Orientation="Vertical" Visibility="{Binding FormMaterialInBoxVisibility}" Background="LightBlue" Margin="10" Height="300" Width="450">
+                <TextBlock Text="Materiale i kassen" FontSize="20" FontWeight="Bold" Margin="10"/>
+                <ListView ItemsSource="{Binding MaterialsInBox}"
+                          SelectedItem="{Binding SelectedMaterialInBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          ScrollViewer.CanContentScroll="True"
+                          Margin="10" MaxHeight="200" >
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Navn" DisplayMemberBinding="{Binding Name}" Width="150"/>
-                            <GridViewColumn Header="Beskrivelse" DisplayMemberBinding="{Binding Description}" Width="200"/>
+                            <GridViewColumn Header="Navn" DisplayMemberBinding="{Binding Name}" Width="50"/>
+                            <GridViewColumn Header="Beskrivelse" DisplayMemberBinding="{Binding Description}"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
-                <Button Content="Fjern materiale fra kassen" Margin="10,0,10,0"/>
+                <Button Content="Fjern materiale fra kassen" Command="{Binding RemoveMaterialInBoxCommand}" Margin="10"/>
             </StackPanel>
 
-            <StackPanel Orientation="Vertical">
-                <TextBlock Text="Materialeliste" FontSize="20" FontWeight="Bold" Margin="10,10,0,10"/>
-                <ListView ItemsSource="{Binding MaterialRepository}" Margin="10,0,0,10">
+            <StackPanel Orientation="Vertical" Visibility="{Binding FormMaterialVisibility}"  Background="LightBlue" Margin="10" Height="300" Width="450">
+                <TextBlock Text="Materialeliste" FontSize="20" FontWeight="Bold" Margin="10"/>
+                <ListView ItemsSource="{Binding MaterialsAvailable}"
+                          SelectedItem="{Binding SelectedMaterial, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          ScrollViewer.CanContentScroll="True"
+                          Margin="10" MaxHeight="200" >
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Navn" DisplayMemberBinding="{Binding Name}" Width="150"/>
@@ -69,7 +75,7 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-                <Button Content="Tilføj materiale til kassen" Margin="10,0,10,0"/>
+                <Button Content="Tilføj materiale til kassen" Command="{Binding AddMaterialInBoxCommand}" Margin="10"/>
             </StackPanel>
         </StackPanel>
     </StackPanel>
