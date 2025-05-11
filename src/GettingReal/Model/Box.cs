@@ -6,9 +6,19 @@ using System.Xml.Serialization;
 /// </summary>
 public class Box
 {
-
+    /// <summary>
+    /// Unique identifier for the box.
+    /// </summary>
     public Guid GUID { get; set; }
+
+    /// <summary>
+    /// Name of the box.
+    /// </summary>
     public string Name { get; set; }
+
+    /// <summary>
+    /// Description of the box.
+    /// </summary>
     public string Description { get; set; }
 
     /// <summary>
@@ -33,16 +43,11 @@ public class Box
         get => Materials?.Select(m => m.GUID).ToList() ?? new List<Guid>();
         set
         {
-            if (Materials == null)
-                Materials = new List<Material>();
+            Materials ??= [];
             Materials.Clear();
             if (value != null)
-            {
                 foreach (var guid in value)
-                {
                     Materials.Add(new Material { GUID = guid });
-                }
-            }
         }
     }
 
@@ -57,6 +62,7 @@ public class Box
         GUID = Guid.Empty;
         Name = string.Empty;
         Description = string.Empty;
+        Materials = [];
     }
 
     /// <summary>
@@ -72,5 +78,6 @@ public class Box
         GUID = Guid.NewGuid();
         Name = name;
         Description = description;
+        Materials = [];
     }
 }
