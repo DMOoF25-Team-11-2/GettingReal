@@ -4,19 +4,18 @@
     <GUID>d09a2b3b-2e1e-428e-b4ca-49da89237daa</GUID>
     <Name>1</Name>
     <Description>2D til 3D</Description>
-    <MaterialGUIDs>
-      <MaterialGUID>560f0c8b-6b7f-4e35-bddf-f586830ec302</MaterialGUID>
-      <MaterialGUID>6913fae9-96b3-442d-93fb-6861898ba590</MaterialGUID>
-      <MaterialGUID>71003744-0b14-4a3a-9b3d-47cae946b87a</MaterialGUID>
-      <MaterialGUID>d1c3f3a1-5e3c-4080-a4ed-b1c8e564c1a5</MaterialGUID>
-      <MaterialGUID>a07c36b4-4152-4756-a4b5-19ad2267985e</MaterialGUID>
-      <MaterialGUID>a5274f87-11a9-4215-81b8-b2d7a0befade</MaterialGUID>
-    </MaterialGUIDs>
+    <MaterialGuids>
+      <guid>560f0c8b-6b7f-4e35-bddf-f586830ec302</guid>
+      <guid>a5274f87-11a9-4215-81b8-b2d7a0befade</guid>
+      <guid>a07c36b4-4152-4756-a4b5-19ad2267985e</guid>
+    </MaterialGuids>
   </Box>
   <Box>
     <GUID>092166ad-f676-4666-9960-4276ae123360</GUID>
     <Name>2</Name>
     <Description>3D</Description>
-    <MaterialGUIDs />
+    <MaterialGuids>
+      <guid>ac336d6e-accd-4c14-8def-14b647386544</guid>
+    </MaterialGuids>
   </Box>
 </ArrayOfBox>

@@ -11,11 +11,14 @@ direction TB
         class Workshop {
 	        +Guid GUID
 	        +string Name
+            +List~Guid~ MaterialGuids
+            +List~Guid~ ActivityGuids
         }
         class Activity {
 	        +Guid GUID
 	        +string Name
 	        +TimeSpand ExpectedTime
+            +List~Guid~ MaterialGuids
         }
         class Material {
 	        +Guid GUID
@@ -27,6 +30,7 @@ direction TB
 	        +Guid GUID
 	        +string Name
 	        +string Description
+            +List~Guid~ MaterialGuids
         }
         class BoxRepository {
 	        +DoNameExist(string) ::bool

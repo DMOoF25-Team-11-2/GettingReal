@@ -34,10 +34,6 @@ public class Box
     public Box() : this("", "")
     {
         GUID = Guid.Empty;
-        //Name = string.Empty;
-        //Description = string.Empty;
-        //Materials = [];
-        //MaterialGUIDs = [];
     }
 
     /// <summary>
@@ -48,7 +44,7 @@ public class Box
     /// <remarks>
     /// This constructor is used to create a new Box instance with a specified name and description.
     /// </remarks>
-    public Box(string name = "", string description = "") : base()
+    public Box(string name = "", string description = "")
     {
         GUID = Guid.NewGuid();
         Name = name;
