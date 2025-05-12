@@ -66,7 +66,7 @@ class BoxViewModel : ViewModelBase
         }
     }
 
-    private string _newBoxName = string.Empty;
+    private string _newBoxName;
     public string NewBoxName
     {
         get => _newBoxName;
@@ -80,7 +80,7 @@ class BoxViewModel : ViewModelBase
         }
     }
 
-    private string _newBoxDescription = string.Empty;
+    private string _newBoxDescription;
     public string NewBoxDescription
     {
         get => _newBoxDescription;
@@ -155,6 +155,9 @@ class BoxViewModel : ViewModelBase
 
         Boxes = new ObservableCollection<Box>(_boxRepository.GetAll());
         MaterialsAvailable = new ObservableCollection<Material>(_materialRepository.GetAll());
+
+        _newBoxName = string.Empty;
+        _newBoxDescription = string.Empty;
 
         AddBoxCommand = new RelayCommand(AddBox, CanAddBox);
         RemoveBoxCommand = new RelayCommand(RemoveBox, CanRemoveBox);
