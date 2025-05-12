@@ -7,9 +7,11 @@ class BoxViewModel : ViewModelBase
 {
     private readonly BoxRepository _boxRepository;
     private readonly MaterialRepository _materialRepository;
+
     public ObservableCollection<Box>? Boxes { get; set; }
     public ObservableCollection<Material>? MaterialsAvailable { get; set; }
     public ObservableCollection<Material>? MaterialsInBox { get; set; }
+
     private Box? _selectedBox;
     public Box? SelectedBox
     {
@@ -18,16 +20,24 @@ class BoxViewModel : ViewModelBase
         {
             if (SetProperty(ref _selectedBox, value))
             {
+                foreach (var guids in SelectedBox!.MaterialGuids)
+                {
+                    var material = MaterialsAvailable?.FirstOrDefault(m => m.GUID == guids);
+                    if (material != null)
+                    {
+                        MaterialsInBox?.Add(material);
+                    }
+                }
                 OnPropertyChanged(nameof(SelectedBox));
-                RemoveBoxCommand.RaiseCanExecuteChanged();
+                //RemoveBoxCommand.RaiseCanExecuteChanged();
                 SetButtonVisibility();
                 SetFormMaterialVisibility();
-                MaterialsInBox = [.. SelectedBox?.Materials ?? []];
-                RefreshMaterialInBox();
+                //RefreshMaterialInBox();
                 UpdateFormValue();
             }
         }
     }
+
     private Material? _selectedMaterial;
     public Material? SelectedMaterial
     {
@@ -41,6 +51,7 @@ class BoxViewModel : ViewModelBase
             }
         }
     }
+
     private Material? _selectedMaterialInBox;
     public Material? SelectedMaterialInBox
     {
@@ -50,11 +61,12 @@ class BoxViewModel : ViewModelBase
             if (SetProperty(ref _selectedMaterialInBox, value))
             {
                 OnPropertyChanged(nameof(SelectedMaterialInBox));
-                RemoveBoxCommand.RaiseCanExecuteChanged();
+                RemoveMaterialInBoxCommand.RaiseCanExecuteChanged();
             }
         }
     }
-    private string _newBoxName;
+
+    private string _newBoxName = string.Empty;
     public string NewBoxName
     {
         get => _newBoxName;
@@ -68,7 +80,7 @@ class BoxViewModel : ViewModelBase
         }
     }
 
-    private string _newBoxDescription;
+    private string _newBoxDescription = string.Empty;
     public string NewBoxDescription
     {
         get => _newBoxDescription;
@@ -108,6 +120,7 @@ class BoxViewModel : ViewModelBase
         get => _removeButtonFromMaterialRepoVisibility;
         set => SetProperty(ref _removeButtonFromMaterialRepoVisibility, value);
     }
+
     private Visibility _addButtonToMaterialInBoxVisibility = Visibility.Visible;
     public Visibility AddButtonToMaterialInBoxVisibility
     {
@@ -121,6 +134,7 @@ class BoxViewModel : ViewModelBase
         get => _formMaterialInBoxVisibility;
         set => SetProperty(ref _formMaterialInBoxVisibility, value);
     }
+
     private Visibility _formMaterialVisibility = Visibility.Hidden;
     public Visibility FormMaterialVisibility
     {
@@ -133,30 +147,31 @@ class BoxViewModel : ViewModelBase
     public RelayCommand UpdateBoxCommand { get; private set; }
     public RelayCommand AddMaterialInBoxCommand { get; private set; }
     public RelayCommand RemoveMaterialInBoxCommand { get; private set; }
+
     public BoxViewModel()
     {
-        _newBoxName = string.Empty;
-        _newBoxDescription = string.Empty;
         _boxRepository = new BoxRepository();
-        Boxes = new ObservableCollection<Box>(_boxRepository.GetAll());
         _materialRepository = new MaterialRepository();
+
+        Boxes = new ObservableCollection<Box>(_boxRepository.GetAll());
         MaterialsAvailable = new ObservableCollection<Material>(_materialRepository.GetAll());
+
         AddBoxCommand = new RelayCommand(AddBox, CanAddBox);
         RemoveBoxCommand = new RelayCommand(RemoveBox, CanRemoveBox);
         UpdateBoxCommand = new RelayCommand(SaveBox, CanSaveBox);
         AddMaterialInBoxCommand = new RelayCommand(AddMaterialInBox, CanAddInFormMaterialInBox);
         RemoveMaterialInBoxCommand = new RelayCommand(RemoveMaterialInBox, CanRemoveInFormMaterialInBox);
+
         SetButtonVisibility();
     }
 
-    #region Button action
+    #region Button Actions
     private void AddBox()
     {
-        Box newBox = new(NewBoxName, NewBoxDescription);
+        var newBox = new Box(NewBoxName, NewBoxDescription);
         Boxes?.Add(newBox);
         _boxRepository.Add(newBox);
         ClearForm();
-        AddBoxCommand.RaiseCanExecuteChanged();
     }
 
     private void RemoveBox()
@@ -165,107 +180,76 @@ class BoxViewModel : ViewModelBase
         {
             _boxRepository.Remove(SelectedBox.GUID);
             Boxes?.Remove(SelectedBox);
-            RemoveBoxCommand.RaiseCanExecuteChanged();
         }
     }
 
     private void SaveBox()
     {
-        //MessageBox.Show("Test", "Test", MessageBoxButton.OK);
-        SelectedBox!.Name = NewBoxName;
-        SelectedBox.Description = NewBoxDescription;
-        _boxRepository.Update(SelectedBox);
-        //workaround to refresh listview with new data
-        var temp = Boxes;
-        Boxes = null;
-        OnPropertyChanged(nameof(Boxes));
-        Boxes = temp;
-        OnPropertyChanged(nameof(Boxes));
+        if (SelectedBox != null)
+        {
+            SelectedBox.Name = NewBoxName;
+            SelectedBox.Description = NewBoxDescription;
+            _boxRepository.Update(SelectedBox);
+            RefreshBoxes();
+        }
     }
+
     private void AddMaterialInBox()
     {
-        if (SelectedMaterial != null && SelectedMaterial.GUID != Guid.Empty)
+        if (SelectedMaterial != null && SelectedBox != null)
         {
-            SelectedBox!.Materials.Add(SelectedMaterial);
+            SelectedBox.MaterialGuids.Add(SelectedMaterial.GUID);
             MaterialsInBox?.Add(SelectedMaterial);
             _boxRepository.Update(SelectedBox);
             RefreshMaterialInBox();
         }
     }
+
     private void RemoveMaterialInBox()
     {
-        if (SelectedMaterialInBox != null)
+        if (SelectedMaterialInBox != null && SelectedBox != null)
         {
+            SelectedBox.MaterialGuids.Remove(SelectedMaterialInBox.GUID);
             MaterialsInBox?.Remove(SelectedMaterialInBox);
-            SelectedBox!.Materials = [.. MaterialsInBox!];
             _boxRepository.Update(SelectedBox);
         }
     }
     #endregion
-    #region Button can do
-    private bool CanAddBox()
-    {
-        if (SelectedBox != null && SelectedBox.GUID != Guid.Empty)
-            return false;
-        return IsFormValid();
-    }
-    private bool CanRemoveBox()
-    {
-        return SelectedBox != null;
-    }
-    private bool CanSaveBox()
-    {
-        return IsFormValid();
-    }
-    private bool CanRemoveInFormMaterialInBox()
-    {
-        return SelectedMaterialInBox != null;
-    }
-    private bool CanAddInFormMaterialInBox()
-    {
-        return SelectedMaterial != null && SelectedMaterial.GUID != Guid.Empty;
-    }
+
+    #region Button Conditions
+    private bool CanAddBox() => SelectedBox == null || SelectedBox.GUID == Guid.Empty && IsFormValid();
+    private bool CanRemoveBox() => SelectedBox != null;
+    private bool CanSaveBox() => IsFormValid();
+    private bool CanRemoveInFormMaterialInBox() => SelectedMaterialInBox != null;
+    private bool CanAddInFormMaterialInBox() => SelectedMaterial != null && SelectedMaterial.GUID != Guid.Empty;
     #endregion
-    #region  Button Visibility
+
+    #region Helpers
     private void SetButtonVisibility()
     {
-        //if (SelectedBox != null && SelectedBox.GUID != Guid.Empty)
-        //{
-        //    AddButtonVisibility = Visibility.Collapsed; // Hide the button
-        //    UpdateButtonVisibility = Visibility.Visible; // Show the button
-        //    RemoveButtonVisibility = Visibility.Visible; // Show the button
-        //}
-        //else
-        //{
-        //    AddButtonVisibility = Visibility.Visible; // Show the button
-        //    UpdateButtonVisibility = Visibility.Collapsed; // Hide the button
-        //    RemoveButtonVisibility = Visibility.Collapsed; // Hide the button
-        //}
-        AddButtonVisibility = (SelectedBox != null && SelectedBox.GUID != Guid.Empty) ? Visibility.Collapsed : Visibility.Visible;
-        UpdateButtonVisibility = (SelectedBox != null && SelectedBox.GUID != Guid.Empty) ? Visibility.Visible : Visibility.Collapsed;
-        RemoveButtonVisibility = (SelectedBox != null && SelectedBox.GUID != Guid.Empty) ? Visibility.Visible : Visibility.Collapsed;
-
+        var isBoxSelected = SelectedBox != null && SelectedBox.GUID != Guid.Empty;
+        AddButtonVisibility = isBoxSelected ? Visibility.Collapsed : Visibility.Visible;
+        UpdateButtonVisibility = isBoxSelected ? Visibility.Visible : Visibility.Collapsed;
+        RemoveButtonVisibility = isBoxSelected ? Visibility.Visible : Visibility.Collapsed;
     }
 
-    #endregion
     private void SetFormMaterialVisibility()
     {
-        if (SelectedBox != null && SelectedBox.GUID != Guid.Empty)
-        {
-            FormMaterialInBoxVisibility = Visibility.Visible; // Show the form
-            FormMaterialVisibility = Visibility.Visible; // Show the form
-        }
-        else
-        {
-            FormMaterialInBoxVisibility = Visibility.Hidden; // Hide the form
-            FormMaterialVisibility = Visibility.Hidden; // Hide the form
-        }
+        var isBoxSelected = SelectedBox != null && SelectedBox.GUID != Guid.Empty;
+        MaterialsInBox = isBoxSelected
+            ? new ObservableCollection<Material>(
+                SelectedBox!.MaterialGuids
+                    .Select(guid => _materialRepository.Get(guid))
+                    .Where(material => material != null)
+                    .Cast<Material>()
+              )
+            : null;
+        FormMaterialInBoxVisibility = isBoxSelected ? Visibility.Visible : Visibility.Hidden;
+        FormMaterialVisibility = isBoxSelected ? Visibility.Visible : Visibility.Hidden;
+        RefreshMaterialInBox();
     }
 
-    private bool IsFormValid()
-    {
-        return (!string.IsNullOrWhiteSpace(NewBoxName));
-    }
+    private bool IsFormValid() => !string.IsNullOrWhiteSpace(NewBoxName);
 
     private void UpdateFormValue()
     {
@@ -273,9 +257,7 @@ class BoxViewModel : ViewModelBase
         {
             NewBoxName = SelectedBox.Name;
             NewBoxDescription = SelectedBox.Description;
-            MaterialsInBox = new ObservableCollection<Material>(SelectedBox.Materials ?? new List<Material>());
-
-            //OnPropertyChanged(nameof(MaterialsInBox));
+            RefreshMaterialInBox();
         }
         else
         {
@@ -291,20 +273,20 @@ class BoxViewModel : ViewModelBase
 
     private void RefreshMaterialInBox()
     {
-        if (SelectedBox != null)
-        {
-            MaterialsInBox = new ObservableCollection<Material>(SelectedBox.Materials ?? new List<Material>());
-        }
-        else
-        {
-            MaterialsInBox = new ObservableCollection<Material>();
-        }
+        var temp = MaterialsInBox;
+        MaterialsInBox = null;
         OnPropertyChanged(nameof(MaterialsInBox));
-        //workaround to refresh listview with new data
-        //var temp = MaterialsInBox;
-        //MaterialsInBox = null;
-        //OnPropertyChanged(nameof(MaterialsInBox));
-        //MaterialsInBox = temp;
-        //OnPropertyChanged(nameof(MaterialsInBox));
+        MaterialsInBox = temp;
+        OnPropertyChanged(nameof(MaterialsInBox));
     }
+
+    private void RefreshBoxes()
+    {
+        var temp = Boxes;
+        Boxes = null;
+        OnPropertyChanged(nameof(Boxes));
+        Boxes = temp;
+        OnPropertyChanged(nameof(Boxes));
+    }
+    #endregion
 }
