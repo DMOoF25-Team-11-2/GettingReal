@@ -28,7 +28,7 @@ public class Activity
     /// <summary>
     /// Gets or sets the list of material GUIDs associated with the activity.
     /// </summary>
-    public List<Guid> MaterialGUIDs { get; set; }
+    public List<Guid> MaterialGuids { get; set; }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Activity"/> class with default values.
@@ -50,6 +50,6 @@ public class Activity
         Name = name;
         ExpectedTime = expectedTime;
         Description = description;
-        MaterialGUIDs = [];
+        MaterialGuids = [];
     }
 }
