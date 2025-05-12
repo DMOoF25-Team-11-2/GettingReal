@@ -21,11 +21,10 @@ public class Box
 
     /// <summary>
     /// List of materials contained in the box.
+    /// Represents by materials guids.
     /// </summary>
-    /// <remarks>
-    /// This property is used to store the materials that are contained in the box.
-    /// </remarks>
-    public List<Material> Materials { get; set; }
+    public List<Guid> MaterialGuids { get; set; }
+
     /// <summary>
     /// Default constructor for XML serialization.
     /// </summary>
@@ -54,6 +53,6 @@ public class Box
         GUID = Guid.NewGuid();
         Name = name;
         Description = description;
-        Materials = [];
+        MaterialGuids = [];
     }
 }

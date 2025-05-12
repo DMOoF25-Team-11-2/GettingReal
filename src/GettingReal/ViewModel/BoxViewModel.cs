@@ -20,7 +20,14 @@ class BoxViewModel : ViewModelBase
         {
             if (SetProperty(ref _selectedBox, value))
             {
-                MaterialsInBox = new ObservableCollection<Material>(_selectedBox!.Materials);
+                foreach (var guids in SelectedBox!.MaterialGuids)
+                {
+                    var material = MaterialsAvailable?.FirstOrDefault(m => m.GUID == guids);
+                    if (material != null)
+                    {
+                        MaterialsInBox?.Add(material);
+                    }
+                }
                 OnPropertyChanged(nameof(SelectedBox));
                 //RemoveBoxCommand.RaiseCanExecuteChanged();
                 SetButtonVisibility();
@@ -191,7 +198,7 @@ class BoxViewModel : ViewModelBase
     {
         if (SelectedMaterial != null && SelectedBox != null)
         {
-            SelectedBox.Materials.Add(SelectedMaterial);
+            SelectedBox.MaterialGuids.Add(SelectedMaterial.GUID);
             MaterialsInBox?.Add(SelectedMaterial);
             _boxRepository.Update(SelectedBox);
             RefreshMaterialInBox();
@@ -202,7 +209,7 @@ class BoxViewModel : ViewModelBase
     {
         if (SelectedMaterialInBox != null && SelectedBox != null)
         {
-            SelectedBox.Materials.Remove(SelectedMaterialInBox);
+            SelectedBox.MaterialGuids.Remove(SelectedMaterialInBox.GUID);
             MaterialsInBox?.Remove(SelectedMaterialInBox);
             _boxRepository.Update(SelectedBox);
         }
@@ -229,7 +236,14 @@ class BoxViewModel : ViewModelBase
     private void SetFormMaterialVisibility()
     {
         var isBoxSelected = SelectedBox != null && SelectedBox.GUID != Guid.Empty;
-        MaterialsInBox = isBoxSelected ? new ObservableCollection<Material>(SelectedBox!.Materials) : null;
+        MaterialsInBox = isBoxSelected
+            ? new ObservableCollection<Material>(
+                SelectedBox!.MaterialGuids
+                    .Select(guid => _materialRepository.Get(guid))
+                    .Where(material => material != null)
+                    .Cast<Material>()
+              )
+            : null;
         FormMaterialInBoxVisibility = isBoxSelected ? Visibility.Visible : Visibility.Hidden;
         FormMaterialVisibility = isBoxSelected ? Visibility.Visible : Visibility.Hidden;
         RefreshMaterialInBox();
