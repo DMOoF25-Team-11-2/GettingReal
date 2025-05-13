@@ -29,7 +29,61 @@ class WorkshopViewModel : ViewModelBase
                 OnPropertyChanged(nameof(SelectedWorkshop));
                 RemoveWorkshopCommand.RaiseCanExecuteChanged();
                 SetButtonVisibility();
+                SetFormMaterialVisibility();
                 UpdateFormValue();
+            }
+        }
+    }
+    private Activity? _selectedActivity;
+    public Activity? SelectedActivity
+    {
+        get => _selectedActivity;
+        set
+        {
+            if (SetProperty(ref _selectedActivity, value))
+            {
+                OnPropertyChanged(nameof(SelectedActivity));
+                RemoveActivityFromWorkshopCommand.RaiseCanExecuteChanged();
+            }
+        }
+    }
+    private Activity? _selectedActivityInWorkshop;
+    public Activity? SelectedActivityInWorkshop
+    {
+        get => _selectedActivityInWorkshop;
+        set
+        {
+            if (SetProperty(ref _selectedActivityInWorkshop, value))
+            {
+                OnPropertyChanged(nameof(SelectedActivityInWorkshop));
+                RemoveActivityFromWorkshopCommand.RaiseCanExecuteChanged();
+            }
+        }
+    }
+
+    private Material? _selectedMaterial;
+    public Material? SelectedMaterial
+    {
+        get => _selectedMaterial;
+        set
+        {
+            if (SetProperty(ref _selectedMaterial, value))
+            {
+                OnPropertyChanged(nameof(SelectedMaterial));
+                RemoveMaterialFromWorkshopCommand.RaiseCanExecuteChanged();
+            }
+        }
+    }
+    private Material? _selectedMaterialInWorkshop;
+    public Material? SelectedMaterialInWorkshop
+    {
+        get => _selectedMaterialInWorkshop;
+        set
+        {
+            if (SetProperty(ref _selectedMaterialInWorkshop, value))
+            {
+                OnPropertyChanged(nameof(SelectedMaterialInWorkshop));
+                RemoveMaterialFromWorkshopCommand.RaiseCanExecuteChanged();
             }
         }
     }
@@ -77,55 +131,86 @@ class WorkshopViewModel : ViewModelBase
         }
     }
     #endregion
-    #region Button visability properties
+    #region Button visibility properties
     // Button visibility properties
-    private Visibility _addButtonVisibility = Visibility.Collapsed;
-    public Visibility AddButtonVisibility
+    private Visibility _buttonAddVisibility = Visibility.Collapsed;
+    public Visibility ButtonAddVisibility
     {
-        get => _addButtonVisibility;
-        set => SetProperty(ref _addButtonVisibility, value);
+        get => _buttonAddVisibility;
+        set => SetProperty(ref _buttonAddVisibility, value);
     }
-    private Visibility _removeButtonVisibility = Visibility.Collapsed;
-    public Visibility RemoveButtonVisibility
+    private Visibility _buttonRemoveVisibility = Visibility.Collapsed;
+    public Visibility ButtonRemoveVisibility
     {
-        get => _removeButtonVisibility;
-        set => SetProperty(ref _removeButtonVisibility, value);
+        get => _buttonRemoveVisibility;
+        set => SetProperty(ref _buttonRemoveVisibility, value);
     }
-    private Visibility _updateButtonVisibility = Visibility.Collapsed;
-    public Visibility UpdateButtonVisibility
+    private Visibility _buttonUpdateVisibility = Visibility.Collapsed;
+    public Visibility ButtonUpdateVisibility
     {
-        get => _updateButtonVisibility;
-        set => SetProperty(ref _updateButtonVisibility, value);
+        get => _buttonUpdateVisibility;
+        set => SetProperty(ref _buttonUpdateVisibility, value);
     }
-    private Visibility _removeButtonFromMaterialInWorkshopVisibility = Visibility.Visible;
-    public Visibility RemoveButtonFromMaterialInWorkshopVisibility
+    private Visibility _buttonRemoveMaterialFromWorkshopVisibility = Visibility.Visible;
+    public Visibility ButtonRemoveMaterialFromWorkshopVisibility
     {
-        get => _removeButtonFromMaterialInWorkshopVisibility;
-        set => SetProperty(ref _removeButtonFromMaterialInWorkshopVisibility, value);
+        get => _buttonRemoveMaterialFromWorkshopVisibility;
+        set => SetProperty(ref _buttonRemoveMaterialFromWorkshopVisibility, value);
     }
-    private Visibility _addButtonToMaterialInWorkshopVisibility = Visibility.Visible;
-    public Visibility AddButtonToMaterialInWorkshopVisibility
+    private Visibility _buttonAddToMaterialInWorkshopVisibility = Visibility.Visible;
+    public Visibility ButtonAddToMaterialInWorkshopVisibility
     {
-        get => _addButtonToMaterialInWorkshopVisibility;
-        set => SetProperty(ref _addButtonToMaterialInWorkshopVisibility, value);
+        get => _buttonAddToMaterialInWorkshopVisibility;
+        set => SetProperty(ref _buttonAddToMaterialInWorkshopVisibility, value);
     }
-    private Visibility _removeButtonFromActivityInWorkshopVisibility = Visibility.Visible;
-    public Visibility RemoveButtonFromActivityInWorkshopVisibility
+    private Visibility _buttonRemoveFromActivityInWorkshopVisibility = Visibility.Visible;
+    public Visibility ButtonRemoveToMaterialInWorkshopVisibility
     {
-        get => _removeButtonFromActivityInWorkshopVisibility;
-        set => SetProperty(ref _removeButtonFromActivityInWorkshopVisibility, value);
+        get => _buttonRemoveFromActivityInWorkshopVisibility;
+        set => SetProperty(ref _buttonRemoveFromActivityInWorkshopVisibility, value);
     }
-    private Visibility _addButtonToActivityInWorkshopVisibility = Visibility.Visible;
-    public Visibility AddButtonToActivityInWorkshopVisibility
+    private Visibility _buttonAddActivityToWorkshopVisibility = Visibility.Visible;
+    public Visibility ButtonAddActivityToWorkshopVisibility
     {
-        get => _addButtonToActivityInWorkshopVisibility;
-        set => SetProperty(ref _addButtonToActivityInWorkshopVisibility, value);
+        get => _buttonAddActivityToWorkshopVisibility;
+        set => SetProperty(ref _buttonAddActivityToWorkshopVisibility, value);
+    }
+    #endregion
+    #region Form visibility properties
+    private Visibility _formActivityInWorkshopVisibility = Visibility.Hidden;
+    public Visibility FormActivityInWorkshopVisibility
+    {
+        get => _formActivityInWorkshopVisibility;
+        set => SetProperty(ref _formActivityInWorkshopVisibility, value);
+    }
+    private Visibility _formActivityVisibility = Visibility.Hidden;
+    public Visibility FormActivityVisibility
+    {
+        get => _formActivityVisibility;
+        set => SetProperty(ref _formActivityVisibility, value);
+    }
+    private Visibility _formMaterialInWorkshopVisibility = Visibility.Hidden;
+    public Visibility FormMaterialInWorkshopVisibility
+    {
+        get => _formMaterialInWorkshopVisibility;
+        set => SetProperty(ref _formMaterialInWorkshopVisibility, value);
+    }
+
+    private Visibility _formMaterialVisibility = Visibility.Hidden;
+    public Visibility FormMaterialVisibility
+    {
+        get => _formMaterialVisibility;
+        set => SetProperty(ref _formMaterialVisibility, value);
     }
     #endregion
     #region Commands properties
     public RelayCommand AddWorkshopCommand { get; private set; }
     public RelayCommand RemoveWorkshopCommand { get; private set; }
     public RelayCommand UpdateWorkshopCommand { get; private set; }
+    public RelayCommand AddMaterialToWorkshopCommand { get; private set; }
+    public RelayCommand RemoveMaterialFromWorkshopCommand { get; private set; }
+    public RelayCommand AddActivityToWorkshopCommand { get; private set; }
+    public RelayCommand RemoveActivityFromWorkshopCommand { get; private set; }
     #endregion
     public WorkshopViewModel()
     {
@@ -143,6 +228,10 @@ class WorkshopViewModel : ViewModelBase
         AddWorkshopCommand = new RelayCommand(AddWorkshop, CanAddWorkshop);
         RemoveWorkshopCommand = new RelayCommand(RemoveWorkshop, CanRemoveWorkshop);
         UpdateWorkshopCommand = new RelayCommand(SaveWorkshop, CanSaveWorkshop);
+        AddMaterialToWorkshopCommand = new RelayCommand(AddMaterialToWorkshop, CanAddMaterialToWorkshop);
+        RemoveMaterialFromWorkshopCommand = new RelayCommand(RemoveMaterialFromWorkshop, CanRemoveMaterialFromWorkshop);
+        AddActivityToWorkshopCommand = new RelayCommand(AddActivityToWorkshop, CanAddActivityToWorkshop);
+        RemoveActivityFromWorkshopCommand = new RelayCommand(RemoveActivityFromWorkshop, CanRemoveActivityFromWorkshop);
 
         SetButtonVisibility();
     }
@@ -178,6 +267,46 @@ class WorkshopViewModel : ViewModelBase
         Workshops = temp;
         OnPropertyChanged(nameof(Workshops));
     }
+    private void AddMaterialToWorkshop()
+    {
+        if (SelectedWorkshop != null && SelectedWorkshop.GUID != Guid.Empty)
+        {
+            //Material material = new(NewWorkshopName, NewWorkshopDescription, 0);
+            //_materialRepository.Add(material);
+            //MaterialsInWorkshop?.Add(material);
+            //ClearForm();
+            //AddMaterialToWorkshopCommand.RaiseCanExecuteChanged();
+        }
+    }
+    private void RemoveMaterialFromWorkshop()
+    {
+        //if (SelectedWorkshop != null && SelectedWorkshop.GUID != Guid.Empty)
+        //{
+        //    _materialRepository.Remove(SelectedWorkshop.GUID);
+        //    MaterialsInWorkshop?.Remove(SelectedWorkshop);
+        //    RemoveMaterialFromWorkshopCommand.RaiseCanExecuteChanged();
+        //}
+    }
+    private void AddActivityToWorkshop()
+    {
+        if (SelectedWorkshop != null && SelectedWorkshop.GUID != Guid.Empty)
+        {
+            //Activity activity = new(NewWorkshopName, NewWorkshopDescription, TimeSpan.Zero);
+            //_activityRepository.Add(activity);
+            //ActivitiesInWorkshop?.Add(activity);
+            //ClearForm();
+            //AddActivityToWorkshopCommand.RaiseCanExecuteChanged();
+        }
+    }
+    private void RemoveActivityFromWorkshop()
+    {
+        //if (SelectedWorkshop != null && SelectedWorkshop.GUID != Guid.Empty)
+        //{
+        //    _activityRepository.Remove(SelectedWorkshop.GUID);
+        //    ActivitiesInWorkshop?.Remove(SelectedWorkshop);
+        //    RemoveActivityFromWorkshopCommand.RaiseCanExecuteChanged();
+        //}
+    }
     #endregion
     #region Buttons conditions
 
@@ -199,21 +328,55 @@ class WorkshopViewModel : ViewModelBase
     {
         return IsFormValid();
     }
+    private bool CanAddMaterialToWorkshop()
+    {
+        return SelectedWorkshop != null && SelectedWorkshop.GUID != Guid.Empty;
+    }
+    private bool CanRemoveMaterialFromWorkshop()
+    {
+        return SelectedWorkshop != null && SelectedWorkshop.GUID != Guid.Empty;
+    }
+    private bool CanAddActivityToWorkshop()
+    {
+        return SelectedWorkshop != null && SelectedWorkshop.GUID != Guid.Empty;
+    }
+    private bool CanRemoveActivityFromWorkshop()
+    {
+        return SelectedWorkshop != null && SelectedWorkshop.GUID != Guid.Empty;
+    }
     #endregion
     #region Helper methods
+
+    private void SetButtonVisibility()
+    {
+        ButtonAddVisibility = (SelectedWorkshop != null && SelectedWorkshop.GUID != Guid.Empty) ? Visibility.Collapsed : Visibility.Visible;
+        ButtonUpdateVisibility = (SelectedWorkshop != null && SelectedWorkshop.GUID != Guid.Empty) ? Visibility.Visible : Visibility.Collapsed;
+        ButtonRemoveVisibility = (SelectedWorkshop != null && SelectedWorkshop.GUID != Guid.Empty) ? Visibility.Visible : Visibility.Collapsed;
+    }
+    private void SetFormMaterialVisibility()
+    {
+        var isActivitySelected = SelectedWorkshop != null && SelectedWorkshop.GUID != Guid.Empty;
+        MaterialsInWorkshop = isActivitySelected
+            ? new ObservableCollection<Material>(
+                SelectedWorkshop!.MaterialGuids
+                    .Select(guid => _materialRepository.Get(guid))
+                    .Where(material => material != null)
+                    .Cast<Material>()
+              )
+            : null;
+        FormActivityInWorkshopVisibility = isActivitySelected ? Visibility.Visible : Visibility.Hidden;
+        FormActivityVisibility = isActivitySelected ? Visibility.Visible : Visibility.Hidden;
+        FormMaterialInWorkshopVisibility = isActivitySelected ? Visibility.Visible : Visibility.Hidden;
+        FormMaterialVisibility = isActivitySelected ? Visibility.Visible : Visibility.Hidden;
+        //RefreshMaterialInActivity();
+    }
+
     private bool IsFormValid()
     {
         if (string.IsNullOrWhiteSpace(NewWorkshopName))
             return false;
         return true;
 
-    }
-
-    private void SetButtonVisibility()
-    {
-        AddButtonVisibility = (SelectedWorkshop != null && SelectedWorkshop.GUID != Guid.Empty) ? Visibility.Collapsed : Visibility.Visible;
-        UpdateButtonVisibility = (SelectedWorkshop != null && SelectedWorkshop.GUID != Guid.Empty) ? Visibility.Visible : Visibility.Collapsed;
-        RemoveButtonVisibility = (SelectedWorkshop != null && SelectedWorkshop.GUID != Guid.Empty) ? Visibility.Visible : Visibility.Collapsed;
     }
     private void UpdateFormValue()
     {
