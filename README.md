@@ -1,4 +1,4 @@
-[![Contributors][contributors-shield]][contributors-url]
+﻿[![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
@@ -8,14 +8,13 @@
 
 ## Documentation
 
-Rapporten kan læse [her]()
+Rapporten kan læse [her](https://github.com/DMOoF25-Team-11-2/GettingReal/raw/refs/heads/main/documentation/Report.docx)
 
 ## Kontakt os
 Hvis du har spørgsmål eller kommentarer til projektet, er du velkommen til at kontakte os via e-mail.
 
 | Navn          | E-mail            |
 |---------------|-------------------|
-|Anders Vincent Danielsen|[e-mail](mailto:avda70523@edu.ucl.dk)|
 |Benjamin Jon Leonhardt|[e-mail](mailto:bjle71347@edu.ucl.dk)|
 |Cecillie Skoven Møller|[e-mail](mailto:csmo71359@edu.ucl.dk)|
 |Jens Tirsvad Nielsen|[e-mail](mailto:jtni71354@edu.ucl.dk)|
