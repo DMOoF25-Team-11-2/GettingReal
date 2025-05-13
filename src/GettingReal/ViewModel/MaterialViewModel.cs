@@ -5,8 +5,16 @@ using GettingReal.Model;
 
 class MaterialViewModel : ViewModelBase
 {
+    #region Properties
+    /// <summary>
+    /// Repository to manage the materials
+    /// </summary>
     private readonly MaterialRepository _materialRepository;
+    #endregion
+    #region Observable Collections properties
     public ObservableCollection<Material>? Materials { get; set; } = new ObservableCollection<Material>();
+    #endregion
+    #region Selected properties
     private Material? _selectedMaterial;
     public Material? SelectedMaterial
     {
@@ -22,7 +30,8 @@ class MaterialViewModel : ViewModelBase
             }
         }
     }
-
+    #endregion
+    #region Form properties
     private string _newMaterialName;
     public string NewMaterialName
     {
@@ -64,7 +73,8 @@ class MaterialViewModel : ViewModelBase
             }
         }
     }
-
+    #endregion
+    #region Button visibility properties
     private Visibility _addButtonVisibility = Visibility.Collapsed;
     public Visibility AddButtonVisibility
     {
@@ -85,11 +95,13 @@ class MaterialViewModel : ViewModelBase
         get => _updateButtonVisibility;
         set => SetProperty(ref _updateButtonVisibility, value);
     }
-
+    #endregion
+    #region Commands properties
     public RelayCommand AddMaterialCommand { get; private set; }
     public RelayCommand RemoveMaterialCommand { get; private set; }
 
     public RelayCommand UpdateMaterialCommand { get; private set; }
+    #endregion
     public MaterialViewModel()
     {
         _materialRepository = new MaterialRepository();
@@ -101,7 +113,7 @@ class MaterialViewModel : ViewModelBase
         UpdateMaterialCommand = new RelayCommand(SaveMaterial, CanSaveMaterial);
         SetButtonVisibility();
     }
-
+    #region Buttons action
     private void AddMaterial()
     {
         Material newMaterial = new(NewMaterialName, NewMaterialDescription, NewMaterialQuantity);
@@ -110,14 +122,6 @@ class MaterialViewModel : ViewModelBase
         ClearForm();
         AddMaterialCommand.RaiseCanExecuteChanged();
     }
-
-    private bool CanAddMaterial()
-    {
-        if (SelectedMaterial != null && SelectedMaterial.GUID != Guid.Empty)
-            return false;
-        return IsFormValid();
-    }
-
     private void RemoveMaterial()
     {
         if (SelectedMaterial != null)
@@ -127,12 +131,6 @@ class MaterialViewModel : ViewModelBase
             RemoveMaterialCommand.RaiseCanExecuteChanged();
         }
     }
-
-    private bool CanRemoveMaterial()
-    {
-        return SelectedMaterial != null;
-    }
-
     private void SaveMaterial()
     {
         //MessageBox.Show("Test", "Test", MessageBoxButton.OK);
@@ -146,11 +144,26 @@ class MaterialViewModel : ViewModelBase
         Materials = temp;
         OnPropertyChanged(nameof(Materials));
     }
+    #endregion
+    #region Buttons conditions
+    private bool CanAddMaterial()
+    {
+        if (SelectedMaterial != null && SelectedMaterial.GUID != Guid.Empty)
+            return false;
+        return IsFormValid();
+    }
+    private bool CanRemoveMaterial()
+    {
+        return SelectedMaterial != null;
+    }
+
 
     private bool CanSaveMaterial()
     {
         return IsFormValid();
     }
+    #endregion
+    #region Helpers methods
 
     private bool IsFormValid()
     {
@@ -188,4 +201,5 @@ class MaterialViewModel : ViewModelBase
         NewMaterialDescription = string.Empty;
         NewMaterialQuantity = 0;
     }
+    #endregion
 }

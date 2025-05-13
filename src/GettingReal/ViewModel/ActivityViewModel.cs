@@ -5,16 +5,16 @@ using GettingReal.Model;
 
 class ActivityViewModel : ViewModelBase
 {
-    // Repositories for activities and materials
+    // Repositories
     private readonly ActivityRepository _activityRepository;
     private readonly MaterialRepository _materialRepository;
 
-    // Collection of activities and materials
+    // Observable Collections
     public ObservableCollection<Activity>? Activities { get; set; }
     public ObservableCollection<Material>? MaterialsAvailable { get; set; }
     public ObservableCollection<Material>? MaterialsInActivity { get; set; }
 
-    // Selected activity and material properties
+    // Selected properties
     private Activity? _selectedActivity;
     public Activity? SelectedActivity
     {
@@ -50,6 +50,7 @@ class ActivityViewModel : ViewModelBase
             {
                 OnPropertyChanged(nameof(SelectedMaterial));
                 AddMaterialInActivityCommand.RaiseCanExecuteChanged();
+                SetButtonVisibility();
             }
         }
     }
