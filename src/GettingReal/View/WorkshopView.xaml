@@ -11,7 +11,7 @@
     <StackPanel Orientation="Vertical" Margin="10">
         <StackPanel Orientation="Horizontal">
             <!-- Left Side: ListView for Workshop -->
-            <StackPanel Orientation="Vertical" Width="300" Margin="10" Background="LightBlue">
+            <StackPanel Orientation="Vertical" Background="LightBlue" Margin="10" Height="300" Width="450">
                 <TextBlock Text="Workshopliste" FontSize="20" FontWeight="Bold" Margin="10"/>
                 <ListView x:Name="ListViewWorkshops" ItemsSource="{Binding Workshops}" 
                           SelectedItem="{Binding SelectedWorkshop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -27,7 +27,7 @@
             </StackPanel>
 
             <!-- Right Side: Form for Add/Edit -->
-            <StackPanel Orientation="Vertical" Background="LightBlue" Width="300">
+            <StackPanel Orientation="Vertical" Background="LightBlue" Margin="10" Height="300" Width="450">
                 <TextBlock Text="Workshope" FontSize="20" FontWeight="Bold" Margin="10"/>
 
                 <TextBlock Text="Navn:" Margin="10"/>
@@ -37,10 +37,74 @@
                 <TextBox Text="{Binding NewWorkshopDescription, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
 
                 <StackPanel Orientation="Horizontal">
-                    <Button Content="Tilføj" Command="{Binding AddWorkshopCommand}" Visibility="{Binding AddButtonVisibility}" Width="75" Margin="10"/>
-                    <Button Content="Opdater" Command="{Binding UpdateMaterialCommand}" Visibility="{Binding UpdateButtonVisibility}" Width="75" Margin="10"/>
-                    <Button Content="Fjern" Command="{Binding RemoveWorkshopCommand}" Visibility="{Binding RemoveButtonVisibility}" Width="75" Margin="10"/>
+                    <Button Content="Tilføj" Command="{Binding AddWorkshopCommand}" Visibility="{Binding ButtonAddVisibility}" Width="75" Margin="10"/>
+                    <Button Content="Opdater" Command="{Binding UpdateWorkshopCommand}" Visibility="{Binding ButtonUpdateVisibility}" Width="75" Margin="10"/>
+                    <Button Content="Fjern" Command="{Binding RemoveWorkshopCommand}" Visibility="{Binding ButtonRemoveVisibility}" Width="75" Margin="10"/>
                 </StackPanel>
+            </StackPanel>
+        </StackPanel>
+        <!-- Activities Section -->
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Vertical" Visibility="{Binding FormActivityInWorkshopVisibility}" Background="LightBlue" Margin="10" Height="300" Width="450">
+                <TextBlock Text="Aktiviter i workshop" FontSize="20" FontWeight="Bold" Margin="10"/>
+                <ListView ItemsSource="{Binding ActivitiesInWorkshop}"
+                          SelectedItem="{Binding SelectedActivityInWorkshop}"
+                          ScrollViewer.CanContentScroll="True"
+                          Margin="10" MaxHeight="200" >
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Navn" DisplayMemberBinding="{Binding Name}" Width="150"/>
+                            <GridViewColumn Header="Beskrivelse" DisplayMemberBinding="{Binding Description}" Width="50"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Button Content="Fjern" Command="{Binding ButtonRemoveMaterialFromWorkshopVisibility}" Margin="10"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Visibility="{Binding FormActivityVisibility}"  Background="LightBlue" Margin="10" Height="300" Width="450">
+                <TextBlock Text="Aktiviteter tilgængeligt" FontSize="20" FontWeight="Bold" Margin="10"/>
+                <ListView ItemsSource="{Binding ActivitiesAvailable}"
+                          SelectedItem="{Binding SelectedActivity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          ScrollViewer.CanContentScroll="True"
+                          Margin="10" MaxHeight="200" >
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Navn" DisplayMemberBinding="{Binding Name}" Width="125"/>
+                            <GridViewColumn Header="Beskrivelse" DisplayMemberBinding="{Binding Description}" Width="175"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Button Content="Tilføj" Command="{Binding ButtonAddActivityToWorkshopVisibility}" Margin="10"/>
+            </StackPanel>
+        <!-- Materials Section -->
+            <StackPanel Orientation="Vertical" Visibility="{Binding FormMaterialInWorkshopVisibility}" Background="LightGray" Margin="10" Height="300" Width="450">
+                <TextBlock Text="Materialer der skal bruges" FontSize="20" FontWeight="Bold" Margin="10"/>
+                <ListView ItemsSource="{Binding MaterialsInWorkshop}"
+                          SelectedItem="{Binding SelectedMaterialInWorkshop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          ScrollViewer.CanContentScroll="True"
+                          Margin="10" MaxHeight="200" >
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Navn" DisplayMemberBinding="{Binding Name}" Width="150"/>
+                            <GridViewColumn Header="Beskrivelse" DisplayMemberBinding="{Binding Description}" Width="50"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Button Content="Fjern" Command="{Binding ButtonRemoveToMaterialInWorkshopVisibility}" Margin="10"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Visibility="{Binding FormMaterialVisibility}"  Background="LightGray" Margin="10" Height="300" Width="450">
+                <TextBlock Text="Materialer tilgængeligt" FontSize="20" FontWeight="Bold" Margin="10"/>
+                <ListView ItemsSource="{Binding MaterialsAvailable}"
+                          SelectedItem="{Binding SelectedMaterial, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          ScrollViewer.CanContentScroll="True"
+                          Margin="10" MaxHeight="200" >
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Navn" DisplayMemberBinding="{Binding Name}" Width="125"/>
+                            <GridViewColumn Header="Beskrivelse" DisplayMemberBinding="{Binding Description}" Width="175"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Button Content="Tilføj" Command="{Binding ButtonAddToMaterialInWorkshopVisibility}" Margin="10"/>
             </StackPanel>
         </StackPanel>
     </StackPanel>
