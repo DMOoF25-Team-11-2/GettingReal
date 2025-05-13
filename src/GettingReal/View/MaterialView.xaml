@@ -36,7 +36,7 @@
                 <!--<TextBox Text="{Binding SelectedMaterial.Name, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10" IsEnabled="{Binding SelectedMaterial}"/>-->
 
                 <TextBlock Text="Beskrivelse:" Margin="10,0,0,5"/>
-                <TextBox Text="{Binding NewMaterialDescription, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
+                <TextBox Height="100" AcceptsReturn="True" Text="{Binding NewMaterialDescription, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
                 <!--<TextBox Text="{Binding SelectedMaterial.Description, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10" IsEnabled="{Binding SelectedMaterial}"/>-->
 
                 <TextBlock Text="Antal:" Margin="10,0,0,5"/>

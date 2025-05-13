@@ -9,13 +9,13 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="WorkshopView">
     <StackPanel Orientation="Vertical" Margin="10">
-        <StackPanel Orientation="Horizontal" Margin="10">
+        <StackPanel Orientation="Horizontal">
             <!-- Left Side: ListView for Workshop -->
-            <StackPanel Orientation="Vertical" Width="300" Margin="0,0,10,0" Background="LightBlue">
+            <StackPanel Orientation="Vertical" Width="300" Margin="10" Background="LightBlue">
                 <TextBlock Text="Workshopliste" FontSize="20" FontWeight="Bold" Margin="10"/>
                 <ListView x:Name="ListViewWorkshops" ItemsSource="{Binding Workshops}" 
                           SelectedItem="{Binding SelectedWorkshop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                          Margin="0,0,0,10"
+                          Margin="10"
                           PreviewKeyDown="ListViewWorkshops_PreviewKeyDown">
                     <ListView.View>
                         <GridView>
@@ -27,13 +27,13 @@
             </StackPanel>
 
             <!-- Right Side: Form for Add/Edit -->
-            <StackPanel Orientation="Vertical" Width="300" Background="LightBlue">
+            <StackPanel Orientation="Vertical" Background="LightBlue" Width="300">
                 <TextBlock Text="Workshope" FontSize="20" FontWeight="Bold" Margin="10"/>
 
-                <TextBlock Text="Navn:" Margin="10,0,0,5"/>
+                <TextBlock Text="Navn:" Margin="10"/>
                 <TextBox Text="{Binding NewWorkshopName, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
 
-                <TextBlock Text="Beskrivelse:" Margin="10,0,0,5"/>
+                <TextBlock Text="Beskrivelse:" Margin="10"/>
                 <TextBox Text="{Binding NewWorkshopDescription, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
 
                 <StackPanel Orientation="Horizontal">

@@ -22,12 +22,12 @@ public class Workshop
     /// <summary>
     /// Gets or sets the expected time for the workshop.
     /// </summary>
-    public List<Guid> ActivityGUIDs { get; set; }
+    public List<Guid> ActivityGuids { get; set; }
 
     /// <summary>
     /// Gets or sets the list of material GUIDs associated with the workshop.
     /// </summary>
-    public List<Guid> MaterialGUIDs { get; set; }
+    public List<Guid> MaterialGuids { get; set; }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Workshop"/> class.
@@ -45,7 +45,7 @@ public class Workshop
         GUID = Guid.NewGuid();
         Name = name;
         Description = description;
-        ActivityGUIDs = [];
-        MaterialGUIDs = [];
+        ActivityGuids = [];
+        MaterialGuids = [];
     }
 }
