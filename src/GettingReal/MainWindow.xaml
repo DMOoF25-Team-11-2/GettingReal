@@ -33,6 +33,12 @@
                 </MenuItem>
                 <MenuItem x:Name="ShowWhorkshop" Header="Workshop" Click="Show_Workshop_Click"/>
             </MenuItem>
+           <MenuItem Header="Rapport">
+                <MenuItem.ToolTip>
+                    <ToolTip Content="Rapportmenu" />
+                </MenuItem.ToolTip>
+                <MenuItem  x:Name="Rapport" Header="Materialer i kasse"/>
+            </MenuItem> 
         </Menu>
         <StackPanel Orientation="Horizontal">
             <Frame Name="MainFrame" NavigationUIVisibility="Hidden" Margin="10"/>
