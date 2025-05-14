@@ -15,7 +15,10 @@ class WorkshopViewModel : ViewModelBase
     public ObservableCollection<Workshop>? Workshops { get; set; } = new ObservableCollection<Workshop>();
     public ObservableCollection<Material>? MaterialsAvailable { get; set; }
     public ObservableCollection<Material>? MaterialsInWorkshop { get; set; }
-    public ObservableCollection<Activity>? ActivitiesAvailable { get; set; }
+    public ObservableCollection<Activity>? ActivitiesAvailable { 
+        get; // Burde frasotere alle aktiviteter i workshop
+        set;
+    }
     public ObservableCollection<Activity>? ActivitiesInWorkshop { get; set; }
     #endregion
 
@@ -224,6 +227,7 @@ class WorkshopViewModel : ViewModelBase
         Workshops = new ObservableCollection<Workshop>(_workshopRepository.GetAll());
         MaterialsAvailable = new ObservableCollection<Material>(_materialRepository.GetAll());
         ActivitiesAvailable = new ObservableCollection<Activity>(_activityRepository.GetAll()); // skal have ActivitiesInWorkshop inhold fjernet
+        ActivitiesInWorkshop = new ObservableCollection<Activity>();
 
         _newWorkshopName = string.Empty;
         _newWorkshopDescription = string.Empty;
@@ -292,14 +296,15 @@ class WorkshopViewModel : ViewModelBase
     }
     private void AddActivityToWorkshop()
     {
-        if (SelectedWorkshop != null && SelectedWorkshop.GUID != Guid.Empty)
-        {
-            //Activity activity = new(NewWorkshopName, NewWorkshopDescription, TimeSpan.Zero);
-            //_activityRepository.Add(activity);
-            //ActivitiesInWorkshop?.Add(activity);
-            //ClearForm();
-            //AddActivityToWorkshopCommand.RaiseCanExecuteChanged();
-        }
+        this.ActivitiesInWorkshop.Add(this.SelectedActivity!);
+        //if (SelectedWorkshop != null && SelectedWorkshop.GUID != Guid.Empty)
+        //{
+        //Activity activity = new(NewWorkshopName, NewWorkshopDescription, TimeSpan.Zero);
+        //_activityRepository.Add(activity);
+        //ActivitiesInWorkshop?.Add(activity);
+        //ClearForm();
+        //AddActivityToWorkshopCommand.RaiseCanExecuteChanged();
+        //}
     }
     private void RemoveActivityFromWorkshop()
     {
@@ -341,8 +346,7 @@ class WorkshopViewModel : ViewModelBase
     }
     private bool CanAddActivityToWorkshop()
     {
-        //return true;
-        return SelectedActivity != null;// && SelectedActivity.GUID != Guid.Empty;
+        return SelectedActivity != null && SelectedActivity.GUID != Guid.Empty;
     }
     private bool CanRemoveActivityFromWorkshop()
     {
