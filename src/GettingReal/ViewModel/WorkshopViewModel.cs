@@ -10,6 +10,7 @@ class WorkshopViewModel : ViewModelBase
     private readonly MaterialRepository _materialRepository;
     private readonly ActivityRepository _activityRepository;
     #endregion
+    
     #region Observable Collections properties
     public ObservableCollection<Workshop>? Workshops { get; set; } = new ObservableCollection<Workshop>();
     public ObservableCollection<Material>? MaterialsAvailable { get; set; }
@@ -17,6 +18,7 @@ class WorkshopViewModel : ViewModelBase
     public ObservableCollection<Activity>? ActivitiesAvailable { get; set; }
     public ObservableCollection<Activity>? ActivitiesInWorkshop { get; set; }
     #endregion
+
     #region Selected properties
     private Workshop? _selectedWorkshop;
     public Workshop? SelectedWorkshop
@@ -44,6 +46,7 @@ class WorkshopViewModel : ViewModelBase
             {
                 OnPropertyChanged(nameof(SelectedActivity));
                 RemoveActivityFromWorkshopCommand.RaiseCanExecuteChanged();
+                AddActivityToWorkshopCommand.RaiseCanExecuteChanged();
             }
         }
     }
@@ -220,7 +223,7 @@ class WorkshopViewModel : ViewModelBase
 
         Workshops = new ObservableCollection<Workshop>(_workshopRepository.GetAll());
         MaterialsAvailable = new ObservableCollection<Material>(_materialRepository.GetAll());
-        ActivitiesAvailable = new ObservableCollection<Activity>(_activityRepository.GetAll());
+        ActivitiesAvailable = new ObservableCollection<Activity>(_activityRepository.GetAll()); // skal have ActivitiesInWorkshop inhold fjernet
 
         _newWorkshopName = string.Empty;
         _newWorkshopDescription = string.Empty;
@@ -338,11 +341,12 @@ class WorkshopViewModel : ViewModelBase
     }
     private bool CanAddActivityToWorkshop()
     {
-        return SelectedWorkshop != null && SelectedWorkshop.GUID != Guid.Empty;
+        //return true;
+        return SelectedActivity != null;// && SelectedActivity.GUID != Guid.Empty;
     }
     private bool CanRemoveActivityFromWorkshop()
     {
-        return SelectedWorkshop != null && SelectedWorkshop.GUID != Guid.Empty;
+        return SelectedActivity != null && SelectedActivity.GUID != Guid.Empty;
     }
     #endregion
     #region Helper methods

@@ -73,7 +73,7 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-                <Button Content="Tilføj" Command="{Binding ButtonAddActivityToWorkshopVisibility}" Margin="10"/>
+                <Button Content="Tilføj" Command="{Binding AddActivityToWorkshopCommand}" Margin="10" />
             </StackPanel>
         <!-- Materials Section -->
             <StackPanel Orientation="Vertical" Visibility="{Binding FormMaterialInWorkshopVisibility}" Background="LightGray" Margin="10" Height="300" Width="450">
