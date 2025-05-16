@@ -28,7 +28,7 @@
 
             <!-- Right Side: Form for Add/Edit -->
             <StackPanel Orientation="Vertical" Background="LightBlue" Margin="10" Height="300" Width="450">
-                <TextBlock Text="Workshope" FontSize="20" FontWeight="Bold" Margin="10"/>
+                <TextBlock Text="Workshop" FontSize="20" FontWeight="Bold" Margin="10"/>
 
                 <TextBlock Text="Navn:" Margin="10"/>
                 <TextBox Text="{Binding NewWorkshopName, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
