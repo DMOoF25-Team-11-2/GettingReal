@@ -33,6 +33,13 @@ class WorkshopViewModel : ViewModelBase
                 SetFormActivityVisibility();
                 UpdateFormValue();
             }
+            else
+            {
+                ClearForm();
+                SetButtonVisibility();
+                FormActivityInWorkshopVisibility = Visibility.Hidden;
+                FormActivityVisibility = Visibility.Hidden;
+            }
         }
     }
     private Activity? _selectedActivity;
