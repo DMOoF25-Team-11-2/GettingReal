@@ -75,7 +75,7 @@
                 </ListView>
                 <Button Content="Tilføj" Command="{Binding AddActivityToWorkshopCommand}" Margin="10" />
             </StackPanel>
-        <!-- Materials Section -->
+        <!-- Materials Section --><!--
             <StackPanel Orientation="Vertical" Visibility="{Binding FormMaterialInWorkshopVisibility}" Background="LightGray" Margin="10" Height="300" Width="450">
                 <TextBlock Text="Materialer der skal bruges" FontSize="20" FontWeight="Bold" Margin="10"/>
                 <ListView ItemsSource="{Binding MaterialsInWorkshop}"
@@ -105,7 +105,7 @@
                     </ListView.View>
                 </ListView>
                 <Button Content="Tilføj" Command="{Binding ButtonAddToMaterialInWorkshopVisibility}" Margin="10"/>
-            </StackPanel>
+            </StackPanel>-->
         </StackPanel>
     </StackPanel>
 </Page>
