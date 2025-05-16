@@ -1,5 +1,6 @@
 ﻿namespace GettingReal.ViewModel;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using GettingReal.Model;
 
@@ -7,18 +8,13 @@ class WorkshopViewModel : ViewModelBase
 {
     #region Properties
     private readonly WorkshopRepository _workshopRepository;
-    private readonly MaterialRepository _materialRepository;
+    //private readonly MaterialRepository _materialRepository;
     private readonly ActivityRepository _activityRepository;
     #endregion
-    
+
     #region Observable Collections properties
-    public ObservableCollection<Workshop>? Workshops { get; set; } = new ObservableCollection<Workshop>();
-    public ObservableCollection<Material>? MaterialsAvailable { get; set; }
-    public ObservableCollection<Material>? MaterialsInWorkshop { get; set; }
-    public ObservableCollection<Activity>? ActivitiesAvailable { 
-        get; // Burde frasotere alle aktiviteter i workshop
-        set;
-    }
+    public ObservableCollection<Workshop>? Workshops { get; set; }
+    public ObservableCollection<Activity>? ActivitiesAvailable { get; set; }
     public ObservableCollection<Activity>? ActivitiesInWorkshop { get; set; }
     #endregion
 
@@ -29,12 +25,14 @@ class WorkshopViewModel : ViewModelBase
         get => _selectedWorkshop;
         set
         {
-            if (SetProperty(ref _selectedWorkshop, value))
+            SetProperty(ref _selectedWorkshop, value);
+            if (_selectedWorkshop != null)
             {
                 OnPropertyChanged(nameof(SelectedWorkshop));
                 RemoveWorkshopCommand.RaiseCanExecuteChanged();
                 SetButtonVisibility();
-                SetFormMaterialVisibility();
+                //SetFormMaterialVisibility();
+                SetFormActivityVisibility();
                 UpdateFormValue();
             }
         }
@@ -47,12 +45,27 @@ class WorkshopViewModel : ViewModelBase
         {
             if (SetProperty(ref _selectedActivity, value))
             {
-                OnPropertyChanged(nameof(SelectedActivity));
-                RemoveActivityFromWorkshopCommand.RaiseCanExecuteChanged();
+                if (_selectedWorkshop != null)
+                {
+                    // Find the workshop in the repository
+                    var workshop = _workshopRepository.Get(_selectedWorkshop.GUID);
+                    if (workshop != null)
+                    {
+                        // Get the activities for this workshop
+                        ActivitiesInWorkshop = new ObservableCollection<Activity>(
+                            workshop.ActivityGuids
+                                .Select(guid => _activityRepository.Get(guid))
+                                .Where(activity => activity != null)
+                                .Cast<Activity>()
+                        );
+                        OnPropertyChanged(nameof(ActivitiesInWorkshop));
+                    }
+                }
                 AddActivityToWorkshopCommand.RaiseCanExecuteChanged();
             }
         }
     }
+
     private Activity? _selectedActivityInWorkshop;
     public Activity? SelectedActivityInWorkshop
     {
@@ -61,40 +74,56 @@ class WorkshopViewModel : ViewModelBase
         {
             if (SetProperty(ref _selectedActivityInWorkshop, value))
             {
+                if (_selectedActivityInWorkshop != null)
+                {
+                    // Find the activity in the repository
+                    var activity = _activityRepository.Get(_selectedActivityInWorkshop.GUID);
+                    if (activity != null)
+                    {
+                        // Get the activities for this workshop
+                        ActivitiesInWorkshop = new ObservableCollection<Activity>(
+                            _selectedWorkshop!.ActivityGuids
+                                .Select(guid => _activityRepository.Get(guid))
+                                .Where(activity => activity != null)
+                                .Cast<Activity>()
+                        );
+                        OnPropertyChanged(nameof(ActivitiesInWorkshop));
+                    }
+                }
                 OnPropertyChanged(nameof(SelectedActivityInWorkshop));
                 RemoveActivityFromWorkshopCommand.RaiseCanExecuteChanged();
             }
         }
     }
 
-    private Material? _selectedMaterial;
-    public Material? SelectedMaterial
-    {
-        get => _selectedMaterial;
-        set
-        {
-            if (SetProperty(ref _selectedMaterial, value))
-            {
-                OnPropertyChanged(nameof(SelectedMaterial));
-                RemoveMaterialFromWorkshopCommand.RaiseCanExecuteChanged();
-            }
-        }
-    }
-    private Material? _selectedMaterialInWorkshop;
-    public Material? SelectedMaterialInWorkshop
-    {
-        get => _selectedMaterialInWorkshop;
-        set
-        {
-            if (SetProperty(ref _selectedMaterialInWorkshop, value))
-            {
-                OnPropertyChanged(nameof(SelectedMaterialInWorkshop));
-                RemoveMaterialFromWorkshopCommand.RaiseCanExecuteChanged();
-            }
-        }
-    }
+    //private Material? _selectedMaterial;
+    //public Material? SelectedMaterial
+    //{
+    //    get => _selectedMaterial;
+    //    set
+    //    {
+    //        if (SetProperty(ref _selectedMaterial, value))
+    //        {
+    //            OnPropertyChanged(nameof(SelectedMaterial));
+    //            RemoveMaterialFromWorkshopCommand.RaiseCanExecuteChanged();
+    //        }
+    //    }
+    //}
+    //private Material? _selectedMaterialInWorkshop;
+    //public Material? SelectedMaterialInWorkshop
+    //{
+    //    get => _selectedMaterialInWorkshop;
+    //    set
+    //    {
+    //        if (SetProperty(ref _selectedMaterialInWorkshop, value))
+    //        {
+    //            OnPropertyChanged(nameof(SelectedMaterialInWorkshop));
+    //            RemoveMaterialFromWorkshopCommand.RaiseCanExecuteChanged();
+    //        }
+    //    }
+    //}
     #endregion
-    #region Form properties
+    #region  Form fields for new workshop
     private string _newWorkshopName;
     public string NewWorkshopName
     {
@@ -157,29 +186,29 @@ class WorkshopViewModel : ViewModelBase
         get => _buttonUpdateVisibility;
         set => SetProperty(ref _buttonUpdateVisibility, value);
     }
-    private Visibility _buttonRemoveMaterialFromWorkshopVisibility = Visibility.Visible;
-    public Visibility ButtonRemoveMaterialFromWorkshopVisibility
-    {
-        get => _buttonRemoveMaterialFromWorkshopVisibility;
-        set => SetProperty(ref _buttonRemoveMaterialFromWorkshopVisibility, value);
-    }
-    private Visibility _buttonAddToMaterialInWorkshopVisibility = Visibility.Visible;
-    public Visibility ButtonAddToMaterialInWorkshopVisibility
-    {
-        get => _buttonAddToMaterialInWorkshopVisibility;
-        set => SetProperty(ref _buttonAddToMaterialInWorkshopVisibility, value);
-    }
+    //private Visibility _buttonRemoveMaterialFromWorkshopVisibility = Visibility.Visible;
+    //public Visibility ButtonRemoveMaterialFromWorkshopVisibility
+    //{
+    //    get => _buttonRemoveMaterialFromWorkshopVisibility;
+    //    set => SetProperty(ref _buttonRemoveMaterialFromWorkshopVisibility, value);
+    //}
+    //private Visibility _buttonAddToMaterialInWorkshopVisibility = Visibility.Visible;
+    //public Visibility ButtonAddToMaterialInWorkshopVisibility
+    //{
+    //    get => _buttonAddToMaterialInWorkshopVisibility;
+    //    set => SetProperty(ref _buttonAddToMaterialInWorkshopVisibility, value);
+    //}
     private Visibility _buttonRemoveFromActivityInWorkshopVisibility = Visibility.Visible;
-    public Visibility ButtonRemoveToMaterialInWorkshopVisibility
+    public Visibility ButtonRemoveFromActivityInWorkshopVisibility
     {
         get => _buttonRemoveFromActivityInWorkshopVisibility;
         set => SetProperty(ref _buttonRemoveFromActivityInWorkshopVisibility, value);
     }
-    private Visibility _buttonAddActivityToWorkshopVisibility = Visibility.Visible;
-    public Visibility ButtonAddActivityToWorkshopVisibility
+    private Visibility _buttonAddActivityInWorkshopVisibility = Visibility.Visible;
+    public Visibility ButtonAddActivityInWorkshopVisibility
     {
-        get => _buttonAddActivityToWorkshopVisibility;
-        set => SetProperty(ref _buttonAddActivityToWorkshopVisibility, value);
+        get => _buttonAddActivityInWorkshopVisibility;
+        set => SetProperty(ref _buttonAddActivityInWorkshopVisibility, value);
     }
     #endregion
     #region Form visibility properties
@@ -195,39 +224,38 @@ class WorkshopViewModel : ViewModelBase
         get => _formActivityVisibility;
         set => SetProperty(ref _formActivityVisibility, value);
     }
-    private Visibility _formMaterialInWorkshopVisibility = Visibility.Hidden;
-    public Visibility FormMaterialInWorkshopVisibility
-    {
-        get => _formMaterialInWorkshopVisibility;
-        set => SetProperty(ref _formMaterialInWorkshopVisibility, value);
-    }
+    //private Visibility _formMaterialInWorkshopVisibility = Visibility.Hidden;
+    //public Visibility FormMaterialInWorkshopVisibility
+    //{
+    //    get => _formMaterialInWorkshopVisibility;
+    //    set => SetProperty(ref _formMaterialInWorkshopVisibility, value);
+    //}
 
-    private Visibility _formMaterialVisibility = Visibility.Hidden;
-    public Visibility FormMaterialVisibility
-    {
-        get => _formMaterialVisibility;
-        set => SetProperty(ref _formMaterialVisibility, value);
-    }
+    //private Visibility _formMaterialVisibility = Visibility.Hidden;
+    //public Visibility FormMaterialVisibility
+    //{
+    //    get => _formMaterialVisibility;
+    //    set => SetProperty(ref _formMaterialVisibility, value);
+    //}
     #endregion
     #region Commands properties
     public RelayCommand AddWorkshopCommand { get; private set; }
     public RelayCommand RemoveWorkshopCommand { get; private set; }
     public RelayCommand UpdateWorkshopCommand { get; private set; }
-    public RelayCommand AddMaterialToWorkshopCommand { get; private set; }
-    public RelayCommand RemoveMaterialFromWorkshopCommand { get; private set; }
+    //public RelayCommand AddMaterialToWorkshopCommand { get; private set; }
+    //public RelayCommand RemoveMaterialFromWorkshopCommand { get; private set; }
     public RelayCommand AddActivityToWorkshopCommand { get; private set; }
     public RelayCommand RemoveActivityFromWorkshopCommand { get; private set; }
     #endregion
     public WorkshopViewModel()
     {
         _workshopRepository = new WorkshopRepository();
-        _materialRepository = new MaterialRepository();
+        //_materialRepository = new MaterialRepository();
         _activityRepository = new ActivityRepository();
 
-        Workshops = new ObservableCollection<Workshop>(_workshopRepository.GetAll());
-        MaterialsAvailable = new ObservableCollection<Material>(_materialRepository.GetAll());
-        ActivitiesAvailable = new ObservableCollection<Activity>(_activityRepository.GetAll()); // skal have ActivitiesInWorkshop inhold fjernet
-        ActivitiesInWorkshop = new ObservableCollection<Activity>();
+        Workshops = [.. _workshopRepository.GetAll()];
+        //MaterialsAvailable = new ObservableCollection<Material>(_materialRepository.GetAll());
+        ActivitiesAvailable = [.. _activityRepository.GetAll()];
 
         _newWorkshopName = string.Empty;
         _newWorkshopDescription = string.Empty;
@@ -235,8 +263,8 @@ class WorkshopViewModel : ViewModelBase
         AddWorkshopCommand = new RelayCommand(AddWorkshop, CanAddWorkshop);
         RemoveWorkshopCommand = new RelayCommand(RemoveWorkshop, CanRemoveWorkshop);
         UpdateWorkshopCommand = new RelayCommand(SaveWorkshop, CanSaveWorkshop);
-        AddMaterialToWorkshopCommand = new RelayCommand(AddMaterialToWorkshop, CanAddMaterialToWorkshop);
-        RemoveMaterialFromWorkshopCommand = new RelayCommand(RemoveMaterialFromWorkshop, CanRemoveMaterialFromWorkshop);
+        //AddMaterialToWorkshopCommand = new RelayCommand(AddMaterialToWorkshop, CanAddMaterialToWorkshop);
+        //RemoveMaterialFromWorkshopCommand = new RelayCommand(RemoveMaterialFromWorkshop, CanRemoveMaterialFromWorkshop);
         AddActivityToWorkshopCommand = new RelayCommand(AddActivityToWorkshop, CanAddActivityToWorkshop);
         RemoveActivityFromWorkshopCommand = new RelayCommand(RemoveActivityFromWorkshop, CanRemoveActivityFromWorkshop);
 
@@ -274,111 +302,102 @@ class WorkshopViewModel : ViewModelBase
         Workshops = temp;
         OnPropertyChanged(nameof(Workshops));
     }
-    private void AddMaterialToWorkshop()
-    {
-        if (SelectedWorkshop != null && SelectedWorkshop.GUID != Guid.Empty)
-        {
-            //Material material = new(NewWorkshopName, NewWorkshopDescription, 0);
-            //_materialRepository.Add(material);
-            //MaterialsInWorkshop?.Add(material);
-            //ClearForm();
-            //AddMaterialToWorkshopCommand.RaiseCanExecuteChanged();
-        }
-    }
-    private void RemoveMaterialFromWorkshop()
-    {
-        //if (SelectedWorkshop != null && SelectedWorkshop.GUID != Guid.Empty)
-        //{
-        //    _materialRepository.Remove(SelectedWorkshop.GUID);
-        //    MaterialsInWorkshop?.Remove(SelectedWorkshop);
-        //    RemoveMaterialFromWorkshopCommand.RaiseCanExecuteChanged();
-        //}
-    }
+    //private void AddMaterialToWorkshop()
+    //{
+    //    if (SelectedWorkshop != null && SelectedWorkshop.GUID != Guid.Empty)
+    //    {
+    //        //Material material = new(NewWorkshopName, NewWorkshopDescription, 0);
+    //        //_materialRepository.Add(material);
+    //        //MaterialsInWorkshop?.Add(material);
+    //        //ClearForm();
+    //        //AddMaterialToWorkshopCommand.RaiseCanExecuteChanged();
+    //    }
+    //}
+    //private void RemoveMaterialFromWorkshop()
+    //{
+    //    //if (SelectedWorkshop != null && SelectedWorkshop.GUID != Guid.Empty)
+    //    //{
+    //    //    _materialRepository.Remove(SelectedWorkshop.GUID);
+    //    //    MaterialsInWorkshop?.Remove(SelectedWorkshop);
+    //    //    RemoveMaterialFromWorkshopCommand.RaiseCanExecuteChanged();
+    //    //}
+    //}
     private void AddActivityToWorkshop()
     {
-        this.ActivitiesInWorkshop.Add(this.SelectedActivity!);
-        //if (SelectedWorkshop != null && SelectedWorkshop.GUID != Guid.Empty)
-        //{
-        //Activity activity = new(NewWorkshopName, NewWorkshopDescription, TimeSpan.Zero);
-        //_activityRepository.Add(activity);
-        //ActivitiesInWorkshop?.Add(activity);
-        //ClearForm();
-        //AddActivityToWorkshopCommand.RaiseCanExecuteChanged();
-        //}
+        if (SelectedActivity != null)
+        {
+            SelectedWorkshop?.ActivityGuids.Add(SelectedActivity.GUID);
+            ActivitiesAvailable?.Remove(SelectedActivity);
+            _workshopRepository.Update(SelectedWorkshop!);
+        }
     }
     private void RemoveActivityFromWorkshop()
     {
-        //if (SelectedWorkshop != null && SelectedWorkshop.GUID != Guid.Empty)
-        //{
-        //    _activityRepository.Remove(SelectedWorkshop.GUID);
-        //    ActivitiesInWorkshop?.Remove(SelectedWorkshop);
-        //    RemoveActivityFromWorkshopCommand.RaiseCanExecuteChanged();
-        //}
+        if (SelectedActivityInWorkshop != null)
+        {
+            SelectedWorkshop?.ActivityGuids.Remove(SelectedActivityInWorkshop.GUID);
+            ActivitiesAvailable?.Add(SelectedActivityInWorkshop);
+            ActivitiesInWorkshop?.Remove(SelectedActivityInWorkshop);
+            _workshopRepository.Update(SelectedWorkshop!);
+        }
     }
     #endregion
     #region Buttons conditions
-
     private bool CanAddWorkshop()
     {
         if (SelectedWorkshop != null && SelectedWorkshop.GUID != Guid.Empty)
             return false;
         return IsFormValid();
     }
-
-
     private bool CanRemoveWorkshop()
     {
         return SelectedWorkshop != null;
     }
-
-
     private bool CanSaveWorkshop()
     {
         return IsFormValid();
     }
-    private bool CanAddMaterialToWorkshop()
-    {
-        return SelectedWorkshop != null && SelectedWorkshop.GUID != Guid.Empty;
-    }
-    private bool CanRemoveMaterialFromWorkshop()
-    {
-        return SelectedWorkshop != null && SelectedWorkshop.GUID != Guid.Empty;
-    }
+    //private bool CanAddMaterialToWorkshop()
+    //{
+    //    return SelectedWorkshop != null && SelectedWorkshop.GUID != Guid.Empty;
+    //}
+    //private bool CanRemoveMaterialFromWorkshop()
+    //{
+    //    return SelectedWorkshop != null && SelectedWorkshop.GUID != Guid.Empty;
+    //}
     private bool CanAddActivityToWorkshop()
     {
         return SelectedActivity != null && SelectedActivity.GUID != Guid.Empty;
     }
     private bool CanRemoveActivityFromWorkshop()
     {
-        return SelectedActivity != null && SelectedActivity.GUID != Guid.Empty;
+        return SelectedActivityInWorkshop != null && SelectedActivityInWorkshop.GUID != Guid.Empty;
     }
     #endregion
     #region Helper methods
-
     private void SetButtonVisibility()
     {
         ButtonAddVisibility = (SelectedWorkshop != null && SelectedWorkshop.GUID != Guid.Empty) ? Visibility.Collapsed : Visibility.Visible;
         ButtonUpdateVisibility = (SelectedWorkshop != null && SelectedWorkshop.GUID != Guid.Empty) ? Visibility.Visible : Visibility.Collapsed;
         ButtonRemoveVisibility = (SelectedWorkshop != null && SelectedWorkshop.GUID != Guid.Empty) ? Visibility.Visible : Visibility.Collapsed;
     }
-    private void SetFormMaterialVisibility()
+    private void SetFormActivityVisibility()
     {
         var isActivitySelected = SelectedWorkshop != null && SelectedWorkshop.GUID != Guid.Empty;
-        MaterialsInWorkshop = isActivitySelected
-            ? new ObservableCollection<Material>(
-                SelectedWorkshop!.MaterialGuids
-                    .Select(guid => _materialRepository.Get(guid))
-                    .Where(material => material != null)
-                    .Cast<Material>()
-              )
-            : null;
         FormActivityInWorkshopVisibility = isActivitySelected ? Visibility.Visible : Visibility.Hidden;
         FormActivityVisibility = isActivitySelected ? Visibility.Visible : Visibility.Hidden;
-        FormMaterialInWorkshopVisibility = isActivitySelected ? Visibility.Visible : Visibility.Hidden;
-        FormMaterialVisibility = isActivitySelected ? Visibility.Visible : Visibility.Hidden;
-        //RefreshMaterialInActivity();
+        RefreshActivitiesInWorkshop();
+        // Refresh the list of available activities
+        ActivitiesAvailable = new ObservableCollection<Activity>(
+            _activityRepository.GetAll()
+        );
+        foreach (var activity in ActivitiesInWorkshop!)
+        {
+            ActivitiesAvailable?.Remove(activity);
+        }
+        // Notify the UI that the list of available activities has changed
+        OnPropertyChanged(nameof(ActivitiesAvailable));
     }
-
     private bool IsFormValid()
     {
         if (string.IsNullOrWhiteSpace(NewWorkshopName))
@@ -398,11 +417,20 @@ class WorkshopViewModel : ViewModelBase
             ClearForm();
         }
     }
-
     private void ClearForm()
     {
         NewWorkshopName = string.Empty;
         NewWorkshopDescription = string.Empty;
+    }
+    private void RefreshActivitiesInWorkshop()
+    {
+        ActivitiesInWorkshop = new ObservableCollection<Activity>(
+                SelectedWorkshop!.ActivityGuids
+                    .Select(guid => _activityRepository.Get(guid))
+                    .Where(activity => activity != null)
+                    .Cast<Activity>()
+              );
+        OnPropertyChanged(nameof(ActivitiesInWorkshop));
     }
     #endregion
 }
