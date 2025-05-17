@@ -25,11 +25,6 @@ public class Workshop
     public List<Guid> ActivityGuids { get; set; }
 
     /// <summary>
-    /// Gets or sets the list of material GUIDs associated with the workshop.
-    /// </summary>
-    public List<Guid> MaterialGuids { get; set; }
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="Workshop"/> class.
     /// </summary>
     public Workshop() : this(string.Empty, string.Empty)

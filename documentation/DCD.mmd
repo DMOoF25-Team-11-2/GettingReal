@@ -11,7 +11,6 @@ direction TB
         class Workshop {
 	        +Guid GUID
 	        +string Name
-            +List~Guid~ MaterialGuids
             +List~Guid~ ActivityGuids
         }
         class Activity {
@@ -33,16 +32,12 @@ direction TB
             +List~Guid~ MaterialGuids
         }
         class BoxRepository {
-	        +DoNameExist(string) ::bool
         }
         class MaterialRepository {
-	        +DoNameExist(string) ::bool
         }
         class ActivityRepository {
-	        +DoNameExist(string) ::bool
         }
         class WorkshopRepository {
-	        +DoNameExist(string) ::bool
         }
         class Repository~T~ {
 	        +-List~T~ Items
