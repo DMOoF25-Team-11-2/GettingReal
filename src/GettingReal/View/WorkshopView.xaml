@@ -75,37 +75,6 @@
                 </ListView>
                 <Button Content="Tilføj" Command="{Binding AddActivityToWorkshopCommand}" Margin="10" />
             </StackPanel>
-        <!-- Materials Section --><!--
-            <StackPanel Orientation="Vertical" Visibility="{Binding FormMaterialInWorkshopVisibility}" Background="LightGray" Margin="10" Height="300" Width="450">
-                <TextBlock Text="Materialer der skal bruges" FontSize="20" FontWeight="Bold" Margin="10"/>
-                <ListView ItemsSource="{Binding MaterialsInWorkshop}"
-                          SelectedItem="{Binding SelectedMaterialInWorkshop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                          ScrollViewer.CanContentScroll="True"
-                          Margin="10" MaxHeight="200" >
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Navn" DisplayMemberBinding="{Binding Name}" Width="150"/>
-                            <GridViewColumn Header="Beskrivelse" DisplayMemberBinding="{Binding Description}" Width="50"/>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-                <Button Content="Fjern" Command="{Binding ButtonRemoveToMaterialInWorkshopVisibility}" Margin="10"/>
-            </StackPanel>
-            <StackPanel Orientation="Vertical" Visibility="{Binding FormMaterialVisibility}"  Background="LightGray" Margin="10" Height="300" Width="450">
-                <TextBlock Text="Materialer tilgængeligt" FontSize="20" FontWeight="Bold" Margin="10"/>
-                <ListView ItemsSource="{Binding MaterialsAvailable}"
-                          SelectedItem="{Binding SelectedMaterial, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                          ScrollViewer.CanContentScroll="True"
-                          Margin="10" MaxHeight="200" >
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Navn" DisplayMemberBinding="{Binding Name}" Width="125"/>
-                            <GridViewColumn Header="Beskrivelse" DisplayMemberBinding="{Binding Description}" Width="175"/>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-                <Button Content="Tilføj" Command="{Binding ButtonAddToMaterialInWorkshopVisibility}" Margin="10"/>
-            </StackPanel>-->
         </StackPanel>
     </StackPanel>
 </Page>
