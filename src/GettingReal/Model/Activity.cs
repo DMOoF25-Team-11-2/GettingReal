@@ -52,4 +52,16 @@ public class Activity
         Description = description;
         MaterialGuids = [];
     }
+
+    #region helpers
+    public IEnumerable<Material> GetMaterialsForActivity()
+    {
+        if (MaterialGuids == null || MaterialGuids.Count == 0)
+        {
+            IEnumerable<Material> materialList = new MaterialRepository().GetAll();
+            return [.. materialList.Where(m => m.GUID == GUID)];
+        }
+        return [];
+    }
+    #endregion
 }

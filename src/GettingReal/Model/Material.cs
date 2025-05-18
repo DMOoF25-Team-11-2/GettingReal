@@ -52,4 +52,16 @@ public class Material
         Description = description;
         Quantity = quantity;
     }
+
+    public Box? GetBoxForMaterial()
+    {
+        List<Box> boxes = new BoxRepository().GetAll();
+        for (int i = 0; i < boxes.Count; i++)
+        {
+            var materialGuids = boxes[i].MaterialGuids;
+            if (materialGuids != null && materialGuids.Contains(GUID))
+                return boxes[i];
+        }
+        return null;
+    }
 }
