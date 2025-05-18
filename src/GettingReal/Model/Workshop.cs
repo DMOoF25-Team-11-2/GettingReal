@@ -41,6 +41,33 @@ public class Workshop
         Name = name;
         Description = description;
         ActivityGuids = [];
-        MaterialGuids = [];
+    }
+
+    public IEnumerable<Activity> GetActivitiesForWorkshop()
+    {
+        if (ActivityGuids != null && ActivityGuids.Count != 0)
+        {
+            IEnumerable<Activity> activityList = new ActivityRepository().GetAll();
+            return activityList.Where(activity => ActivityGuids.Contains(activity.GUID));
+        }
+        return [];
+    }
+
+    public IEnumerable<Box> GetBoxesForWorkshop()
+    {
+        List<Box> boxList = new List<Box>();
+        IEnumerable<Box> boxRepository = new BoxRepository().GetAll();
+        IEnumerable<Activity> activityList = GetActivitiesForWorkshop();
+        if (activityList != null && activityList.Count() != 0)
+        {
+            IEnumerable<Material> materialList = new MaterialRepository().GetAll();
+            foreach (Material material in materialList)
+            {
+                var box = boxRepository.FirstOrDefault(b => b.MaterialGuids.Contains(material.GUID));
+                if (box != null)
+                    boxList.Add(box);
+            }
+        }
+        return [];
     }
 }
