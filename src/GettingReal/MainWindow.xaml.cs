@@ -40,9 +40,10 @@ public partial class MainWindow : Window
         MainFrame.Navigate(new WorkshopView());
     }
 
+    // Rapport Menu
     private void RapportBoxesForWorkshop_Click(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException("RapportBoxesForWorkshopView is not implemented yet.");
+        MainFrame.Navigate(new ReportForBoxesInWorkshopView());
     }
 
     private void RapportBoxInventory_Click(object sender, RoutedEventArgs e)

@@ -6,6 +6,12 @@ public class RelayCommand : ICommand
 {
     private readonly Action _execute;
     private readonly Func<bool> _canExecute;
+    private Action<object> performEksportToPdf;
+
+    public RelayCommand(Action<object> performEksportToPdf)
+    {
+        this.performEksportToPdf = performEksportToPdf;
+    }
 
     public RelayCommand(Action execute, Func<bool> canExecute = null)
     {
