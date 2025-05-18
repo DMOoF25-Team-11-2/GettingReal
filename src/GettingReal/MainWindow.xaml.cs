@@ -40,5 +40,14 @@ public partial class MainWindow : Window
         MainFrame.Navigate(new WorkshopView());
     }
 
+    private void RapportBoxesForWorkshop_Click(object sender, RoutedEventArgs e)
+    {
+        throw new NotImplementedException("RapportBoxesForWorkshopView is not implemented yet.");
+    }
+
+    private void RapportBoxInventory_Click(object sender, RoutedEventArgs e)
+    {
+        throw new NotImplementedException("RapportBoxInventoryView is not implemented yet.");
+    }
     #endregion
 }
