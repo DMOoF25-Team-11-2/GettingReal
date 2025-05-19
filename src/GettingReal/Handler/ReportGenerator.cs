@@ -3,48 +3,48 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using GettingReal.Model;
 
-namespace GettingReal.Handler
+namespace GettingReal.Handler;
+
+public class ReportGenerator //generates reports in Xaml-format
 {
-    public class ReportGenerator //generates reports in Xaml-format
+    public static string ReportMaterialsInBox(Workshop workshop)
     {
-        public static string ReportMaterialsInBox(IEnumerable<Box> data)
+        StringBuilder xamlBuilder = new StringBuilder();
+        MaterialRepository materials = new();
+        BoxRepository boxes = new();
+
+        xamlBuilder.AppendLine("<StackPanel xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'>");
+
+        foreach (Guid guid in workshop.ActivityGuids)
         {
-            StringBuilder xamlBuilder = new StringBuilder();
-            MaterialRepository materialRepository = new();
+            Activity? activity = new ActivityRepository().Get(guid);
 
-            xamlBuilder.AppendLine("<StackPanel xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'>");
-
-            foreach (var item in data)
+            foreach (Guid materialGuidInActivity in activity.MaterialGuids)
             {
-                var guids = item.MaterialGuids;
-                if (guids != null)
+                foreach (Box box in boxes.GetAll())
                 {
-                    foreach (var guid in guids)
-
+                    foreach (Guid materialGuidInBox in box.MaterialGuids)
                     {
-                        var material = materialRepository.Get(guid);
-
-                        if (material != null)
-
+                        if (materialGuidInBox == materialGuidInActivity)
                         {
-
+                            Material? material = materials.Get(materialGuidInActivity);
                             xamlBuilder.AppendLine($"   <TextBlock Text='{material.Name}' FontSize='16' />");
                             xamlBuilder.AppendLine($"   <TextBlock Text='{material.Description}' FontSize='12' Foreground='Gray' />");
 
                         }
                     }
-
                 }
-            }  
-            xamlBuilder.AppendLine("</StackPanel>");
+            }
+            
+        }  
+        xamlBuilder.AppendLine("</StackPanel>");
 
-            return xamlBuilder.ToString();
+        return xamlBuilder.ToString();
 
 
-
-        }
 
     }
 
