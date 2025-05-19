@@ -45,29 +45,70 @@ public class Workshop
 
     public IEnumerable<Activity> GetActivitiesForWorkshop()
     {
+        List<Activity> result = [];
         if (ActivityGuids != null && ActivityGuids.Count != 0)
         {
             IEnumerable<Activity> activityList = new ActivityRepository().GetAll();
-            return activityList.Where(activity => ActivityGuids.Contains(activity.GUID));
+            for (int i = 0; i < activityList.Count(); i++)
+            {
+                var activity = activityList.ElementAt(i);
+                if (activity == null)
+                    continue;
+                if (ActivityGuids.Contains(activity.GUID))
+                {
+                    result.Add(activity);
+                }
+            }
         }
-        return [];
+        return result;
     }
 
     public IEnumerable<Box> GetBoxesForWorkshop()
     {
-        List<Box> boxList = new List<Box>();
-        IEnumerable<Box> boxRepository = new BoxRepository().GetAll();
-        IEnumerable<Activity> activityList = GetActivitiesForWorkshop();
-        if (activityList != null && activityList.Count() != 0)
+        // 1. Get all activities for this workshop
+        var activities = GetActivitiesForWorkshop();
+        if (activities == null || !activities.Any())
+            return [];
+
+        // 2. Collect all material GUIDs from all activities
+        var requiredMaterialGuids = new HashSet<Guid>(
+            activities
+                .Where(a => a.MaterialGuids != null)
+                .SelectMany(a => a.MaterialGuids)
+        );
+
+        // 3. Get all boxes
+        var allBoxes = new BoxRepository().GetAll();
+
+        // 4. Find boxes that contain any of the required materials
+        var result = allBoxes
+            .Where(box => box.MaterialGuids != null && box.MaterialGuids.Any(guid => requiredMaterialGuids.Contains(guid)))
+            .ToList();
+
+        // 5. Find missing material GUIDs
+        var foundMaterialGuids = new HashSet<Guid>(
+            result
+                .Where(box => box.MaterialGuids != null)
+                .SelectMany(box => box.MaterialGuids)
+                .Where(guid => requiredMaterialGuids.Contains(guid))
+        );
+
+        var missingMaterialGuids = requiredMaterialGuids.Except(foundMaterialGuids).ToList();
+
+        if (missingMaterialGuids.Count != 0)
         {
-            IEnumerable<Material> materialList = new MaterialRepository().GetAll();
-            foreach (Material material in materialList)
+            foreach (var guid in missingMaterialGuids)
             {
-                var box = boxRepository.FirstOrDefault(b => b.MaterialGuids.Contains(material.GUID));
-                if (box != null)
-                    boxList.Add(box);
+                var material = new MaterialRepository().Get(guid);
+                if (material != null)
+                {
+                    var box = new Box("No box", material.Name);
+                    result.Add(box);
+                }
             }
         }
-        return [];
+
+        return result;
     }
+
 }
