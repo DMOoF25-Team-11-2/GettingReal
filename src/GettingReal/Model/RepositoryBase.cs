@@ -13,7 +13,7 @@ public abstract class RepositoryBase<T> where T : new()
     /// <summary>
     /// List of items in the repository.
     /// </summary>
-    public List<T> Items { get; private set; } = new List<T>();
+    public List<T> Items { get; set; } = new List<T>();
 
     public RepositoryBase()
     {
