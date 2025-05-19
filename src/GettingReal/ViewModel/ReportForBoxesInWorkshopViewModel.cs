@@ -2,6 +2,9 @@
 using GettingReal.Model;
 
 namespace GettingReal.ViewModel;
+
+using System.Windows;
+using GettingReal.Handler;
 public class ReportForBoxesInWorkshopViewModel : ViewModelBase
 {
     #region Properties
@@ -68,7 +71,8 @@ public class ReportForBoxesInWorkshopViewModel : ViewModelBase
     #region Buttons action
     private void ExecuteExportToPdf()
     {
-        //var report = ReportGenerator.ReportMaterialsInBox(_selectedWorkshop);
+        string report = ReportGenerator.ReportMaterialsInBox(_selectedWorkshop);
+        ReportGenerator.Print(report);     
     }
 
     private void ExecutePrintReport()
@@ -76,10 +80,11 @@ public class ReportForBoxesInWorkshopViewModel : ViewModelBase
     }
     #endregion
 
+
     #region Button condition
     private bool CanExecuteExportToPdf()
     {
-        return SelectedWorkshop != null;
+        return true;
     }
     private bool CanExecutePrintReport()
     {
