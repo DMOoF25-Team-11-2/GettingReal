@@ -2,7 +2,6 @@
 using GettingReal.Model;
 
 namespace GettingReal.ViewModel;
-
 public class ReportForBoxesInWorkshopViewModel : ViewModelBase
 {
     #region Properties
@@ -34,13 +33,16 @@ public class ReportForBoxesInWorkshopViewModel : ViewModelBase
             }
         }
     }
-    #endregion
+    private object _selectedBox;
 
+    public object SelectedBox { get => _selectedBox; set => SetProperty(ref _selectedBox, value); }
+    #endregion
 
     #region Commands properties
     public RelayCommand ExportToPdfCommand { get; private set; }
     public RelayCommand PrintReportCommand { get; private set; }
     #endregion
+
     public ReportForBoxesInWorkshopViewModel()
     {
         _workshopRepository = new WorkshopRepository();
@@ -48,36 +50,42 @@ public class ReportForBoxesInWorkshopViewModel : ViewModelBase
 
         Workshops = new ObservableCollection<Workshop>(_workshopRepository.GetAll());
 
-        ExportToPdfCommand = new RelayCommand(ExecuteExportToPdf);
-        PrintReportCommand = new RelayCommand(ExecutePrintReport);
+        ExportToPdfCommand = new RelayCommand(ExecuteExportToPdf, CanExecuteExportToPdf);
+        PrintReportCommand = new RelayCommand(ExecutePrintReport, CanExecutePrintReport);
     }
 
     private void UpdateBoxesForWorkshop()
     {
-        if (SelectedWorkshop == null)
-        {
-            BoxesForWorkshop = null;
+        if (_selectedWorkshop == null)
             return;
-        }
 
-        // If Workshop has a GetBoxesForWorkshop method, use it:
-        var boxes = SelectedWorkshop.GetBoxesForWorkshop()?.ToList()
-            ?? new List<Box>();
+        var boxes = _selectedWorkshop.GetBoxesForWorkshop()?.ToList()
+            ?? [];
 
-        BoxesForWorkshop = new ObservableCollection<Box>(boxes);
+        BoxesForWorkshop = [.. boxes];
     }
 
     #region Buttons action
     private void ExecuteExportToPdf()
     {
+        //var report = ReportGenerator.ReportMaterialsInBox(_selectedWorkshop);
     }
 
     private void ExecutePrintReport()
     {
     }
     #endregion
+
+    #region Button condition
+    private bool CanExecuteExportToPdf()
+    {
+        return SelectedWorkshop != null;
+    }
     private bool CanExecutePrintReport()
     {
-        return true; // Added a return value to avoid compilation errors
+        return SelectedWorkshop != null;
     }
+
+
+    #endregion
 }
