@@ -72,7 +72,7 @@ public class ReportForBoxesInWorkshopViewModel : ViewModelBase
     private void ExecuteExportToPdf()
     {
         string report = ReportGenerator.ReportMaterialsInBox(_selectedWorkshop);
-        MessageBox.Show(report, "Report", MessageBoxButton.OK, MessageBoxImage.Information);
+        ReportGenerator.Print(report);     
     }
 
     private void ExecutePrintReport()
