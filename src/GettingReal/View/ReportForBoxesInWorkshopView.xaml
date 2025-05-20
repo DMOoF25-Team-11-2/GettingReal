@@ -34,7 +34,6 @@
                 </ListView.View>
             </ListView>
         <StackPanel Orientation="Horizontal">
-            <Button Content="Eksporter til PDF" Command="{Binding ExportToPdfCommand}" Margin="10"/>
             <Button Content="Udskriv" Command="{Binding PrintReportCommand}" Margin="10"/>
         </StackPanel>
     </StackPanel>
