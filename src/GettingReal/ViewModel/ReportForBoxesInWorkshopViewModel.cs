@@ -3,7 +3,6 @@ using GettingReal.Model;
 
 namespace GettingReal.ViewModel;
 
-using System.Windows;
 using GettingReal.Handler;
 public class ReportForBoxesInWorkshopViewModel : ViewModelBase
 {
@@ -32,7 +31,7 @@ public class ReportForBoxesInWorkshopViewModel : ViewModelBase
             if (SetProperty(ref _selectedWorkshop, value))
             {
                 UpdateBoxesForWorkshop();
-                OnPropertyChanged(nameof(SelectedWorkshop));
+                PrintReportCommand.RaiseCanExecuteChanged();
             }
         }
     }
@@ -42,7 +41,6 @@ public class ReportForBoxesInWorkshopViewModel : ViewModelBase
     #endregion
 
     #region Commands properties
-    public RelayCommand ExportToPdfCommand { get; private set; }
     public RelayCommand PrintReportCommand { get; private set; }
     #endregion
 
@@ -53,7 +51,6 @@ public class ReportForBoxesInWorkshopViewModel : ViewModelBase
 
         Workshops = new ObservableCollection<Workshop>(_workshopRepository.GetAll());
 
-        ExportToPdfCommand = new RelayCommand(ExecuteExportToPdf, CanExecuteExportToPdf);
         PrintReportCommand = new RelayCommand(ExecutePrintReport, CanExecutePrintReport);
     }
 
@@ -69,28 +66,18 @@ public class ReportForBoxesInWorkshopViewModel : ViewModelBase
     }
 
     #region Buttons action
-    private void ExecuteExportToPdf()
-    {
-        string report = ReportGenerator.ReportBoxesNeededForWorkshop(_selectedWorkshop);
-        ReportGenerator.Print(report);     
-    }
-
     private void ExecutePrintReport()
     {
+        string report = ReportGenerator.ReportBoxesNeededForWorkshop(_selectedWorkshop!);
+        ReportGenerator.Print(report);
     }
     #endregion
 
 
     #region Button condition
-    private bool CanExecuteExportToPdf()
-    {
-        return true;
-    }
     private bool CanExecutePrintReport()
     {
         return SelectedWorkshop != null;
     }
-
-
     #endregion
 }

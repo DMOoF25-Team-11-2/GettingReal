@@ -14,8 +14,8 @@ public class ReportForBoxInventoryViewModel : ViewModelBase
 
     #region Observable Collections properties
     public ObservableCollection<Box> Boxes { get; }
-    private ObservableCollection<Material>? _materialsInBox;
-    public ObservableCollection<Material>? MaterialsInBox
+    private ObservableCollection<Material> _materialsInBox;
+    public ObservableCollection<Material> MaterialsInBox
     {
         get => _materialsInBox;
         private set => SetProperty(ref _materialsInBox, value);
@@ -23,7 +23,7 @@ public class ReportForBoxInventoryViewModel : ViewModelBase
     #endregion
 
     #region Selected properties
-    private Box? _selectedBox;
+    private Box? _selectedBox = null;
     public Box? SelectedBox
     {
         get => _selectedBox;
@@ -32,7 +32,7 @@ public class ReportForBoxInventoryViewModel : ViewModelBase
             if (SetProperty(ref _selectedBox, value))
             {
                 UpdateMaterialsInBox();
-                OnPropertyChanged(nameof(SelectedBox));
+                PrintReportCommand.RaiseCanExecuteChanged();
             }
         }
     }
@@ -46,8 +46,9 @@ public class ReportForBoxInventoryViewModel : ViewModelBase
     {
         _boxRepository = new BoxRepository();
         _materialRepository = new MaterialRepository();
+        _materialsInBox = [];
 
-        Boxes = new ObservableCollection<Box>(_boxRepository.GetAll());
+        Boxes = [.. _boxRepository.GetAll()];
 
         PrintReportCommand = new RelayCommand(ExecutePrintReport, CanExecutePrintReport);
     }
@@ -61,7 +62,7 @@ public class ReportForBoxInventoryViewModel : ViewModelBase
 
         foreach (var guid in _selectedBox.MaterialGuids)
         {
-            var material = _materialRepository.Get(guid);
+            Material? material = _materialRepository.Get(guid);
             if (material != null)
                 materials.Add(material);
         }
@@ -80,7 +81,6 @@ public class ReportForBoxInventoryViewModel : ViewModelBase
 
     private bool CanExecutePrintReport()
     {
-        return true;
         return _selectedBox != null;
     }
     #endregion
