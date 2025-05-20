@@ -24,8 +24,8 @@ public class ReportGenerator //generates reports in Xaml-format
 
         xamlBuilder.AppendLine("<StackPanel Orientation=\"Vertical\" xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' Margin=\"20\" >");
         xamlBuilder.AppendLine("<StackPanel Orientation=\"Horizontal\">");
-        xamlBuilder.AppendLine($"   <TextBlock Text='{"Kassenavn"}' FontSize='16' Width=\"{col1}\" />");
-        xamlBuilder.AppendLine($"   <TextBlock Text='{"Beskrivelse"}' FontSize='16' Width=\"{col2}\" />");
+        xamlBuilder.AppendLine($"   <TextBlock Text='{"Kassenavn"}' FontSize='16' FontWeight='Bold' Width=\"{col1}\" />");
+        xamlBuilder.AppendLine($"   <TextBlock Text='{"Beskrivelse"}' FontSize='16' FontWeight='Bold' Width=\"{col2}\" />");
         xamlBuilder.AppendLine("</StackPanel>");
 
         IEnumerable<Box> boxes = workshop.GetBoxesForWorkshop();
@@ -52,8 +52,8 @@ public class ReportGenerator //generates reports in Xaml-format
         StringBuilder xamlBuilder = new StringBuilder();
         xamlBuilder.AppendLine("<StackPanel Orientation=\"Vertical\" xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' Margin=\"20\" >");
         xamlBuilder.AppendLine("<StackPanel Orientation=\"Horizontal\">");
-        xamlBuilder.AppendLine($"   <TextBlock Text='{"Kassenavn"}' FontSize='16' Width=\"{col1}\" />");
-        xamlBuilder.AppendLine($"   <TextBlock Text='{"Beskrivelse"}' FontSize='16' Width=\"{col2}\" />");
+        xamlBuilder.AppendLine($"   <TextBlock Text='{"Kassenavn"}' FontSize='16' FontWeight='Bold' Width=\"{col1}\" />");
+        xamlBuilder.AppendLine($"   <TextBlock Text='{"Beskrivelse"}' FontSize='16' FontWeight='Bold' Width=\"{col2}\" />");
         xamlBuilder.AppendLine("</StackPanel>");
 
         IEnumerable<Material> materials = new MaterialRepository().GetAll();
