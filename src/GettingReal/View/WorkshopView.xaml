@@ -6,13 +6,12 @@
       xmlns:viewmodel="clr-namespace:GettingReal.ViewModel" 
       d:DataContext="{d:DesignInstance Type=viewmodel:WorkshopViewModel}"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
       Title="WorkshopView">
-    <StackPanel Orientation="Vertical" Margin="10">
+    <StackPanel>
         <StackPanel Orientation="Horizontal">
             <!-- Left Side: ListView for Workshop -->
-            <StackPanel Orientation="Vertical" Background="LightBlue" Margin="10" Height="300" Width="450">
-                <TextBlock Text="Workshopliste" FontSize="20" FontWeight="Bold" Margin="10"/>
+            <StackPanel Orientation="Vertical" Style="{StaticResource StackPanelVerticalFrame}">
+                <TextBlock Text="Workshopliste" Style="{StaticResource TextBlockHeadLine}"/>
                 <ListView x:Name="ListViewWorkshops" ItemsSource="{Binding Workshops}" 
                           SelectedItem="{Binding SelectedWorkshop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                           Margin="10"
@@ -27,8 +26,8 @@
             </StackPanel>
 
             <!-- Right Side: Form for Add/Edit -->
-            <StackPanel Orientation="Vertical" Background="LightBlue" Margin="10" Height="300" Width="450">
-                <TextBlock Text="Workshop" FontSize="20" FontWeight="Bold" Margin="10"/>
+            <StackPanel Orientation="Vertical" Style="{StaticResource StackPanelVerticalFrame}">
+                <TextBlock Text="Workshop" Style="{StaticResource TextBlockHeadLine}"/>
 
                 <TextBlock Text="Navn:" Margin="10"/>
                 <TextBox Text="{Binding NewWorkshopName, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
@@ -45,8 +44,8 @@
         </StackPanel>
         <!-- Activities Section -->
         <StackPanel Orientation="Horizontal">
-            <StackPanel Orientation="Vertical" Visibility="{Binding FormActivityInWorkshopVisibility}" Background="LightBlue" Margin="10" Height="300" Width="450">
-                <TextBlock Text="Aktiviter i workshop" FontSize="20" FontWeight="Bold" Margin="10"/>
+            <StackPanel Orientation="Vertical" Visibility="{Binding FormActivityInWorkshopVisibility}" Style="{StaticResource StackPanelVerticalFrame}">
+                <TextBlock Text="Aktiviter i workshop" Style="{StaticResource TextBlockHeadLine}"/>
                 <ListView ItemsSource="{Binding ActivitiesInWorkshop}"
                           SelectedItem="{Binding SelectedActivityInWorkshop}"
                           ScrollViewer.CanContentScroll="True"
@@ -60,8 +59,8 @@
                 </ListView>
                 <Button Content="Fjern" Command="{Binding RemoveActivityFromWorkshopCommand}" Margin="10"/>
             </StackPanel>
-            <StackPanel Orientation="Vertical" Visibility="{Binding FormActivityVisibility}"  Background="LightBlue" Margin="10" Height="300" Width="450">
-                <TextBlock Text="Aktiviteter tilgængeligt" FontSize="20" FontWeight="Bold" Margin="10"/>
+            <StackPanel Orientation="Vertical" Visibility="{Binding FormActivityVisibility}" Style="{StaticResource StackPanelVerticalFrame}">
+                <TextBlock Text="Aktiviteter tilgængeligt" Style="{StaticResource TextBlockHeadLine}"/>
                 <ListView ItemsSource="{Binding ActivitiesAvailable}"
                           SelectedItem="{Binding SelectedActivity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                           ScrollViewer.CanContentScroll="True"

@@ -6,16 +6,14 @@
       xmlns:viewmodel="clr-namespace:GettingReal.ViewModel" 
       d:DataContext="{d:DesignInstance Type=viewmodel:MaterialViewModel}"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
       Title="MaterialView">
-    <StackPanel Orientation="Vertical" Margin="10">
-        <StackPanel Orientation="Horizontal" Margin="10">
+    <StackPanel>
+        <StackPanel Orientation="Horizontal">
             <!-- Left Side: ListView for Materials -->
-            <StackPanel Orientation="Vertical" Width="300" Margin="0,0,10,0" Background="LightBlue">
-                <TextBlock Text="Materialeliste" FontSize="20" FontWeight="Bold" Margin="10"/>
+            <StackPanel Style="{StaticResource StackPanelVerticalFrame}">
+                <TextBlock Text="Materialeliste" Style="{StaticResource TextBlockHeadLine}"/>
                 <ListView x:Name="ListViewMaterials" ItemsSource="{Binding Materials}" 
                           SelectedItem="{Binding SelectedMaterial, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                          Margin="0,0,0,10"
                           PreviewKeyDown="ListViewMaterials_PreviewKeyDown">
                     <ListView.View>
                         <GridView>
@@ -26,20 +24,19 @@
                     </ListView.View>
                 </ListView>
             </StackPanel>
-
             <!-- Right Side: Form for Add/Edit -->
-            <StackPanel Orientation="Vertical" Width="300" Background="LightBlue">
-                <TextBlock Text="Materiale" FontSize="20" FontWeight="Bold" Margin="10"/>
+            <StackPanel Orientation="Vertical" Style="{StaticResource StackPanelVerticalFrame}">
+                <TextBlock Text="Materiale" Style="{StaticResource TextBlockHeadLine}"/>
 
-                <TextBlock Text="Navn:" Margin="10,0,0,5"/>
+                <TextBlock Text="Navn:" Margin="8,0,0,5"/>
                 <TextBox Text="{Binding NewMaterialName, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
                 <!--<TextBox Text="{Binding SelectedMaterial.Name, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10" IsEnabled="{Binding SelectedMaterial}"/>-->
 
-                <TextBlock Text="Beskrivelse:" Margin="10,0,0,5"/>
+                <TextBlock Text="Beskrivelse:" Margin="8,0,0,5"/>
                 <TextBox Height="100" AcceptsReturn="True" Text="{Binding NewMaterialDescription, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
                 <!--<TextBox Text="{Binding SelectedMaterial.Description, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10" IsEnabled="{Binding SelectedMaterial}"/>-->
 
-                <TextBlock Text="Antal:" Margin="10,0,0,5"/>
+                <TextBlock Text="Antal:" Margin="8,0,0,5"/>
                 <TextBox Text="{Binding NewMaterialQuantity, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
 
                 <StackPanel Orientation="Horizontal">
