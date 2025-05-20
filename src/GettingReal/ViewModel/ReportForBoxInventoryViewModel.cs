@@ -74,7 +74,7 @@ public class ReportForBoxInventoryViewModel : ViewModelBase
     #region Buttons action
     private void ExecuteExportToPdf()
     {
-        string report = ReportGenerator.ReportMaterialsInBox(_selectedBox);
+        string report = ReportGenerator.ReportBoxInventory(_selectedBox);
         ReportGenerator.Print(report);
     }
 
