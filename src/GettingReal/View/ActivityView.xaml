@@ -6,13 +6,12 @@
       xmlns:viewmodel="clr-namespace:GettingReal.ViewModel" 
       d:DataContext="{d:DesignInstance Type=viewmodel:ActivityViewModel}"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
       Title="ActivityView">
-    <StackPanel Orientation="Vertical" Margin="10">
+    <StackPanel>
         <StackPanel Orientation="Horizontal">
             <!-- Left Side: ListView for Activity -->
-            <StackPanel Orientation="Vertical" Background="LightBlue" Margin="10" Height="300" Width="450">
-                <TextBlock Text="Aktivitetsliste" FontSize="20" FontWeight="Bold" Margin="10"/>
+            <StackPanel Orientation="Vertical" Style="{StaticResource StackPanelVerticalFrame}">
+                <TextBlock Text="Aktivitetsliste" Style="{StaticResource TextBlockHeadLine}"/>
                 <ListView x:Name="ListViewActivities" ItemsSource="{Binding Activities}" 
                           SelectedItem="{Binding SelectedActivity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                           Margin="10"
@@ -28,8 +27,8 @@
             </StackPanel>
 
             <!-- Right Side: Form for Add/Edit -->
-            <StackPanel Orientation="Vertical" Background="LightBlue"  Margin="10" Height="300" Width="450">
-                <TextBlock Text="Aktivitet" FontSize="20" FontWeight="Bold" Margin="10"/>
+            <StackPanel Orientation="Vertical" Style="{StaticResource StackPanelVerticalFrame}">
+                <TextBlock Text="Aktivitet" Style="{StaticResource TextBlockHeadLine}"/>
 
                 <TextBlock Text="Navn:" Margin="10"/>
                 <TextBox Text="{Binding NewActivityName, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
@@ -50,8 +49,8 @@
 
         <!-- Materials Section -->
         <StackPanel Orientation="Horizontal">
-            <StackPanel Orientation="Vertical" Visibility="{Binding FormMaterialInActivityVisibility}" Background="LightBlue" Margin="10" Height="300" Width="450">
-                <TextBlock Text="Materiale der skal bruges" FontSize="20" FontWeight="Bold" Margin="10"/>
+            <StackPanel Orientation="Vertical" Visibility="{Binding FormMaterialInActivityVisibility}" Style="{StaticResource StackPanelVerticalFrame}">
+                <TextBlock Text="Materiale der skal bruges" Style="{StaticResource TextBlockHeadLine}"/>
                 <ListView ItemsSource="{Binding MaterialsInActivity}"
                           SelectedItem="{Binding SelectedMaterialInActivity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                           ScrollViewer.CanContentScroll="True"
@@ -66,8 +65,8 @@
                 <Button Content="Fjern materiale fra kassen" Command="{Binding RemoveMaterialInActivityCommand}" Margin="10"/>
             </StackPanel>
 
-            <StackPanel Orientation="Vertical" Visibility="{Binding FormMaterialVisibility}"  Background="LightBlue" Margin="10" Height="300" Width="450">
-                <TextBlock Text="Materiale tilgængeligt" FontSize="20" FontWeight="Bold" Margin="10"/>
+            <StackPanel Orientation="Vertical" Visibility="{Binding FormMaterialVisibility}" Style="{StaticResource StackPanelVerticalFrame}">
+                <TextBlock Text="Materiale tilgængeligt" Style="{StaticResource TextBlockHeadLine}"/>
                 <ListView ItemsSource="{Binding MaterialsAvailable}"
                           SelectedItem="{Binding SelectedMaterial, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                           ScrollViewer.CanContentScroll="True"

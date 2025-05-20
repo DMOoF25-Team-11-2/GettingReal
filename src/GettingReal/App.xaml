@@ -4,6 +4,13 @@
              xmlns:local="clr-namespace:GettingReal"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="View/Styles/StackPanelStyle.xaml"/>
+                <ResourceDictionary Source="View/Styles/ButtonStyle.xaml"/>
+                <ResourceDictionary Source="View/Styles/ListViewStyle.xaml"/>
+                <ResourceDictionary Source="View/Styles/TextBlockStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
