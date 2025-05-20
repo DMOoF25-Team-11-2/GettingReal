@@ -48,7 +48,6 @@ public partial class MainWindow : Window
 
     private void RapportBoxInventory_Click(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException("RapportBoxInventoryView is not implemented yet.");
     }
     #endregion
 }
