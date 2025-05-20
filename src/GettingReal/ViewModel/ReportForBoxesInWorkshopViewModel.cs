@@ -71,7 +71,7 @@ public class ReportForBoxesInWorkshopViewModel : ViewModelBase
     #region Buttons action
     private void ExecuteExportToPdf()
     {
-        string report = ReportGenerator.ReportMaterialsInBox(_selectedWorkshop);
+        string report = ReportGenerator.ReportBoxesNeededForWorkshop(_selectedWorkshop);
         ReportGenerator.Print(report);     
     }
 
