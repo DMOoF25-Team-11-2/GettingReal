@@ -48,6 +48,7 @@ public partial class MainWindow : Window
 
     private void RapportBoxInventory_Click(object sender, RoutedEventArgs e)
     {
+        MainFrame.Navigate(new ReportForBoxInventoryView());
     }
     #endregion
 }
