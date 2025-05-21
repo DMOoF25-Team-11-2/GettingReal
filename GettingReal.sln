@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		documentation\DCD.mmd = documentation\DCD.mmd
 		documentation\DomainModel.mmd = documentation\DomainModel.mmd
+		README.md = README.md
 		documentation\SSD-UC1.mmd = documentation\SSD-UC1.mmd
 		documentation\SSD-UC10.mmd = documentation\SSD-UC10.mmd
 		documentation\SSD-UC11.mmd = documentation\SSD-UC11.mmd

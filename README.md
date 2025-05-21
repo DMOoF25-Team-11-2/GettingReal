@@ -10,6 +10,8 @@
 
 Rapporten kan læse [her](https://github.com/DMOoF25-Team-11-2/GettingReal/raw/refs/heads/main/documentation/Report.docx)
 
+Kode documentation kan læse ./documentation/doxygen/html/index.html
+
 ## Kontakt os
 Hvis du har spørgsmål eller kommentarer til projektet, er du velkommen til at kontakte os via e-mail.
 
