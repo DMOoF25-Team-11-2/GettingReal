@@ -53,6 +53,15 @@ public class Material
         Quantity = quantity;
     }
 
+    /// <summary>
+    /// Gets the box that contains this material.
+    /// </summary>
+    /// <returns>
+    /// The box that contains this material, or null if no box contains it.
+    /// </returns>
+    /// <remarks>
+    /// This method retrieves all boxes from the repository and checks if this material's GUID is present in any of the boxes' MaterialGuids.
+    /// </remarks>
     public Box? GetBoxForMaterial()
     {
         List<Box> boxes = new BoxRepository().GetAll();

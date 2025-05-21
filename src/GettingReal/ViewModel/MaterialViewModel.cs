@@ -3,6 +3,9 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using GettingReal.Model;
 
+/// <summary>
+/// ViewModel for managing materials.
+/// </summary>
 class MaterialViewModel : ViewModelBase
 {
     #region Properties

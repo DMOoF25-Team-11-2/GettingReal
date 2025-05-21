@@ -5,6 +5,9 @@ namespace GettingReal.ViewModel;
 
 using GettingReal.Handler;
 
+/// <summary>
+/// ViewModel for managing the report of boxes in inventory.
+/// </summary>
 public class ReportForBoxInventoryViewModel : ViewModelBase
 {
     #region Properties

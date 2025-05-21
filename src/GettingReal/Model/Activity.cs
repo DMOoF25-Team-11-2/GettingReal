@@ -54,6 +54,9 @@ public class Activity
     }
 
     #region helpers
+    /// <summary>
+    /// Gets the list of materials associated with the activity.
+    /// </summary>
     public IEnumerable<Material> GetMaterialsForActivity()
     {
         if (MaterialGuids == null || MaterialGuids.Count == 0)

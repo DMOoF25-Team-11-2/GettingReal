@@ -43,6 +43,10 @@ public class Workshop
         ActivityGuids = [];
     }
 
+    /// <summary>
+    /// Gets the list of activities associated with the workshop.
+    /// </summary>
+    /// <returns>An enumerable collection of activities.</returns>
     public IEnumerable<Activity> GetActivitiesForWorkshop()
     {
         List<Activity> result = [];
@@ -63,6 +67,10 @@ public class Workshop
         return result;
     }
 
+    /// <summary>
+    /// Gets the list of boxes associated with the workshop.
+    /// </summary>
+    /// <returns>An enumerable collection of boxes.</returns>
     public IEnumerable<Box> GetBoxesForWorkshop()
     {
         // 1. Get all activities for this workshop
@@ -107,8 +115,6 @@ public class Workshop
                 }
             }
         }
-
         return result;
     }
-
 }

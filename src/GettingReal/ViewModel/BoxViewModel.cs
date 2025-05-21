@@ -3,6 +3,9 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using GettingReal.Model;
 
+/// <summary>
+/// ViewModel for managing boxes and their materials.
+/// </summary>
 class BoxViewModel : ViewModelBase
 {
     #region Properties
