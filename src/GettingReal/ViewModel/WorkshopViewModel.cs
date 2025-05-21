@@ -4,6 +4,9 @@ using System.Linq;
 using System.Windows;
 using GettingReal.Model;
 
+/// <summary>
+/// ViewModel for managing workshops.
+/// </summary>
 class WorkshopViewModel : ViewModelBase
 {
     #region Properties

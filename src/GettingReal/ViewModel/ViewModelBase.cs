@@ -3,6 +3,9 @@ using System.Runtime.CompilerServices;
 
 namespace GettingReal.ViewModel;
 
+/// <summary>
+/// Base class for ViewModels implementing INotifyPropertyChanged.
+/// </summary>
 public class ViewModelBase : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler PropertyChanged;

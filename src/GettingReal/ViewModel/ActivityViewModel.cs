@@ -3,6 +3,9 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using GettingReal.Model;
 
+/// <summary>
+/// ViewModel for managing activities and their associated materials.
+/// </summary>
 class ActivityViewModel : ViewModelBase
 {
     // Repositories

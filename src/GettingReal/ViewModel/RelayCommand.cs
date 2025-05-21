@@ -2,6 +2,10 @@
 
 namespace GettingReal.ViewModel;
 
+/// <summary>
+/// RelayCommand is a class that implements the ICommand interface.
+/// It is used to define commands in the MVVM pattern.
+/// </summary>
 public class RelayCommand : ICommand
 {
     private readonly Action _execute;
@@ -28,6 +32,10 @@ public class RelayCommand : ICommand
     public void RaiseCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
 }
 
+/// <summary>
+/// RelayCommand is a class that implements the ICommand interface.
+/// </summary>
+/// <typeparam name="T"></typeparam>
 public class RelayCommand<T> : ICommand
 {
     private readonly Action<T> _execute;

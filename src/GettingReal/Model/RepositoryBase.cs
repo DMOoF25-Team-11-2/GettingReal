@@ -15,6 +15,13 @@ public abstract class RepositoryBase<T> where T : new()
     /// </summary>
     public List<T> Items { get; set; } = new List<T>();
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="RepositoryBase{T}"/> class.
+    /// </summary>
+    /// <remarks>
+    /// This constructor initializes the repository by loading items from an XML file.
+    /// It also creates the XML file if it does not exist.
+    /// </remarks>
     public RepositoryBase()
     {
         // Get the directory of the executing assembly
