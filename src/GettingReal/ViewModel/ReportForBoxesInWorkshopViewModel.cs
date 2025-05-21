@@ -2,8 +2,11 @@
 using GettingReal.Model;
 
 namespace GettingReal.ViewModel;
-
 using GettingReal.Handler;
+
+/// <summary>
+/// ViewModel for managing the report of boxes needed for a workshop.
+/// </summary>
 public class ReportForBoxesInWorkshopViewModel : ViewModelBase
 {
     #region Properties
