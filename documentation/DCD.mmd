@@ -4,6 +4,14 @@ config:
   look: classic
   layout: dagre
 title: DCD
+description: |
+  This is the domain class diagram of the GettingReal application. It shows the main classes and their relationships.
+  The diagram is divided into two namespaces: GettingReal.Model and GettingReal.Handler.
+  The GettingReal.Model namespace contains the domain classes, while the GettingReal.Handler namespace contains the classes that handle the data.
+  The diagram also shows the relationships between the classes, such as inheritance and composition.
+  The diagram is generated using Mermaid syntax.
+  The diagram is intended to be used as a reference for understanding the structure of the application.
+  TODO ReportGenerator instead of string use xaml container.
 ---
 classDiagram
 direction TB
@@ -58,6 +66,13 @@ direction TB
         class XmlFileHandler {
 	        +Save(IEnumerable~T~, string) :void
 	        +Load(string) :void
+        }
+        class ReportGenerator {
+            -List~int~ _col$
+            -int _colCount$
+            +ReportBoxesNeededForWorkshop(Workshop) :string$
+            +ReportBoxInventory (Box) :string$
+            +Print(string) :void$
         }
 	}
 
