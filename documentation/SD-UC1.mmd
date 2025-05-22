@@ -21,9 +21,8 @@ sequenceDiagram
     BoxRepository-->>-UI: List<Boxes>
     UI-->>User: ShowBoxList
     UI-->>-User: ShowInputForm
-    User->>+UI: Fill out Form for create new Box
-    UI->>UI: CanAddBox()
     loop Check if form is valid (until button is clicked)
+    User->>+UI: Fill out Form for create new Box
         UI->>UI: IsFormValid()
         alt Form is valid
             UI-->>User: Button Can execute
