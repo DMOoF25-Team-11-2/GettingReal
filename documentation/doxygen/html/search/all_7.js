@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['load_0',['Load',['../class_getting_real_1_1_handler_1_1_xml_file_handler.html#a8d7a7eda330a70ed5796059ab0c6acfb',1,'GettingReal::Handler::XmlFileHandler']]]
+  ['iguidgenerateable_0',['IGuidGenerateAble',['../interface_getting_real_1_1_model_1_1_i_guid_generate_able.html',1,'GettingReal::Model']]],
+  ['iguidgenerateable_2ecs_1',['IGuidGenerateAble.cs',['../_i_guid_generate_able_8cs.html',1,'']]],
+  ['items_2',['Items',['../class_getting_real_1_1_model_1_1_repository_base.html#a97932f121b9cec39cd948d061e5418b0',1,'GettingReal::Model::RepositoryBase']]]
 ];

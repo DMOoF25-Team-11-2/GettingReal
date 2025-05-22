@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['xmlfilehandler_0',['XmlFileHandler',['../class_getting_real_1_1_handler_1_1_xml_file_handler.html',1,'GettingReal::Handler']]]
+  ['viewmodelbase_0',['ViewModelBase',['../class_getting_real_1_1_view_model_1_1_view_model_base.html',1,'GettingReal::ViewModel']]],
+  ['viewmodelbase_2ecs_1',['ViewModelBase.cs',['../_view_model_base_8cs.html',1,'']]]
 ];

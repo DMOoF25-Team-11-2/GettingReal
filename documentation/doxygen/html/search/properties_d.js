@@ -1,0 +1,8 @@
+var searchData=
+[
+  ['updateactivitycommand_0',['UpdateActivityCommand',['../class_getting_real_1_1_view_model_1_1_activity_view_model.html#a6d992a855b28da19cd3c2b1f1f6da8c3',1,'GettingReal::ViewModel::ActivityViewModel']]],
+  ['updateboxcommand_1',['UpdateBoxCommand',['../class_getting_real_1_1_view_model_1_1_box_view_model.html#a08ea9f96591d8f6cba666ba639d74ec5',1,'GettingReal::ViewModel::BoxViewModel']]],
+  ['updatebuttonvisibility_2',['UpdateButtonVisibility',['../class_getting_real_1_1_view_model_1_1_activity_view_model.html#aec006f3c59c515f096d14116de13c94c',1,'GettingReal.ViewModel.ActivityViewModel.UpdateButtonVisibility'],['../class_getting_real_1_1_view_model_1_1_box_view_model.html#af83c0c8f9cf48f60df06aedd31fe04db',1,'GettingReal.ViewModel.BoxViewModel.UpdateButtonVisibility'],['../class_getting_real_1_1_view_model_1_1_material_view_model.html#a8c39f3701e4cfbe43e20636bd0a39be2',1,'GettingReal.ViewModel.MaterialViewModel.UpdateButtonVisibility']]],
+  ['updatematerialcommand_3',['UpdateMaterialCommand',['../class_getting_real_1_1_view_model_1_1_material_view_model.html#ade763ba9e6738e4938282f44735c26d0',1,'GettingReal::ViewModel::MaterialViewModel']]],
+  ['updateworkshopcommand_4',['UpdateWorkshopCommand',['../class_getting_real_1_1_view_model_1_1_workshop_view_model.html#ad0c2b3ef36e805dedfd29824ce75ba29',1,'GettingReal::ViewModel::WorkshopViewModel']]]
+];

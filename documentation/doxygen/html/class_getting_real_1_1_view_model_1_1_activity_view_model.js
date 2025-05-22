@@ -1,0 +1,25 @@
+var class_getting_real_1_1_view_model_1_1_activity_view_model =
+[
+    [ "ActivityViewModel", "class_getting_real_1_1_view_model_1_1_activity_view_model.html#a4e621bf31e43b3a75bb39389947eed39", null ],
+    [ "Activities", "class_getting_real_1_1_view_model_1_1_activity_view_model.html#a4e7b05229c695e202aa61f7764593548", null ],
+    [ "AddActivityCommand", "class_getting_real_1_1_view_model_1_1_activity_view_model.html#a6a5b35b49e178943004566dbc1654fee", null ],
+    [ "AddButtonToMaterialInActivityVisibility", "class_getting_real_1_1_view_model_1_1_activity_view_model.html#a149c2f179b14b740a42d07fc96bac3b5", null ],
+    [ "AddButtonVisibility", "class_getting_real_1_1_view_model_1_1_activity_view_model.html#a6d00903149c62201c60320b63a8c63a0", null ],
+    [ "AddMaterialInActivityCommand", "class_getting_real_1_1_view_model_1_1_activity_view_model.html#a8c324a4ea1dd3c4df0963fa11a7fc012", null ],
+    [ "FormMaterialInActivityVisibility", "class_getting_real_1_1_view_model_1_1_activity_view_model.html#a13c7037acaf4a2102fe69e67ae7e91cd", null ],
+    [ "FormMaterialVisibility", "class_getting_real_1_1_view_model_1_1_activity_view_model.html#a999acf12e6fc91d3cfc8ea295a9bf5e8", null ],
+    [ "MaterialsAvailable", "class_getting_real_1_1_view_model_1_1_activity_view_model.html#af7be31aa071d87152bc50a293b733f02", null ],
+    [ "MaterialsInActivity", "class_getting_real_1_1_view_model_1_1_activity_view_model.html#a36d97b8b6b04b88268903c7532e0790a", null ],
+    [ "NewActivityDescription", "class_getting_real_1_1_view_model_1_1_activity_view_model.html#a198ca30c91c5f9061abe4d29c3d792f7", null ],
+    [ "NewActivityExpectedTime", "class_getting_real_1_1_view_model_1_1_activity_view_model.html#ada45b960eef1dd72682ee69d3f730d81", null ],
+    [ "NewActivityName", "class_getting_real_1_1_view_model_1_1_activity_view_model.html#a60613853540261e30bf46027040d1321", null ],
+    [ "RemoveActivityCommand", "class_getting_real_1_1_view_model_1_1_activity_view_model.html#a7e2e2b3d22b37003b7e4a0ba3d8bec31", null ],
+    [ "RemoveButtonFromMaterialInActivityVisibility", "class_getting_real_1_1_view_model_1_1_activity_view_model.html#a182b35f75c35374e596fc3ccb18e858e", null ],
+    [ "RemoveButtonVisibility", "class_getting_real_1_1_view_model_1_1_activity_view_model.html#a551c034d3f79c2e6e17bb6fc24fef8d0", null ],
+    [ "RemoveMaterialInActivityCommand", "class_getting_real_1_1_view_model_1_1_activity_view_model.html#a0dec9f218fcaf395878529d880b5add5", null ],
+    [ "SelectedActivity", "class_getting_real_1_1_view_model_1_1_activity_view_model.html#ad2bd03e1532e026ddcb73ff50bd88dbb", null ],
+    [ "SelectedMaterial", "class_getting_real_1_1_view_model_1_1_activity_view_model.html#a751b0daebc683c5527714c387d022a2a", null ],
+    [ "SelectedMaterialInActivity", "class_getting_real_1_1_view_model_1_1_activity_view_model.html#a975894cb9f2e05cb53958ba17762bfbc", null ],
+    [ "UpdateActivityCommand", "class_getting_real_1_1_view_model_1_1_activity_view_model.html#a6d992a855b28da19cd3c2b1f1f6da8c3", null ],
+    [ "UpdateButtonVisibility", "class_getting_real_1_1_view_model_1_1_activity_view_model.html#aec006f3c59c515f096d14116de13c94c", null ]
+];

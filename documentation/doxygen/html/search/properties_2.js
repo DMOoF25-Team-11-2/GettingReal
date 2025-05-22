@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['expectedtime_0',['ExpectedTime',['../class_getting_real_1_1_model_1_1_activity.html#a30cec3ae8bf138aac355b2a28bb91199',1,'GettingReal::Model::Activity']]]
+  ['description_0',['Description',['../class_getting_real_1_1_model_1_1_activity.html#af188c3b71609804490b015612fa44acb',1,'GettingReal.Model.Activity.Description'],['../class_getting_real_1_1_model_1_1_box.html#a3cc310897ccd46ff0e49a6ce260cc794',1,'GettingReal.Model.Box.Description'],['../class_getting_real_1_1_model_1_1_material.html#ac33adc2944aa3fdb37c1dabe47ef948b',1,'GettingReal.Model.Material.Description'],['../class_getting_real_1_1_model_1_1_workshop.html#a6d6760e8f4aeefefa740f34006446518',1,'GettingReal.Model.Workshop.Description']]]
 ];

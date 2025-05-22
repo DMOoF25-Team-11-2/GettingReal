@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['quantity_0',['Quantity',['../class_getting_real_1_1_model_1_1_material.html#a3da2a0fe2717e97f06e1cdc6b234c965',1,'GettingReal::Model::Material']]]
+  ['onpropertychanged_0',['OnPropertyChanged',['../class_getting_real_1_1_view_model_1_1_view_model_base.html#a7b02531591c2028abcb49b1ebf3e288a',1,'GettingReal::ViewModel::ViewModelBase']]]
 ];

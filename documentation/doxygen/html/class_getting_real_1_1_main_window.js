@@ -1,5 +1,4 @@
 var class_getting_real_1_1_main_window =
 [
-    [ "InitializeComponent", "class_getting_real_1_1_main_window.html#a2ea5a43e1ae43464d261652d9b1b1d4d", null ],
-    [ "InitializeComponent", "class_getting_real_1_1_main_window.html#a2ea5a43e1ae43464d261652d9b1b1d4d", null ]
+    [ "MainWindow", "class_getting_real_1_1_main_window.html#a39b4557c477c518dc253ce4f96bf8cd7", null ]
 ];
