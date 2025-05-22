@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['save_0',['Save',['../class_getting_real_1_1_handler_1_1_xml_file_handler.html#a53e3b49a2d24874502901c9373e49b05',1,'GettingReal::Handler::XmlFileHandler']]]
+  ['print_0',['Print',['../class_getting_real_1_1_handler_1_1_report_generator.html#a1b1240d9e4e1b10983e8b9b8c5e67a1a',1,'GettingReal::Handler::ReportGenerator']]]
 ];

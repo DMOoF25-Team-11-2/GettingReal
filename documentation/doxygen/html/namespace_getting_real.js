@@ -4,6 +4,6 @@ var namespace_getting_real =
     [ "Model", "namespace_getting_real_1_1_model.html", "namespace_getting_real_1_1_model" ],
     [ "View", "namespace_getting_real_1_1_view.html", "namespace_getting_real_1_1_view" ],
     [ "ViewModel", "namespace_getting_real_1_1_view_model.html", "namespace_getting_real_1_1_view_model" ],
-    [ "App", "class_getting_real_1_1_app.html", "class_getting_real_1_1_app" ],
+    [ "App", "class_getting_real_1_1_app.html", null ],
     [ "MainWindow", "class_getting_real_1_1_main_window.html", "class_getting_real_1_1_main_window" ]
 ];

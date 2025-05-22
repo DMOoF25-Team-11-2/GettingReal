@@ -6,6 +6,7 @@
 <meta name="generator" content="Doxygen 1.12.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>GettingReal: src/GettingReal/ViewModel/ViewModelBase.cs Source File</title>
+<link rel="icon" href="logo.png" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -100,7 +101,7 @@ $(function(){initNavTree('_view_model_base_8cs_source.html',''); initResizable(t
   <div class="headertitle"><div class="title">ViewModelBase.cs</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="keyword">using </span>System.ComponentModel;</div>
+<a href="_view_model_base_8cs.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="keyword">using </span>System.ComponentModel;</div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="keyword">using </span>System.Runtime.CompilerServices;</div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_getting_real_1_1_view_model.html">GettingReal.ViewModel</a>;</div>
@@ -108,30 +109,37 @@ $(function(){initNavTree('_view_model_base_8cs_source.html',''); initResizable(t
 <div class="foldopen" id="foldopen00009" data-start="{" data-end="};">
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="class_getting_real_1_1_view_model_1_1_view_model_base.html">    9</a></span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_class" href="class_getting_real_1_1_view_model_1_1_view_model_base.html">ViewModelBase</a> : INotifyPropertyChanged</div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>{</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keyword">public</span> <span class="keyword">event</span> PropertyChangedEventHandler PropertyChanged;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="class_getting_real_1_1_view_model_1_1_view_model_base.html#a05bbfbbe7f09c46725cb325a3949b8ab">   11</a></span>    <span class="keyword">public</span> <span class="keyword">event</span> PropertyChangedEventHandler <a class="code hl_event" href="class_getting_real_1_1_view_model_1_1_view_model_base.html#a05bbfbbe7f09c46725cb325a3949b8ab">PropertyChanged</a>;</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keyword">protected</span> <span class="keywordtype">void</span> OnPropertyChanged([CallerMemberName] <span class="keywordtype">string</span> propertyName = <span class="keyword">null</span>)</div>
+<div class="foldopen" id="foldopen00013" data-start="{" data-end="}">
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="class_getting_real_1_1_view_model_1_1_view_model_base.html#a7b02531591c2028abcb49b1ebf3e288a">   13</a></span>    <span class="keyword">protected</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_getting_real_1_1_view_model_1_1_view_model_base.html#a7b02531591c2028abcb49b1ebf3e288a">OnPropertyChanged</a>([CallerMemberName] <span class="keywordtype">string</span> propertyName = <span class="keyword">null</span>)</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    {</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>        PropertyChanged?.Invoke(<span class="keyword">this</span>, <span class="keyword">new</span> PropertyChangedEventArgs(propertyName));</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>        <a class="code hl_event" href="class_getting_real_1_1_view_model_1_1_view_model_base.html#a05bbfbbe7f09c46725cb325a3949b8ab">PropertyChanged</a>?.Invoke(<span class="keyword">this</span>, <span class="keyword">new</span> PropertyChangedEventArgs(propertyName));</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    }</div>
+</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keyword">protected</span> <span class="keywordtype">bool</span> SetProperty&lt;T&gt;(ref T field, T value, [CallerMemberName] <span class="keywordtype">string</span> propertyName = <span class="keyword">null</span>)</div>
+<div class="foldopen" id="foldopen00018" data-start="{" data-end="}">
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="class_getting_real_1_1_view_model_1_1_view_model_base.html#ab358a0599bacf5672c4ad090bb6dac56">   18</a></span>    <span class="keyword">protected</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="class_getting_real_1_1_view_model_1_1_view_model_base.html#ab358a0599bacf5672c4ad090bb6dac56">SetProperty&lt;T&gt;</a>(ref T field, T value, [CallerMemberName] <span class="keywordtype">string</span> propertyName = <span class="keyword">null</span>)</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    {</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="keywordflow">if</span> (Equals(field, value)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        field = value;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        OnPropertyChanged(propertyName);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <a class="code hl_function" href="class_getting_real_1_1_view_model_1_1_view_model_base.html#a7b02531591c2028abcb49b1ebf3e288a">OnPropertyChanged</a>(propertyName);</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    }</div>
+</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>}</div>
 </div>
 <div class="ttc" id="aclass_getting_real_1_1_view_model_1_1_view_model_base_html"><div class="ttname"><a href="class_getting_real_1_1_view_model_1_1_view_model_base.html">GettingReal.ViewModel.ViewModelBase</a></div><div class="ttdoc">Base class for ViewModels implementing INotifyPropertyChanged.</div><div class="ttdef"><b>Definition</b> <a href="#l00009">ViewModelBase.cs:10</a></div></div>
+<div class="ttc" id="aclass_getting_real_1_1_view_model_1_1_view_model_base_html_a05bbfbbe7f09c46725cb325a3949b8ab"><div class="ttname"><a href="class_getting_real_1_1_view_model_1_1_view_model_base.html#a05bbfbbe7f09c46725cb325a3949b8ab">GettingReal.ViewModel.ViewModelBase.PropertyChanged</a></div><div class="ttdeci">PropertyChangedEventHandler PropertyChanged</div><div class="ttdef"><b>Definition</b> <a href="#l00011">ViewModelBase.cs:11</a></div></div>
+<div class="ttc" id="aclass_getting_real_1_1_view_model_1_1_view_model_base_html_a7b02531591c2028abcb49b1ebf3e288a"><div class="ttname"><a href="class_getting_real_1_1_view_model_1_1_view_model_base.html#a7b02531591c2028abcb49b1ebf3e288a">GettingReal.ViewModel.ViewModelBase.OnPropertyChanged</a></div><div class="ttdeci">void OnPropertyChanged([CallerMemberName] string propertyName=null)</div><div class="ttdef"><b>Definition</b> <a href="#l00013">ViewModelBase.cs:13</a></div></div>
+<div class="ttc" id="aclass_getting_real_1_1_view_model_1_1_view_model_base_html_ab358a0599bacf5672c4ad090bb6dac56"><div class="ttname"><a href="class_getting_real_1_1_view_model_1_1_view_model_base.html#ab358a0599bacf5672c4ad090bb6dac56">GettingReal.ViewModel.ViewModelBase.SetProperty&lt; T &gt;</a></div><div class="ttdeci">bool SetProperty&lt; T &gt;(ref T field, T value, [CallerMemberName] string propertyName=null)</div><div class="ttdef"><b>Definition</b> <a href="#l00018">ViewModelBase.cs:18</a></div></div>
 <div class="ttc" id="anamespace_getting_real_1_1_view_model_html"><div class="ttname"><a href="namespace_getting_real_1_1_view_model.html">GettingReal.ViewModel</a></div><div class="ttdef"><b>Definition</b> <a href="_activity_view_model_8cs_source.html#l00001">ActivityViewModel.cs:1</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_1bf8b2246e3005f621ef1fbdc438af1d.html">GettingReal</a></li><li class="navelem"><a class="el" href="dir_bcf070e5a639020d6a0745423daa669a.html">ViewModel</a></li><li class="navelem"><b>ViewModelBase.cs</b></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_1bf8b2246e3005f621ef1fbdc438af1d.html">GettingReal</a></li><li class="navelem"><a class="el" href="dir_bcf070e5a639020d6a0745423daa669a.html">ViewModel</a></li><li class="navelem"><a class="el" href="_view_model_base_8cs.html">ViewModelBase.cs</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0 </li>
   </ul>
 </div>

@@ -4,6 +4,5 @@ var searchData=
   ['gettingreal_3a_3ahandler_1',['Handler',['../namespace_getting_real_1_1_handler.html',1,'GettingReal']]],
   ['gettingreal_3a_3amodel_2',['Model',['../namespace_getting_real_1_1_model.html',1,'GettingReal']]],
   ['gettingreal_3a_3aview_3',['View',['../namespace_getting_real_1_1_view.html',1,'GettingReal']]],
-  ['gettingreal_3a_3aview_3a_3astyle_4',['Style',['../namespace_getting_real_1_1_view_1_1_style.html',1,'GettingReal::View']]],
-  ['gettingreal_3a_3aviewmodel_5',['ViewModel',['../namespace_getting_real_1_1_view_model.html',1,'GettingReal']]]
+  ['gettingreal_3a_3aviewmodel_4',['ViewModel',['../namespace_getting_real_1_1_view_model.html',1,'GettingReal']]]
 ];

@@ -6,6 +6,7 @@
 <meta name="generator" content="Doxygen 1.12.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>GettingReal: src/GettingReal/Model/RepositoryBase.cs Source File</title>
+<link rel="icon" href="logo.png" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -100,7 +101,7 @@ $(function(){initNavTree('_repository_base_8cs_source.html',''); initResizable(t
   <div class="headertitle"><div class="title">RepositoryBase.cs</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_getting_real_1_1_model.html">GettingReal.Model</a>;</div>
+<a href="_repository_base_8cs.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_getting_real_1_1_model.html">GettingReal.Model</a>;</div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">using </span>System.IO;</div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">using </span><a class="code hl_namespace" href="namespace_getting_real_1_1_handler.html">GettingReal.Handler</a>;</div>
@@ -212,12 +213,14 @@ $(function(){initNavTree('_repository_base_8cs_source.html',''); initResizable(t
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    }</div>
 </div>
 <div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_getting_real_1_1_model_1_1_repository_base.html#aa5c4a61c88228ff14bc0bfe0f2098ff7">Remove</a>(Guid guid)</div>
+<div class="foldopen" id="foldopen00138" data-start="{" data-end="}">
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno"><a class="line" href="class_getting_real_1_1_model_1_1_repository_base.html#ac605a0f376289ae623b6ede5ea453f70">  138</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_getting_real_1_1_model_1_1_repository_base.html#ac605a0f376289ae623b6ede5ea453f70">Remove</a>(Guid guid)</div>
 <div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    {</div>
 <div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        var item = <a class="code hl_function" href="class_getting_real_1_1_model_1_1_repository_base.html#abfe6e41b84190517e1ee0bbe5b7ad374">Get</a>(guid);</div>
 <div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        <span class="keywordflow">if</span> (item != <span class="keyword">null</span>)</div>
 <div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>            <a class="code hl_function" href="class_getting_real_1_1_model_1_1_repository_base.html#aa5c4a61c88228ff14bc0bfe0f2098ff7">Remove</a>(item);</div>
 <div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    }</div>
+</div>
 <div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
 <div class="foldopen" id="foldopen00148" data-start="{" data-end="}">
 <div class="line"><a id="l00148" name="l00148"></a><span class="lineno"><a class="line" href="class_getting_real_1_1_model_1_1_repository_base.html#a5134be8b9327b44167ee52d17db715da">  148</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_getting_real_1_1_model_1_1_repository_base.html#a5134be8b9327b44167ee52d17db715da">Clear</a>()</div>
@@ -239,6 +242,7 @@ $(function(){initNavTree('_repository_base_8cs_source.html',''); initResizable(t
 <div class="ttc" id="aclass_getting_real_1_1_model_1_1_repository_base_html_a97932f121b9cec39cd948d061e5418b0"><div class="ttname"><a href="class_getting_real_1_1_model_1_1_repository_base.html#a97932f121b9cec39cd948d061e5418b0">GettingReal.Model.RepositoryBase.Items</a></div><div class="ttdeci">List&lt; T &gt; Items</div><div class="ttdoc">List of items in the repository.</div><div class="ttdef"><b>Definition</b> <a href="#l00016">RepositoryBase.cs:16</a></div></div>
 <div class="ttc" id="aclass_getting_real_1_1_model_1_1_repository_base_html_aa5c4a61c88228ff14bc0bfe0f2098ff7"><div class="ttname"><a href="class_getting_real_1_1_model_1_1_repository_base.html#aa5c4a61c88228ff14bc0bfe0f2098ff7">GettingReal.Model.RepositoryBase.Remove</a></div><div class="ttdeci">void Remove(T item)</div><div class="ttdoc">Removes an item from the repository.</div><div class="ttdef"><b>Definition</b> <a href="#l00132">RepositoryBase.cs:132</a></div></div>
 <div class="ttc" id="aclass_getting_real_1_1_model_1_1_repository_base_html_abfe6e41b84190517e1ee0bbe5b7ad374"><div class="ttname"><a href="class_getting_real_1_1_model_1_1_repository_base.html#abfe6e41b84190517e1ee0bbe5b7ad374">GettingReal.Model.RepositoryBase.Get</a></div><div class="ttdeci">T? Get(Guid guid)</div><div class="ttdoc">Gets an item from the repository by its GUID.</div><div class="ttdef"><b>Definition</b> <a href="#l00094">RepositoryBase.cs:94</a></div></div>
+<div class="ttc" id="aclass_getting_real_1_1_model_1_1_repository_base_html_ac605a0f376289ae623b6ede5ea453f70"><div class="ttname"><a href="class_getting_real_1_1_model_1_1_repository_base.html#ac605a0f376289ae623b6ede5ea453f70">GettingReal.Model.RepositoryBase.Remove</a></div><div class="ttdeci">void Remove(Guid guid)</div><div class="ttdef"><b>Definition</b> <a href="#l00138">RepositoryBase.cs:138</a></div></div>
 <div class="ttc" id="aclass_getting_real_1_1_model_1_1_repository_base_html_ad1057778d4a62b3814510d1b3af925ad"><div class="ttname"><a href="class_getting_real_1_1_model_1_1_repository_base.html#ad1057778d4a62b3814510d1b3af925ad">GettingReal.Model.RepositoryBase.Get</a></div><div class="ttdeci">T? Get(string name)</div><div class="ttdoc">Gets an item from the repository by its name.</div><div class="ttdef"><b>Definition</b> <a href="#l00108">RepositoryBase.cs:108</a></div></div>
 <div class="ttc" id="aclass_getting_real_1_1_model_1_1_repository_base_html_ae3d92ba0d4dd83fb7babc93b719cf740"><div class="ttname"><a href="class_getting_real_1_1_model_1_1_repository_base.html#ae3d92ba0d4dd83fb7babc93b719cf740">GettingReal.Model.RepositoryBase.Update</a></div><div class="ttdeci">void Update(T item)</div><div class="ttdoc">Updates an item in the repository.</div><div class="ttdef"><b>Definition</b> <a href="#l00117">RepositoryBase.cs:117</a></div></div>
 <div class="ttc" id="anamespace_getting_real_1_1_handler_html"><div class="ttname"><a href="namespace_getting_real_1_1_handler.html">GettingReal.Handler</a></div><div class="ttdef"><b>Definition</b> <a href="_report_generator_8cs_source.html#l00004">ReportGenerator.cs:4</a></div></div>
@@ -248,7 +252,7 @@ $(function(){initNavTree('_repository_base_8cs_source.html',''); initResizable(t
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_1bf8b2246e3005f621ef1fbdc438af1d.html">GettingReal</a></li><li class="navelem"><a class="el" href="dir_d9f049129dc77a55a64f17c44df6a18f.html">Model</a></li><li class="navelem"><b>RepositoryBase.cs</b></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_1bf8b2246e3005f621ef1fbdc438af1d.html">GettingReal</a></li><li class="navelem"><a class="el" href="dir_d9f049129dc77a55a64f17c44df6a18f.html">Model</a></li><li class="navelem"><a class="el" href="_repository_base_8cs.html">RepositoryBase.cs</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0 </li>
   </ul>
 </div>

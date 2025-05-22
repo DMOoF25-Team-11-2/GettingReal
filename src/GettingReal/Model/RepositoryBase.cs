@@ -3,7 +3,9 @@
 using System.IO;
 using GettingReal.Handler;
 /// <summary>
-/// Base class for repositories.
+/// Base class for repositories to ensure API consistency.
+/// To ensure that the repository can be serialized to XML,
+/// the type parameter T must have a parameterless constructor.
 /// </summary>
 /// <typeparam name="T"></typeparam>
 public abstract class RepositoryBase<T> where T : new()

@@ -1,0 +1,25 @@
+var class_getting_real_1_1_view_model_1_1_workshop_view_model =
+[
+    [ "WorkshopViewModel", "class_getting_real_1_1_view_model_1_1_workshop_view_model.html#af5f047a7e8822e352760db19c0a43d99", null ],
+    [ "ActivitiesAvailable", "class_getting_real_1_1_view_model_1_1_workshop_view_model.html#ade545c7e1d97c70c616a98218b858fec", null ],
+    [ "ActivitiesInWorkshop", "class_getting_real_1_1_view_model_1_1_workshop_view_model.html#af75f2fb33138a4ff481f2b380bc704eb", null ],
+    [ "AddActivityToWorkshopCommand", "class_getting_real_1_1_view_model_1_1_workshop_view_model.html#a2632017e08f7fccf83aac5af8286b4a5", null ],
+    [ "AddWorkshopCommand", "class_getting_real_1_1_view_model_1_1_workshop_view_model.html#ad8a4ceeb8446ae0f51ebaf55783849ad", null ],
+    [ "ButtonAddActivityInWorkshopVisibility", "class_getting_real_1_1_view_model_1_1_workshop_view_model.html#abb8648157fc967d176690509ca2203cd", null ],
+    [ "ButtonAddVisibility", "class_getting_real_1_1_view_model_1_1_workshop_view_model.html#a615b5d67797f91572f6216e55d26c2cc", null ],
+    [ "ButtonRemoveFromActivityInWorkshopVisibility", "class_getting_real_1_1_view_model_1_1_workshop_view_model.html#af21179114756990ec2be653b1879c6ca", null ],
+    [ "ButtonRemoveVisibility", "class_getting_real_1_1_view_model_1_1_workshop_view_model.html#a6a2ffe009d1d3a6fd288c5c1a63620b7", null ],
+    [ "ButtonUpdateVisibility", "class_getting_real_1_1_view_model_1_1_workshop_view_model.html#a3eddf8f82c4dcb606b9cfe40f20eb96f", null ],
+    [ "FormActivityInWorkshopVisibility", "class_getting_real_1_1_view_model_1_1_workshop_view_model.html#aa5f96e4a0dd3ec45d44623a796d41426", null ],
+    [ "FormActivityVisibility", "class_getting_real_1_1_view_model_1_1_workshop_view_model.html#a0db73247933914f07d6511784f6fde9b", null ],
+    [ "NewWorkshopDescription", "class_getting_real_1_1_view_model_1_1_workshop_view_model.html#aed39e7dd034636cab700da52e1356784", null ],
+    [ "NewWorkshopExpectedTime", "class_getting_real_1_1_view_model_1_1_workshop_view_model.html#a4ca6c5c95421313d01c3bb8a016017a6", null ],
+    [ "NewWorkshopName", "class_getting_real_1_1_view_model_1_1_workshop_view_model.html#a9ae7dcd97d787877dd73faee92d490a4", null ],
+    [ "RemoveActivityFromWorkshopCommand", "class_getting_real_1_1_view_model_1_1_workshop_view_model.html#aea00164e692323272ce4ebc7263b6be1", null ],
+    [ "RemoveWorkshopCommand", "class_getting_real_1_1_view_model_1_1_workshop_view_model.html#a9c3f3530115b3aaee7191340a4c01471", null ],
+    [ "SelectedActivity", "class_getting_real_1_1_view_model_1_1_workshop_view_model.html#a99fb2d3031248da8bcd2252076f2e60f", null ],
+    [ "SelectedActivityInWorkshop", "class_getting_real_1_1_view_model_1_1_workshop_view_model.html#a423cefb5c9e08fa4f0d2646819e0a9ce", null ],
+    [ "SelectedWorkshop", "class_getting_real_1_1_view_model_1_1_workshop_view_model.html#a19cc71eb6cc4a60656d1ddf73568bef3", null ],
+    [ "UpdateWorkshopCommand", "class_getting_real_1_1_view_model_1_1_workshop_view_model.html#ad0c2b3ef36e805dedfd29824ce75ba29", null ],
+    [ "Workshops", "class_getting_real_1_1_view_model_1_1_workshop_view_model.html#a493b2b45b2cfaa7ecb8c51f6447af886", null ]
+];
