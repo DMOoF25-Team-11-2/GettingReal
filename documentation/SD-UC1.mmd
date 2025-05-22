@@ -1,0 +1,43 @@
+﻿---
+config:
+  theme: dark
+  look: classic
+  layout: dagre
+title: SD-UC1
+description: |
+  Sekvensdiagram for UC1 - Opret kasse
+  Brugeren vælger "Opret kasse" fra kasse-menuen og indtaster kassenummer pg evt beskrivelse af kassen.
+  Systemet returnerer til kasse-menuen.
+  Kassen oprettes i systemet.
+---
+sequenceDiagram
+    participant User
+    participant UI
+    participant BoxRepository
+
+    User->>+UI: Choose MenuShowBox
+    UI->>UI: MainFrame.Navigate(new BoxView())
+    UI->>+BoxRepository: GetAllBoxes()
+    BoxRepository-->>-UI: List<Boxes>
+    UI-->>User: ShowBoxList
+    UI-->>-User: ShowInputForm
+    User->>+UI: Fill out Form for create new Box
+    UI->>UI: CanAddBox()
+    loop Check if form is valid (until button is clicked)
+        UI->>UI: IsFormValid()
+        alt Form is valid
+            UI-->>User: Button Can execute
+        else Form is not valid
+            UI-->>-User: Button Can not execute
+        end
+        note right of User: User can change input or click button
+        opt Button clicked
+             User->>+UI: Click Button
+            UI->>UI: CreateBox()
+            UI->>BoxRepository: Add(Box)
+            BoxRepository-->>UI: 
+            UI-->>UI: ClearForm()
+            UI-->>User: ShowBoxList
+            UI-->>-User: ShowInputForm
+        end
+    end
