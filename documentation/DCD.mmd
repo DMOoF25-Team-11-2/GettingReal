@@ -75,6 +75,30 @@ direction TB
             +Print(string) :void$
         }
 	}
+    namespace GettingReal.ViewModel {
+        class BoxViewModel {
+            +Boxes : ObservableCollection~Box~
+            +SelectedBox : Box
+            +MaterialsInBox : ObservableCollection~Material~
+            +AddBox(Box) : void
+            +RemoveBox(Box) : void
+        }
+        class MaterialViewModel {
+            +Materials : ObservableCollection~Material~
+            +SelectedMaterial : Material
+        }
+        class ActivityViewModel {
+            +Activities : ObservableCollection~Activity~
+            +SelectedActivity : Activity
+            +MaterialsInActivity : ObservableCollection~Material~
+        }
+        class WorkshopViewModel {
+            +Workshops : ObservableCollection~Workshop~
+            +SelectedWorkshop : Workshop
+            +ActivitiesInWorkshop : ObservableCollection~Activity~
+        }
+    }
+
 
 	<<Abstract>> Repository
 	<<interface>> IUidGenerateAble
@@ -95,3 +119,16 @@ direction TB
     MaterialRepository ..|> XmlFileHandler : "use"
     ActivityRepository ..|> XmlFileHandler : "use"
     WorkshopRepository ..|> XmlFileHandler : "use"
+
+    %% MVVM relationships
+    BoxViewModel ..> BoxRepository : "uses"
+    BoxViewModel ..> Box : "manages"
+    BoxViewModel ..> Material : "manages"
+    MaterialViewModel ..> MaterialRepository : "uses"
+    MaterialViewModel ..> Material : "manages"
+    ActivityViewModel ..> ActivityRepository : "uses"
+    ActivityViewModel ..> Activity : "manages"
+    ActivityViewModel ..> Material : "manages"
+    WorkshopViewModel ..> WorkshopRepository : "uses"
+    WorkshopViewModel ..> Workshop : "manages"
+    WorkshopViewModel ..> Activity : "manages"
