@@ -1,1 +1,20 @@
-﻿
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfWorkshop xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Workshop>
+        <GUID>64d3b1af-30db-47fd-84a3-51604429f7c8</GUID>
+        <Name>Test</Name>
+        <Description>Test</Description>
+        <ActivityGuids>
+            <guid>94697748-cfb4-4967-af33-0536a5f14f82</guid>
+            <guid>309c1484-e389-469a-bdba-3ffb38c41f1b</guid>
+        </ActivityGuids>
+    </Workshop>
+    <Workshop>
+        <GUID>20c7006e-1dcf-41a4-b465-2267c786712c</GUID>
+        <Name>Oplæg for undervisere</Name>
+        <Description />
+        <ActivityGuids>
+            <guid>94697748-cfb4-4967-af33-0536a5f14f82</guid>
+        </ActivityGuids>
+    </Workshop>
+</ArrayOfWorkshop>

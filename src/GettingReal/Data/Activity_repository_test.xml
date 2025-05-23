@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfActivity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Activity>
+        <GUID>309c1484-e389-469a-bdba-3ffb38c41f1b</GUID>
+        <Name>Test</Name>
+        <Description>test</Description>
+        <ExpectedTime>PT30M</ExpectedTime>
+        <MaterialGuids>
+            <guid>560f0c8b-6b7f-4e35-bddf-f586830ec302</guid>
+            <guid>a07c36b4-4152-4756-a4b5-19ad2267985e</guid>
+        </MaterialGuids>
+    </Activity>
+    <Activity>
+        <GUID>94697748-cfb4-4967-af33-0536a5f14f82</GUID>
+        <Name>Test2</Name>
+        <Description>Test2</Description>
+        <ExpectedTime>PT10S</ExpectedTime>
+        <MaterialGuids>
+            <guid>a325a380-3577-4217-8ec6-b78fdb77810f</guid>
+            <guid>ac336d6e-accd-4c14-8def-14b647386544</guid>
+        </MaterialGuids>
+    </Activity>
+</ArrayOfActivity>
