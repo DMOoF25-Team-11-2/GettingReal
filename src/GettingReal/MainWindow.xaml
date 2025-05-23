@@ -40,6 +40,9 @@
                 <MenuItem  x:Name="RapportBoxInventory" Header="Kasse indhold" Click="RapportBoxInventory_Click"/>
                 <MenuItem x:Name="RapportBoxesForWorkshop" Header="Workshop - Kasser der skal medbringes" Click="RapportBoxesForWorkshop_Click"/>
             </MenuItem>
+            <MenuItem Header="Hjælp">
+                <MenuItem x:Name="About" Header="Om.." Click="About_Click"/>
+            </MenuItem>
         </Menu>
         <StackPanel Orientation="Horizontal">
             <Frame Name="MainFrame" NavigationUIVisibility="Hidden" Margin="10"/>
