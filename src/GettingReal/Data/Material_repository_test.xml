@@ -1,105 +1,105 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfMaterial xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Material>
-    <GUID>560f0c8b-6b7f-4e35-bddf-f586830ec302</GUID>
-    <Name>Bong monster </Name>
-    <Description>! sæt af 4 forskellige Bong Monster</Description>
-    <Quantity>1</Quantity>
-  </Material>
-  <Material>
-    <GUID>a5274f87-11a9-4215-81b8-b2d7a0befade</GUID>
-    <Name>rumraket</Name>
-    <Description>perle rumraket</Description>
-    <Quantity>1</Quantity>
-  </Material>
-  <Material>
-    <GUID>a07c36b4-4152-4756-a4b5-19ad2267985e</GUID>
-    <Name>semi 3d rumraket </Name>
-    <Description>Bestående af 2 dele lavet af perler der kan sættes sammen</Description>
-    <Quantity>1</Quantity>
-  </Material>
-  <Material>
-    <GUID>d1c3f3a1-5e3c-4080-a4ed-b1c8e564c1a5</GUID>
-    <Name>Hund 3D</Name>
-    <Description>Lavet af perler</Description>
-    <Quantity>1</Quantity>
-  </Material>
-  <Material>
-    <GUID>71003744-0b14-4a3a-9b3d-47cae946b87a</GUID>
-    <Name>rumraket 2D</Name>
-    <Description>3D print</Description>
-    <Quantity>1</Quantity>
-  </Material>
-  <Material>
-    <GUID>6913fae9-96b3-442d-93fb-6861898ba590</GUID>
-    <Name>rumraket 3D</Name>
-    <Description>3d print</Description>
-    <Quantity>1</Quantity>
-  </Material>
-  <Material>
-    <GUID>39a7042e-9c6c-4dc7-8c4d-9774b89980eb</GUID>
-    <Name>Hårnål 3D</Name>
-    <Description>3D print</Description>
-    <Quantity>1</Quantity>
-  </Material>
-  <Material>
-    <GUID>a325a380-3577-4217-8ec6-b78fdb77810f</GUID>
-    <Name>Tøjtryk</Name>
-    <Description>3d print</Description>
-    <Quantity>2</Quantity>
-  </Material>
-  <Material>
-    <GUID>db471faa-9735-46b4-a1a6-6f2516a6385d</GUID>
-    <Name>måne robot</Name>
-    <Description />
-    <Quantity>1</Quantity>
-  </Material>
-  <Material>
-    <GUID>94321b57-9e82-433b-95ce-dc9d35e9995b</GUID>
-    <Name>hårholder sommerfugle</Name>
-    <Description />
-    <Quantity>2</Quantity>
-  </Material>
-  <Material>
-    <GUID>3dda4bf6-0a23-418a-a723-5f9cefc5b9da</GUID>
-    <Name>hårholder Perle </Name>
-    <Description />
-    <Quantity>1</Quantity>
-  </Material>
-  <Material>
-    <GUID>9c6ae7d0-681b-47f9-a8e9-01a06d2fe955</GUID>
-    <Name>Hus 3D</Name>
-    <Description>Flere elementer der kan sættes sammen.</Description>
-    <Quantity>1</Quantity>
-  </Material>
-  <Material>
-    <GUID>32849f98-7f62-4f9a-993f-cef0f209cefd</GUID>
-    <Name>tynd 3d print </Name>
-    <Description>12 forskellige  dele</Description>
-    <Quantity>1</Quantity>
-  </Material>
-  <Material>
-    <GUID>c8bc4999-0f23-4796-a0d7-6d7a609a388b</GUID>
-    <Name>tøjtryk</Name>
-    <Description>3D print</Description>
-    <Quantity>5</Quantity>
-  </Material>
-  <Material>
-    <GUID>02c23a61-9950-4004-a020-cb9a57f1a602</GUID>
-    <Name>Lertryk</Name>
-    <Description>3D print</Description>
-    <Quantity>2</Quantity>
-  </Material>
-  <Material>
-    <GUID>d44c16b0-a3b7-4947-ba97-ea9283631cd6</GUID>
-    <Name>Papirtryk</Name>
-    <Description>3D print</Description>
-    <Quantity>2</Quantity>
-  </Material>
-  <Material>
-    <GUID>ac336d6e-accd-4c14-8def-14b647386544</GUID>
-    <Name>Ombyg bil</Name>
-    <Description>7 dele</Description>
-    <Quantity>1</Quantity>
-  </Material>
+    <Material>
+        <GUID>560f0c8b-6b7f-4e35-bddf-f586830ec302</GUID>
+        <Name>Bong monster </Name>
+        <Description>! Sæt af 4 forskellige Bong Monstre</Description>
+        <Quantity>1</Quantity>
+    </Material>
+    <Material>
+        <GUID>a5274f87-11a9-4215-81b8-b2d7a0befade</GUID>
+        <Name>Rumraket</Name>
+        <Description>Perle rumraket</Description>
+        <Quantity>1</Quantity>
+    </Material>
+    <Material>
+        <GUID>a07c36b4-4152-4756-a4b5-19ad2267985e</GUID>
+        <Name>Semi 3D rumraket </Name>
+        <Description>Bestående af 2 dele lavet af perler, der kan sættes sammen</Description>
+        <Quantity>1</Quantity>
+    </Material>
+    <Material>
+        <GUID>d1c3f3a1-5e3c-4080-a4ed-b1c8e564c1a5</GUID>
+        <Name>Hund 3D</Name>
+        <Description>Lavet af perler</Description>
+        <Quantity>1</Quantity>
+    </Material>
+    <Material>
+        <GUID>71003744-0b14-4a3a-9b3d-47cae946b87a</GUID>
+        <Name>Rumraket 2D</Name>
+        <Description>3D print</Description>
+        <Quantity>1</Quantity>
+    </Material>
+    <Material>
+        <GUID>6913fae9-96b3-442d-93fb-6861898ba590</GUID>
+        <Name>Rumraket 3D</Name>
+        <Description>3D print</Description>
+        <Quantity>1</Quantity>
+    </Material>
+    <Material>
+        <GUID>39a7042e-9c6c-4dc7-8c4d-9774b89980eb</GUID>
+        <Name>Hårnål 3D</Name>
+        <Description>3D print</Description>
+        <Quantity>1</Quantity>
+    </Material>
+    <Material>
+        <GUID>a325a380-3577-4217-8ec6-b78fdb77810f</GUID>
+        <Name>Tøjtryk</Name>
+        <Description>3D print</Description>
+        <Quantity>2</Quantity>
+    </Material>
+    <Material>
+        <GUID>db471faa-9735-46b4-a1a6-6f2516a6385d</GUID>
+        <Name>Månerobot</Name>
+        <Description />
+        <Quantity>1</Quantity>
+    </Material>
+    <Material>
+        <GUID>94321b57-9e82-433b-95ce-dc9d35e9995b</GUID>
+        <Name>Hårholder sommerfugle</Name>
+        <Description />
+        <Quantity>2</Quantity>
+    </Material>
+    <Material>
+        <GUID>3dda4bf6-0a23-418a-a723-5f9cefc5b9da</GUID>
+        <Name>Hårholder Perle </Name>
+        <Description />
+        <Quantity>1</Quantity>
+    </Material>
+    <Material>
+        <GUID>9c6ae7d0-681b-47f9-a8e9-01a06d2fe955</GUID>
+        <Name>Hus 3D</Name>
+        <Description>Flere elementer der kan sættes sammen.</Description>
+        <Quantity>1</Quantity>
+    </Material>
+    <Material>
+        <GUID>32849f98-7f62-4f9a-993f-cef0f209cefd</GUID>
+        <Name>Tynd 3D print </Name>
+        <Description>12 forskellige  dele</Description>
+        <Quantity>1</Quantity>
+    </Material>
+    <Material>
+        <GUID>c8bc4999-0f23-4796-a0d7-6d7a609a388b</GUID>
+        <Name>Tøjtryk</Name>
+        <Description>3D print</Description>
+        <Quantity>5</Quantity>
+    </Material>
+    <Material>
+        <GUID>02c23a61-9950-4004-a020-cb9a57f1a602</GUID>
+        <Name>Lertryk</Name>
+        <Description>3D print</Description>
+        <Quantity>2</Quantity>
+    </Material>
+    <Material>
+        <GUID>d44c16b0-a3b7-4947-ba97-ea9283631cd6</GUID>
+        <Name>Papirtryk</Name>
+        <Description>3D print</Description>
+        <Quantity>2</Quantity>
+    </Material>
+    <Material>
+        <GUID>ac336d6e-accd-4c14-8def-14b647386544</GUID>
+        <Name>Ombyg bil</Name>
+        <Description>7 dele</Description>
+        <Quantity>1</Quantity>
+    </Material>
 </ArrayOfMaterial>
