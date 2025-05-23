@@ -54,8 +54,8 @@ public partial class MainWindow : Window
 
     private void About_Click(object sender, RoutedEventArgs e)
     {
-        MessageBox.Show("451 Grader\nVersion 1.0\n\nDeveloped by\nJens Tirsvad Nielsen - [jenstirsvad@gmail.com]\n" +
-            "Benjamin Jon Leonhardt - [bjle71347@edu.ucl.dk]\n" +
+        MessageBox.Show("451 Grader\nVersion 1.0\n\nDeveloped by\nJens Tirsvad Nielsen - jenstirsvad@gmail.com\n" +
+            "Benjamin Jon Leonhardt - bjle71347@edu.ucl.dk\n" +
             "Cecillie Skoven Møller - csmo71359@edu.ucl.dk\n" +
             "Michael Kragh - mikr71394@edu.ucl.dk"
             , "About Getting Real", MessageBoxButton.OK, MessageBoxImage.Information);
