@@ -49,17 +49,17 @@ direction TB
         }
         class Repository~T~ {
 	        +-List~T~ Items
-	        +Add(T) :void
-	        +GetAll() :List
-	        +Get(string) :T
-	        +Get(Guid) :T
-	        +Update(T) :void
-	        +Remove(T) :void
-	        -DoNameExist(string) :bool
+	        +Add(T) void
+	        +GetAll() List
+	        +Get(string) T
+	        +Get(Guid) T
+	        +Update(T) void
+	        +Remove(T) void
+	        -DoNameExist(string) bool
         }
         class IUidGenerateAble {
-	        +GenerateUid() :string
-	        -DoGuidExist() :bool
+	        +GenerateUid() string
+	        -DoGuidExist() bool
         }
 	}
 	namespace GettingReal.Handler {
